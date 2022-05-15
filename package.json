@@ -3,17 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node src/server",
-    "dev": "nodemon src/server",
-    "update": "node -r dotenv/config utils/update.js"
+    "start": "node server",
+    "dev:server": "nodemon server",
+    "dev": "webpack serve",
+    "update": "node -r dotenv/config utils/update.js",
+    "build": "webpack"
   },
+  "private": true,
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "axios": "0.26.1",
     "dotenv": "16.0.0",
-    "nodemon": "2.0.15"
+    "html-webpack-plugin": "5.5.0",
+    "nodemon": "2.0.15",
+    "webpack": "5.70.0",
+    "webpack-cli": "4.9.2",
+    "webpack-dev-server": "4.7.4"
   },
   "dependencies": {
     "express": "4.17.3"
