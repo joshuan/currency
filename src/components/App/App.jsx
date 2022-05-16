@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { Header } from '../Header/Header';
+import { Page } from '../Page/Page';
+
 import './App.css';
 
 // var data = window.data;
@@ -25,7 +28,10 @@ import './App.css';
 export function App() {
     return (
         <div className="App">
-            App
+            <Header />
+            <Page>
+                <p>App</p>
+            </Page>
         </div>
     );
 }

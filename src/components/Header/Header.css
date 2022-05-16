@@ -1,0 +1,9 @@
+.Header {
+    background: #e3e3e3;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 1.4em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid #ccc;
+}
