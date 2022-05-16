@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
-    entry: './index.js',
+    entry: './index.jsx',
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
@@ -19,20 +19,22 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
+    },
     module: {
         rules: [
             // /** Babel **/
-            // {
-            //     test: /\.m?js$/,
-            //     exclude: /(node_modules|bower_components)/,
-            //     use: {
-            //         loader: 'babel-loader',
-            //         options: {
-            //             presets: ['@babel/preset-env']
-            //         }
-            //     }
-            //     // npm install babel-loader @babel/core @babel/preset-env -D
-            // },
+            {
+                test: /\.m?jsx?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react'],
+                    },
+                },
+            },
             /** CSS */
             {
                 test: /\.css$/i,
