@@ -7,7 +7,9 @@
     "dev:server": "nodemon server",
     "dev": "webpack serve",
     "update": "node -r dotenv/config utils/update.js",
-    "build": "webpack"
+    "build": "rm -rf dist && webpack --mode production && cp ./data/data.json ./dist",
+    "deploy": "./scripts/deploy.sh",
+    "open": "open http://currency.joshuan.ru.website.yandexcloud.net/"
   },
   "private": true,
   "keywords": [],
@@ -31,6 +33,7 @@
   "dependencies": {
     "express": "4.17.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-query": "3.39.0"
   }
 }

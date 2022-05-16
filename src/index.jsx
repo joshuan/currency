@@ -3,5 +3,10 @@ import { App } from './components/App/App';
 import React from 'react';
 
 import './style.css';
+import { QueryClientProvider, queryClient } from './lib/query';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render((
+    <QueryClientProvider client={queryClient}>
+        <App />
+    </QueryClientProvider>
+), document.getElementById('root'));

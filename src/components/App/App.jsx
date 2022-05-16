@@ -1,36 +1,42 @@
 import React from 'react';
+import { useQuery } from 'react-query';
 
 import { Header } from '../Header/Header';
 import { Page } from '../Page/Page';
 
 import './App.css';
+import { Calculator } from '../Calculator/Calculator';
 
-// var data = window.data;
-// var inputs = document.getElementsByTagName('input');
-//
-// function change(cur, value) {
-//     var baseValue = value / data.rates[cur];
-//     for (var input of inputs) {
-//         if (input.name !== cur) {
-//             input.value = (
-//                 baseValue * data.rates[input.name]
-//             ).toFixed(2);
-//         }
-//     }
-// }
-//
-// for (var input of inputs) {
-//     input.addEventListener('change', function(event) {
-//         change(event.target.name, event.target.value);
-//     });
-// }
+function getData() {
+    return new Promise((resolve) => {
+        fetch('/data.json')
+            .then((res) => res.json())
+            .then((data) => {
+                resolve(data);
+            });
+    });
+}
 
 export function App() {
+    const query = useQuery('data', getData);
+
     return (
         <div className="App">
             <Header />
             <Page>
-                <p>App</p>
+                {
+                    query.status === 'loading' && (
+                        <p>Loading...</p>
+                    )
+                }
+                {
+                    query.status === 'success' && (
+                        <Calculator
+                            rates={query.data.rates}
+                            base={query.data.base}
+                        />
+                    )
+                }
             </Page>
         </div>
     );
