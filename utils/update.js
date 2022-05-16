@@ -12,7 +12,7 @@ axios({
         apikey: TOKEN,
     },
 }).then(({ data }) => {
-    return fs.writeFile(path.join(__dirname, 'data.json'), JSON.stringify(data, null, 4), { encoding: 'utf-8' });
+    return fs.writeFile(path.join(__dirname, 'data/data.json'), JSON.stringify(data, null, 4), { encoding: 'utf-8' });
 }).catch((err) => {
     console.error('Error:', err);
 })

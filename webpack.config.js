@@ -7,10 +7,12 @@ module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
-    //     /** Будет запускать сервер на localhost:8080 в этой папке*/
-    //     contentBase: './dist',
+        static: {
+            directory: path.join(__dirname, 'data'),
+        },
+        hot: true,
         open: true,
-        // port: 8080,
+
     },
     // watch: true,
     output: {
@@ -31,12 +33,11 @@ module.exports = {
             //     }
             //     // npm install babel-loader @babel/core @babel/preset-env -D
             // },
-            // /** CSS */
-            // {
-            //     test: /\.css$/i,
-            //     use: ['style-loader', 'css-loader'],
-            //     // npm i style-loader css-loader -D
-            // },
+            /** CSS */
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
             // /** SCSS/SAAS */
             // {
             //     test: /\.s[ac]ss$/i,
