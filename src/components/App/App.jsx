@@ -9,7 +9,7 @@ import { Calculator } from '../Calculator/Calculator';
 
 function getData() {
     return new Promise((resolve) => {
-        fetch('/data.json')
+        fetch(`/data.json?time=${Date.now()}`)
             .then((res) => res.json())
             .then((data) => resolve(data));
     });

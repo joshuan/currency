@@ -5,6 +5,8 @@ curl -H "apikey: st0Vz383WZXw4BJwVkH0fh4M4IbZZLms" \
   --endpoint-url=https://storage.yandexcloud.net \
   - s3://currency.joshuan.ru/data.json
 
+echo "Uploaded https://currency.joshuan.ru/data.json"
+
 aws s3 cp \
  --endpoint-url=https://storage.yandexcloud.net \
  s3://currency.joshuan.ru/data.json s3://currency.joshuan.ru/history/$DATE.json
