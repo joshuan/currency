@@ -1,10 +1,8 @@
 {
-  "name": "currency",
+  "name": "@joshuan/currency",
   "version": "1.0.0",
-  "description": "",
+  "homepage": "https://currency.joshuan.ru",
   "scripts": {
-    "start": "node server",
-    "dev:server": "nodemon server",
     "dev": "webpack serve",
     "data": "curl -o ./dist/data.json https://currency.joshuan.ru/data.json",
     "build": "webpack --mode production",
@@ -13,25 +11,21 @@
   },
   "private": true,
   "keywords": [],
-  "author": "",
+  "author": "Joshuan <joshuan.chel@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "7.17.10",
     "@babel/preset-env": "7.17.10",
     "@babel/preset-react": "7.16.7",
-    "axios": "0.26.1",
     "babel-loader": "8.2.5",
     "css-loader": "6.7.1",
-    "dotenv": "16.0.0",
     "html-webpack-plugin": "5.5.0",
-    "nodemon": "2.0.15",
     "style-loader": "3.3.1",
     "webpack": "5.70.0",
     "webpack-cli": "4.9.2",
     "webpack-dev-server": "4.7.4"
   },
   "dependencies": {
-    "express": "4.17.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-query": "3.39.0"
