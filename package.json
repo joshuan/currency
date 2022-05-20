@@ -6,8 +6,8 @@
     "start": "node server",
     "dev:server": "nodemon server",
     "dev": "webpack serve",
-    "update": "node -r dotenv/config utils/update.js",
-    "build": "rm -rf dist && webpack --mode production && cp ./data/data.json ./dist",
+    "data": "curl -o ./dist/data.json https://currency.joshuan.ru/data.json",
+    "build": "webpack --mode production",
     "deploy": "./scripts/deploy.sh",
     "open": "open http://currency.joshuan.ru.website.yandexcloud.net/"
   },

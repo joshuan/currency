@@ -3,31 +3,14 @@ import React from 'react';
 import './Calculator.css';
 
 export function Calculator({ rates, base }) {
-// var inputs = document.getElementsByTagName('input');
-//
-// function change(cur, value) {
-//     var baseValue = value / data.rates[cur];
-//     for (var input of inputs) {
-//         if (input.name !== cur) {
-//             input.value = (
-//                 baseValue * data.rates[input.name]
-//             ).toFixed(2);
-//         }
-//     }
-// }
-//
-// for (var input of inputs) {
-//     input.addEventListener('change', function(event) {
-//         change(event.target.name, event.target.value);
-//     });
-// }
-
     const list = [
         'USD',
         'EUR',
         'RUB',
         'AED',
         'AUD',
+        'UAH',
+        'GBP',
     ];
 
     const columns = [
