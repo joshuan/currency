@@ -1,6 +1,18 @@
 import React from 'react';
 
+import 'flag-icons/css/flag-icons.min.css';
+
 import './Calculator.css';
+
+const flagsMap = {
+    USD: 'us',
+    EUR: 'eu',
+    RUB: 'ru',
+    AED: 'ae',
+    AUD: 'au',
+    UAH: 'ua',
+    GBP: 'gb',
+};
 
 export function Calculator({ rates, base }) {
     const list = [
@@ -42,6 +54,7 @@ export function Calculator({ rates, base }) {
             <thead>
                 <tr>
                     <th />
+                    <th />
                     {columns.map((koef) => (
                         <th key={`koef-${koef}`}>
                             {koef}
@@ -52,7 +65,12 @@ export function Calculator({ rates, base }) {
             <tbody>
                 {Object.entries(state).map(([currency, value]) => (
                     <tr key={currency}>
-                        <th>{currency}:</th>
+                        <th>
+                            <span className={`fi fi-${flagsMap[currency]}`} />
+                        </th>
+                        <th>
+                            {currency}:
+                        </th>
                         {columns.map((koef) => (
                             <td key={`${currency}-${koef}`}>
                                 <input
