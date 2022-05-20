@@ -20,7 +20,7 @@ export function App() {
 
     return (
         <div className="App">
-            <Header />
+            <Header date={query.status === 'success' ? query.data.timestamp * 1000 : null}/>
             <Page>
                 {
                     query.status === 'loading' && (
