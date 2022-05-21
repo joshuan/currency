@@ -1,3 +1,6 @@
-td, th {
+.Table td, .Table th {
     padding: 3px 0;
+}
+.Table {
+    width: 100%;
 }
