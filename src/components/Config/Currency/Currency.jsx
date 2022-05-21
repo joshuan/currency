@@ -40,17 +40,17 @@ export function Currency({ selected = [], onChange }) {
         event.preventDefault();
     });
 
-    const [searchValue, changeSearch] = React.useState('');
+    const [searchValue, setSearchValue] = React.useState('');
 
     const handleSearch = React.useCallback((event) => {
         const { value } = event.target;
-        changeSearch(value);
+        setSearchValue(value);
     });
 
     return (
         <div className="Config__Currency">
-            <h3>Config:</h3>
-            <p><b>Currencies:</b> <input type="search" value={searchValue} onChange={handleSearch} /></p>
+            <p><b>Currencies:</b></p>
+            <p><input type="search" value={searchValue} onChange={handleSearch} /></p>
             <div>
                 {countries
                     .filter(

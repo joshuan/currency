@@ -21,11 +21,11 @@ export function Ratio({ selected = [], onChange }) {
         onChange(DEFAULT_RATIOS);
     });
 
-    const [searchValue, changeSearch] = React.useState('');
+    const [searchValue, setSearchValue] = React.useState('');
 
     const handleSearch = React.useCallback((event) => {
         const { value } = event.target;
-        changeSearch(value);
+        setSearchValue(value);
     });
 
     const handleSearchApply = React.useCallback((event) => {
@@ -41,12 +41,16 @@ export function Ratio({ selected = [], onChange }) {
             ...selected,
             parseInt(searchValue, 10),
         ]));
+        setSearchValue('');
     });
 
     return (
         <div className="Config__Ratio">
-            <h3>Ratio:</h3>
-            <p><b>Ratios:</b> <input type="search" value={searchValue} onChange={handleSearch} /> <a href="#" onClick={handleSearchApply}>Add</a></p>
+            <p><b>Ratio:</b></p>
+            <p>
+                <input type="search" value={searchValue} onChange={handleSearch} />
+                <button onClick={handleSearchApply}>Add</button>
+            </p>
             <div>
                 {selected
                     .map((ratio) => (
