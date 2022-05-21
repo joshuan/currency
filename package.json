@@ -8,8 +8,9 @@
     "build": "webpack --mode production",
     "deploy": "./scripts/deploy.sh",
     "open": "open http://currency.joshuan.ru.website.yandexcloud.net/",
-    "release": "npm run build && npm run deploy",
-    "update": "yc serverless function invoke update-currency"
+    "release": "npm run clear && npm run build && npm run deploy",
+    "update": "yc serverless function invoke update-currency",
+    "clear": "rm -rf dist && mkdir dist && npm run data"
   },
   "private": true,
   "keywords": [],
