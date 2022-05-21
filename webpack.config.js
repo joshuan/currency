@@ -23,6 +23,12 @@ module.exports = {
         extensions: ['', '.js', '.jsx'],
     },
     module: {
+        generator: {
+            asset: {
+                publicPath: '/assets/',
+                outputPath: 'assets',
+            },
+        },
         rules: [
             // /** Babel **/
             {
