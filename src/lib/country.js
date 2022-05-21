@@ -265,6 +265,7 @@ const data = [
     { code: 'za', name: 'South Africa', currencyCode: 'ZAR' },
     { code: 'zm', name: 'Zambia', currencyCode: 'ZMW' },
     { code: 'zw', name: 'Zimbabwe', currencyCode: 'ZWL' },
+    { code: '_none_country__btc', name: 'BITCOIN', currencyCode: 'BTC' },
 ].filter((x) => x.currencyCode !== '');
 
 // BTC ?!))

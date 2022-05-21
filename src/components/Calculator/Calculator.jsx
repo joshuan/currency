@@ -43,6 +43,15 @@ export function Calculator(props) {
         ));
     });
 
+    const handleChangeRatio = React.useCallback((list) => {
+        setRatios(list);
+        setValues(calculateValues(
+            props.data.rates,
+            { currencies, ratios: list },
+            { currency: lastCurrency, ratio: lastRatio, value: lastValue },
+        ));
+    });
+
     const handleChangeValue = React.useCallback(({ currency, ratio, value }) => {
         setLastCurrency(currency);
         setLastRatio(ratio);
@@ -66,7 +75,12 @@ export function Calculator(props) {
                     onChange={handleChangeValue}
                 />
                 <hr />
-                <Config selected={currencies} onChange={handleChangeCurrency} />
+                <Config
+                    currencies={currencies}
+                    ratios={ratios}
+                    onChangeCurrencies={handleChangeCurrency}
+                    onChangeRatios={handleChangeRatio}
+                />
             </Page>
         </div>
     );
