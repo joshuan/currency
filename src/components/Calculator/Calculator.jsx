@@ -6,6 +6,7 @@ import { Table } from '../Table/Table';
 import { Config } from '../Config/Config';
 
 import './Calculator.css';
+import { saveToStorage } from '../../lib/storage';
 
 function calculateValues(rates, selected, update) {
     const baseValue = (update.value / update.ratio) / rates[update.currency];
@@ -34,8 +35,18 @@ export function Calculator(props) {
         { currency: lastCurrency, ratio: lastRatio, value: 1 },
     ));
 
+    function updateCurrencies(selected) {
+        setCurrencies(selected);
+        saveToStorage('currencies', selected);
+    }
+
+    function updateRatios(selected) {
+        setRatios(selected);
+        saveToStorage('ratios', selected);
+    }
+
     const handleChangeCurrency = React.useCallback((list) => {
-        setCurrencies(list);
+        updateCurrencies(list);
         setValues(calculateValues(
             props.data.rates,
             { currencies: list, ratios },
@@ -44,7 +55,7 @@ export function Calculator(props) {
     });
 
     const handleChangeRatio = React.useCallback((list) => {
-        setRatios(list);
+        updateRatios(list);
         setValues(calculateValues(
             props.data.rates,
             { currencies, ratios: list },

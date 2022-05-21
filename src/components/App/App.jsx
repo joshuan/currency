@@ -5,6 +5,7 @@ import { Calculator } from '../Calculator/Calculator';
 import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../../config';
 
 import './App.css';
+import { getFromStorage } from '../../lib/storage';
 
 function getData() {
     return new Promise((resolve) => {
@@ -28,8 +29,8 @@ export function App() {
                 query.status === 'success' && (
                     <Calculator
                         data={query.data}
-                        currencies={DEFAULT_CURRENCIES}
-                        ratios={DEFAULT_RATIOS}
+                        currencies={getFromStorage('currencies', DEFAULT_CURRENCIES)}
+                        ratios={getFromStorage('ratios', DEFAULT_RATIOS)}
                     />
                 )
             }
