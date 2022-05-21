@@ -1,11 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 
-import { Header } from '../Header/Header';
-import { Page } from '../Page/Page';
+import { Calculator } from '../Calculator/Calculator';
+import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../../config';
 
 import './App.css';
-import { Calculator } from '../Calculator/Calculator';
 
 function getData() {
     return new Promise((resolve) => {
@@ -20,22 +19,20 @@ export function App() {
 
     return (
         <div className="App">
-            <Header date={query.status === 'success' ? query.data.timestamp * 1000 : null}/>
-            <Page>
-                {
-                    query.status === 'loading' && (
-                        <p>Loading...</p>
-                    )
-                }
-                {
-                    query.status === 'success' && (
-                        <Calculator
-                            rates={query.data.rates}
-                            base={query.data.base}
-                        />
-                    )
-                }
-            </Page>
+            {
+                query.status === 'loading' && (
+                    <p>Loading...</p>
+                )
+            }
+            {
+                query.status === 'success' && (
+                    <Calculator
+                        data={query.data}
+                        currencies={DEFAULT_CURRENCIES}
+                        ratios={DEFAULT_RATIOS}
+                    />
+                )
+            }
         </div>
     );
 }

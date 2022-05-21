@@ -1,92 +1,73 @@
 import React from 'react';
 
-import 'flag-icons/css/flag-icons.min.css';
+import { Header } from '../Header/Header';
+import { Page } from '../Page/Page';
+import { Table } from '../Table/Table';
+import { Config } from '../Config/Config';
 
 import './Calculator.css';
 
-const flagsMap = {
-    USD: 'us',
-    EUR: 'eu',
-    RUB: 'ru',
-    AED: 'ae',
-    AUD: 'au',
-    UAH: 'ua',
-    GBP: 'gb',
-};
+function calculateValues(rates, selected, update) {
+    const baseValue = (update.value / update.ratio) / rates[update.currency];
+    const result = {};
 
-export function Calculator({ rates, base }) {
-    const list = [
-        'USD',
-        'EUR',
-        'RUB',
-        'AED',
-        'AUD',
-        'UAH',
-        'GBP',
-    ];
+    for (const currency of selected.currencies) {
+        result[currency] = {};
 
-    const columns = [
-        1,
-        3,
-        6,
-        12,
-    ];
+        for (const ratio of selected.ratios) {
+            result[currency][ratio] = baseValue * rates[currency] * ratio;
+        }
+    }
 
-    const [state, setState] = React.useState(list.reduce((acc, item) => {
-        acc[item] = rates[item];
-        return acc;
-    }, {}));
+    return result;
+}
 
-    const handleChange = React.useCallback((event) => {
-        const { dataset, value } = event.target;
-        const name = dataset.currency;
-        const koef = parseInt(dataset.koef, 10);
-        const baseValue = (value / koef) / rates[name];
+export function Calculator(props) {
+    const [currencies, setCurrencies] = React.useState(props.currencies);
+    const [ratios, setRatios] = React.useState(props.ratios);
+    const [lastCurrency, setLastCurrency] = React.useState(props.currencies[0]);
+    const [lastRatio, setLastRatio] = React.useState(props.ratios[0]);
+    const [lastValue, setLastValue] = React.useState(1);
+    const [values, setValues] = React.useState(calculateValues(
+        props.data.rates,
+        { currencies, ratios },
+        { currency: lastCurrency, ratio: lastRatio, value: 1 },
+    ));
 
-        setState(list.reduce((acc, item) => {
-            acc[item] = baseValue * rates[item];
-            return acc;
-        }, {}));
+    const handleChangeCurrency = React.useCallback((list) => {
+        setCurrencies(list);
+        setValues(calculateValues(
+            props.data.rates,
+            { currencies: list, ratios },
+            { currency: lastCurrency, ratio: lastRatio, value: lastValue },
+        ));
+    });
+
+    const handleChangeValue = React.useCallback(({ currency, ratio, value }) => {
+        setLastCurrency(currency);
+        setLastRatio(ratio);
+        setLastValue(value);
+
+        setValues(calculateValues(
+            props.data.rates,
+            { currencies, ratios },
+            { currency, ratio, value },
+        ));
     });
 
     return (
-        <table className="Calculator">
-            <thead>
-                <tr>
-                    <th />
-                    <th />
-                    {columns.map((koef) => (
-                        <th key={`koef-${koef}`}>
-                            {koef}
-                        </th>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                {Object.entries(state).map(([currency, value]) => (
-                    <tr key={currency}>
-                        <th>
-                            <span className={`fi fi-${flagsMap[currency]}`} />
-                        </th>
-                        <th>
-                            {currency}:
-                        </th>
-                        {columns.map((koef) => (
-                            <td key={`${currency}-${koef}`}>
-                                <input
-                                    name={`${currency}-${koef}`}
-                                    data-currency={currency}
-                                    data-koef={koef}
-                                    type="number"
-                                    value={(value * koef).toFixed(0)}
-                                    onChange={handleChange}
-                                    step={1}
-                                />
-                            </td>
-                        ))}
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <div className="Calculator">
+            <Header date={props.data.timestamp * 1000}/>
+            <Page>
+                <Table
+                    currencies={currencies}
+                    ratios={ratios}
+                    values={values}
+                    onChange={handleChangeValue}
+                />
+                <hr />
+                <Config selected={currencies} onChange={handleChangeCurrency} />
+            </Page>
+        </div>
     );
 }
