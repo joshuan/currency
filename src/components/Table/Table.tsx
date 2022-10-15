@@ -17,7 +17,7 @@ export function Table({ currencies, ratios, values, onChange }: ITableProps) {
         const { dataset, value } = event.target;
 
         onChange({
-            currency: dataset.currenc as string,
+            currency: dataset.currency as string,
             ratio: parseInt(dataset.ratio as string, 10),
             value: parseFloat(value),
         });

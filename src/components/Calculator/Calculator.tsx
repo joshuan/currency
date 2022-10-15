@@ -57,6 +57,10 @@ export function Calculator(props: ICalculatorProps) {
     }, [props.data.rates, ratios, lastCurrency, lastRatio, lastValue]);
 
     const handleChangeValue = React.useCallback(({ currency, ratio, value }: ICalculate) => {
+        if (Number.isNaN(value)) {
+            value = 0;
+        }
+
         setLastCurrency(currency);
         setLastRatio(ratio);
         setLastValue(value);
