@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-. ../.env
+set -e
+
+if [ -f ./.env ]; then
+    . ./.env
+fi
 
 aws s3 \
   --endpoint-url=https://storage.yandexcloud.net \

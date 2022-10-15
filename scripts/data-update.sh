@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-. ./.env
+set -e
+
+if [ -f ./.env ]; then
+    . ./.env
+fi
 
 DATE="$(date '+%Y-%m-%d')"
 
