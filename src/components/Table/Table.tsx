@@ -13,7 +13,6 @@ interface ITableProps {
 }
 
 export function Table({ currencies, ratios, values, onChange }: ITableProps) {
-    console.log('... values', values);
     return (
         <table className="Table">
             <thead>
