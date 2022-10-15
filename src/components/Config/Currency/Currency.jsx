@@ -5,6 +5,9 @@ import './Currency.css';
 import { countries } from '../../../lib/country';
 import { Flag } from '../../Flag/Flag.jsx';
 import { DEFAULT_CURRENCIES } from '../../../config';
+import { Button } from '../../Button/Button';
+import { Input } from '../../Input/Input';
+import { Checkbox } from '../../Checkbox/Checkbox';
 
 function filterByCode(selected) {
     const lowerSelected = selected.map((item) => item.toLowerCase());
@@ -50,7 +53,7 @@ export function Currency({ selected = [], onChange }) {
     return (
         <div className="Config__Currency">
             <p><b>Currencies:</b></p>
-            <p><input type="search" value={searchValue} onChange={handleSearch} /></p>
+            <p><Input type="search" value={searchValue} onChange={handleSearch} /></p>
             <div>
                 {countries
                     .filter(
@@ -60,9 +63,8 @@ export function Currency({ selected = [], onChange }) {
                     )
                     .map(({ code, name, currencyCode }) => (
                         <label key={code} className="Config__Currency_Item">
-                            <input
+                            <Checkbox
                                 className="Config__Currency_Input"
-                                type="checkbox"
                                 data-currency={currencyCode}
                                 checked={selected.includes(currencyCode)}
                                 onChange={handleChange}
@@ -71,7 +73,7 @@ export function Currency({ selected = [], onChange }) {
                         </label>
                     ))}
             </div>
-            <p><a href="#" onClick={handleClear}>Clear to defaults</a></p>
+            <p><Button view="normal" onClick={handleClear}>Clear to defaults</Button></p>
         </div>
     );
 }

@@ -3,6 +3,9 @@ import React from 'react';
 import './Ratio.css';
 
 import { DEFAULT_RATIOS } from '../../../config';
+import { Button } from '../../Button/Button';
+import { Input } from '../../Input/Input';
+import { Checkbox } from '../../Checkbox/Checkbox';
 
 function sort(list) {
     return list.sort((a, b) => a - b);
@@ -48,16 +51,15 @@ export function Ratio({ selected = [], onChange }) {
         <div className="Config__Ratio">
             <p><b>Ratio:</b></p>
             <p>
-                <input type="search" value={searchValue} onChange={handleSearch} />
-                <button onClick={handleSearchApply}>Add</button>
+                <Input type="search" value={searchValue} onChange={handleSearch} />
+                <Button onClick={handleSearchApply}>Add</Button>
             </p>
             <div>
                 {selected
                     .map((ratio) => (
                         <label key={ratio} className="Config__Ratio_Item">
-                            <input
+                            <Checkbox
                                 className="Config__Ratio_Input"
-                                type="checkbox"
                                 data-ratio={ratio}
                                 checked
                                 onChange={handleUnchecked}
@@ -66,7 +68,7 @@ export function Ratio({ selected = [], onChange }) {
                         </label>
                     ))}
             </div>
-            <p><a href="#" onClick={handleClear}>Clear to defaults</a></p>
+            <p><Button view="normal" onClick={handleClear}>Clear to defaults</Button></p>
         </div>
     );
 }

@@ -14,21 +14,21 @@ module.exports = {
         open: true,
 
     },
-    // watch: true,
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
+        clean: true,
     },
     resolve: {
         extensions: ['', '.js', '.jsx'],
     },
     module: {
-        generator: {
-            asset: {
-                publicPath: '/assets/',
-                outputPath: 'assets',
-            },
-        },
+        // generator: {
+        //     asset: {
+        //         publicPath: '/assets/',
+        //         outputPath: 'assets',
+        //     },
+        // },
         rules: [
             // /** Babel **/
             {
