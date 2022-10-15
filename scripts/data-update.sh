@@ -1,6 +1,10 @@
+#!/usr/bin/env bash
+
+. ./.env
+
 DATE="$(date '+%Y-%m-%d')"
 
-curl -H "apikey: st0Vz383WZXw4BJwVkH0fh4M4IbZZLms" \
+curl -H "apikey: ${API_LAYER_TOKEN}" \
  "https://api.apilayer.com/fixer/latest?symbols=&base=USD" | aws s3 cp \
   --endpoint-url=https://storage.yandexcloud.net \
   - s3://currency.joshuan.ru/data.json
