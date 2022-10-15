@@ -3,10 +3,10 @@
 set -e
 
 if [ -f ./.env ]; then
-    . ./.env
+    source ./.env
 fi
 
-aws s3 \
+AWS_PROFILE="${AWS_PROFILE}" aws s3 \
   --endpoint-url=https://storage.yandexcloud.net \
   sync \
   ./dist/ \
