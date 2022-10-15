@@ -50,7 +50,13 @@ export function Ratio({ selected = [], onChange }) {
             title="Ratio"
             filter={(
                 <>
-                    <Input className="Config__Ratio_Input" type="search" value={searchValue} onChange={handleSearch} />
+                    <Input
+                        className="Config__Ratio_Input"
+                        type="search"
+                        value={searchValue}
+                        onChange={handleSearch}
+                        placeholder="Ration value"
+                    />
                     <Button onClick={handleSearchApply}>Add</Button>
                 </>
             )}

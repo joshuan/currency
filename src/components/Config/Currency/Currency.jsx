@@ -51,7 +51,11 @@ export function Currency({ selected = [], onChange }) {
         <ConfigItem
             title="Currencies"
             filter={(
-                <Input type="search" value={searchValue} onChange={handleSearch} />
+                <Input
+                    value={searchValue}
+                    onChange={handleSearch}
+                    placeholder="Search currency or country"
+                />
             )}
             onClear={handleClear}
         >
