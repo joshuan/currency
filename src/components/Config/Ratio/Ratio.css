@@ -1,11 +1,15 @@
-.Config__Ratio {
-
-}
-
-.Config__Ratio_Item {
-    display: block;
+.Config__Ratio_Add {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
 }
 
 .Config__Ratio_Input {
+    width: 7em;
+    margin-right: 0.6em;
+}
 
+.Config__Ratio_Checkbox {
+    display: block;
+    margin: 0.2em 0;
 }

@@ -12,10 +12,7 @@ function sort(list) {
 }
 
 export function Ratio({ selected = [], onChange }) {
-    const handleUnchecked = React.useCallback((event) => {
-        const { dataset } = event.target;
-        const ratio = parseInt(dataset.ratio, 10);
-
+    const handleUnchecked = React.useCallback((ratio) => {
         onChange(selected.filter((item) => item !== ratio));
     });
 
@@ -50,22 +47,21 @@ export function Ratio({ selected = [], onChange }) {
     return (
         <div className="Config__Ratio">
             <p><b>Ratio:</b></p>
-            <p>
-                <Input type="search" value={searchValue} onChange={handleSearch} />
+            <div className="Config__Ratio_Add">
+                <Input className="Config__Ratio_Input" type="search" value={searchValue} onChange={handleSearch} />
                 <Button onClick={handleSearchApply}>Add</Button>
-            </p>
+            </div>
             <div>
                 {selected
                     .map((ratio) => (
-                        <label key={ratio} className="Config__Ratio_Item">
-                            <Checkbox
-                                className="Config__Ratio_Input"
-                                data-ratio={ratio}
-                                checked
-                                onChange={handleUnchecked}
-                            />
+                        <Checkbox
+                            key={ratio}
+                            className="Config__Ratio_Checkbox"
+                            checked
+                            onChange={() => handleUnchecked(ratio)}
+                        >
                             {ratio}
-                        </label>
+                        </Checkbox>
                     ))}
             </div>
             <p><Button view="normal" onClick={handleClear}>Clear to defaults</Button></p>

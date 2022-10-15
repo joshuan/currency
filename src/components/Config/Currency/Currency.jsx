@@ -24,10 +24,7 @@ function filterByCodeAndName(searchValue) {
 }
 
 export function Currency({ selected = [], onChange }) {
-    const handleChange = React.useCallback((event) => {
-        const { dataset, checked } = event.target;
-        const name = dataset.currency;
-
+    const handleChange = React.useCallback((name, checked) => {
         if (checked) {
             onChange([
                 ...selected,
@@ -65,11 +62,11 @@ export function Currency({ selected = [], onChange }) {
                         <label key={code} className="Config__Currency_Item">
                             <Checkbox
                                 className="Config__Currency_Input"
-                                data-currency={currencyCode}
                                 checked={selected.includes(currencyCode)}
-                                onChange={handleChange}
-                            />
-                            <Flag currencyCode={currencyCode} /> {name}
+                                onUpdate={(checked) => handleChange(currencyCode, checked)}
+                            >
+                                <Flag currencyCode={currencyCode} /> {name}
+                            </Checkbox>
                         </label>
                     ))}
             </div>
