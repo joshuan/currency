@@ -1,7 +1,7 @@
 import React from 'react';
 import { ICurrency, IRatio, ICalculations, ICalculate } from '../../types';
 import { Flag } from '../Flag/Flag';
-import { IMoneyInputChangeEvent, MoneyInput } from '../MoneyInput/MoneyInput';
+import { MoneyInput } from '../MoneyInput/MoneyInput';
 
 import './Table.css';
 
@@ -13,16 +13,7 @@ interface ITableProps {
 }
 
 export function Table({ currencies, ratios, values, onChange }: ITableProps) {
-    const handleChange = React.useCallback((event: IMoneyInputChangeEvent) => {
-        const { dataset, value } = event.target;
-
-        onChange({
-            currency: dataset.currency as string,
-            ratio: parseInt(dataset.ratio as string, 10),
-            value: parseFloat(value),
-        });
-    }, [onChange]);
-
+    console.log('... values', values);
     return (
         <table className="Table">
             <thead>
@@ -48,7 +39,7 @@ export function Table({ currencies, ratios, values, onChange }: ITableProps) {
                                     currency={currency}
                                     ratio={ratio}
                                     value={values[currency][ratio]}
-                                    onChange={handleChange}
+                                    onChange={(value: number) => onChange({ currency, ratio, value })}
                                     tabIndex={(indexRatio + 1) * currencies.length + indexCurrency}
                                 />
                             </td>
