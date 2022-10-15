@@ -6,12 +6,15 @@ import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../../config';
 
 import './App.css';
 import { getFromStorage } from '../../lib/storage';
+import { Spin, Text } from '@gravity-ui/uikit';
+import { Center } from '../Center/Center';
 
 function getData() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         fetch(`/data.json?time=${Date.now()}`)
             .then((res) => res.json())
-            .then((data) => resolve(data));
+            .then((data) => resolve(data))
+            .catch((error) => reject(error));
     });
 }
 
@@ -22,7 +25,9 @@ export function App() {
         <div className="App">
             {
                 query.status === 'loading' && (
-                    <p>Loading...</p>
+                    <Center>
+                        <Spin size="xl">Loading...</Spin>
+                    </Center>
                 )
             }
             {
@@ -32,6 +37,14 @@ export function App() {
                         currencies={getFromStorage('currencies', DEFAULT_CURRENCIES)}
                         ratios={getFromStorage('ratios', DEFAULT_RATIOS)}
                     />
+                )
+            }
+            {
+                query.status === 'error' && (
+                    <Center>
+                        <p><Text variant="display-1">Error</Text></p>
+                        <pre>{query.error && query.error.message}</pre>
+                    </Center>
                 )
             }
         </div>
