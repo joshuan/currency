@@ -1,7 +1,5 @@
 import React from 'react';
 
-import 'flag-icons/css/flag-icons.min.css';
-
 import './Flag.css';
 
 import { currencyMap } from '../../lib/country';
@@ -13,6 +11,6 @@ interface IFlagProps {
 
 export function Flag({ currencyCode, className }: IFlagProps) {
     return (
-        <span className={`fi fi-${currencyMap[currencyCode]} ${className || ''}`} />
+        <span className={`Flag Flag-${currencyMap[currencyCode]} ${className || ''}`} />
     );
 }
