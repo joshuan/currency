@@ -10,6 +10,22 @@
     text-align: right;
     width: 100%;
     box-sizing: border-box;
+    color: var(--yc-color-text-primary);
+    background-color: transparent;
+}
+
+.MoneyInput_Input::placeholder {
+    color: var(--yc-color-text-hint);
+}
+
+.MoneyInput_Input {
+    border: 1px solid var(--yc-color-line-generic);
+}
+.MoneyInput_Input:hover {
+    border: 1px solid var(--yc-color-line-generic-hover);
+}
+.MoneyInput_Input:focus {
+    border: 1px solid var(--yc-color-line-generic-active);
 }
 
 .MoneyInput_Decimal {

@@ -2,6 +2,7 @@ import React from 'react';
 import { ICurrency, IRatio, ICalculate, ICalculations, DTO } from '../../types';
 
 import { Header } from '../Header/Header';
+import { Hr } from '../Hr/Hr';
 import { Page } from '../Page/Page';
 import { Table } from '../Table/Table';
 import { Config } from '../Config/Config';
@@ -82,7 +83,7 @@ export function Calculator(props: ICalculatorProps) {
                     values={values}
                     onChange={handleChangeValue}
                 />
-                <hr />
+                <Hr />
                 <Config
                     currencies={currencies}
                     ratios={ratios}
