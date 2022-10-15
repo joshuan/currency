@@ -12,4 +12,5 @@ AWS_PROFILE="${AWS_PROFILE}" aws s3 \
   ./dist/ \
   s3://currency.joshuan.ru/ \
   --exclude '*LICENSE*' \
+  --exclude '*.map' \
   --exclude 'data.json'

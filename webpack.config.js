@@ -9,7 +9,7 @@ module.exports = function (_, { mode }) {
         context: path.resolve(__dirname, 'src'),
         entry: './index.tsx',
         mode: isProduction ? 'production' : 'development',
-        devtool: isProduction ? 'source-map' : 'eval',
+        devtool: isProduction ? 'hidden-source-map' : 'eval',
         devServer: {
             static: {
                 directory: path.join(__dirname, 'dist'),
