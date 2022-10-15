@@ -6,6 +6,7 @@ import { DEFAULT_RATIOS } from '../../../config';
 import { Button } from '../../Button/Button';
 import { Input } from '../../Input/Input';
 import { Checkbox } from '../../Checkbox/Checkbox';
+import { ConfigItem } from '../Item/Item';
 
 function sort(list) {
     return list.sort((a, b) => a - b);
@@ -45,26 +46,27 @@ export function Ratio({ selected = [], onChange }) {
     });
 
     return (
-        <div className="Config__Ratio">
-            <p><b>Ratio:</b></p>
-            <div className="Config__Ratio_Add">
-                <Input className="Config__Ratio_Input" type="search" value={searchValue} onChange={handleSearch} />
-                <Button onClick={handleSearchApply}>Add</Button>
-            </div>
-            <div>
-                {selected
-                    .map((ratio) => (
-                        <Checkbox
-                            key={ratio}
-                            className="Config__Ratio_Checkbox"
-                            checked
-                            onChange={() => handleUnchecked(ratio)}
-                        >
-                            {ratio}
-                        </Checkbox>
-                    ))}
-            </div>
-            <p><Button view="normal" onClick={handleClear}>Clear to defaults</Button></p>
-        </div>
+        <ConfigItem
+            title="Ratio"
+            filter={(
+                <>
+                    <Input className="Config__Ratio_Input" type="search" value={searchValue} onChange={handleSearch} />
+                    <Button onClick={handleSearchApply}>Add</Button>
+                </>
+            )}
+            onClear={handleClear}
+        >
+            {selected
+                .map((ratio) => (
+                    <Checkbox
+                        key={ratio}
+                        className="Config__Ratio_Checkbox"
+                        checked
+                        onChange={() => handleUnchecked(ratio)}
+                    >
+                        {ratio}
+                    </Checkbox>
+                ))}
+        </ConfigItem>
     );
 }

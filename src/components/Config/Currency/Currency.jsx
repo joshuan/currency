@@ -5,9 +5,9 @@ import './Currency.css';
 import { countries } from '../../../lib/country';
 import { Flag } from '../../Flag/Flag.jsx';
 import { DEFAULT_CURRENCIES } from '../../../config';
-import { Button } from '../../Button/Button';
 import { Input } from '../../Input/Input';
 import { Checkbox } from '../../Checkbox/Checkbox';
+import { ConfigItem } from '../Item/Item';
 
 function filterByCode(selected) {
     const lowerSelected = selected.map((item) => item.toLowerCase());
@@ -48,29 +48,30 @@ export function Currency({ selected = [], onChange }) {
     });
 
     return (
-        <div className="Config__Currency">
-            <p><b>Currencies:</b></p>
-            <p><Input type="search" value={searchValue} onChange={handleSearch} /></p>
-            <div>
-                {countries
-                    .filter(
-                        searchValue === '' ?
-                            filterByCode(selected) :
-                            filterByCodeAndName(searchValue)
-                    )
-                    .map(({ code, name, currencyCode }) => (
-                        <label key={code} className="Config__Currency_Item">
-                            <Checkbox
-                                className="Config__Currency_Input"
-                                checked={selected.includes(currencyCode)}
-                                onUpdate={(checked) => handleChange(currencyCode, checked)}
-                            >
-                                <Flag currencyCode={currencyCode} /> {name}
-                            </Checkbox>
-                        </label>
-                    ))}
-            </div>
-            <p><Button view="normal" onClick={handleClear}>Clear to defaults</Button></p>
-        </div>
+        <ConfigItem
+            title="Currencies"
+            filter={(
+                <Input type="search" value={searchValue} onChange={handleSearch} />
+            )}
+            onClear={handleClear}
+        >
+            {countries
+                .filter(
+                    searchValue === '' ?
+                        filterByCode(selected) :
+                        filterByCodeAndName(searchValue)
+                )
+                .map(({ code, name, currencyCode }) => (
+                    <label key={code} className="Config__Currency_Item">
+                        <Checkbox
+                            className="Config__Currency_Input"
+                            checked={selected.includes(currencyCode)}
+                            onUpdate={(checked) => handleChange(currencyCode, checked)}
+                        >
+                            <Flag currencyCode={currencyCode} /> {name}
+                        </Checkbox>
+                    </label>
+                ))}
+        </ConfigItem>
     );
 }

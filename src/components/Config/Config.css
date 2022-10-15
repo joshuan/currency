@@ -2,4 +2,10 @@
     display: flex;
     width: 100%;
     justify-content: space-around;
+    column-gap: 1em;
+}
+
+.Config-Item {
+    flex: 0 0 50%;
+    max-width: 260px;
 }
