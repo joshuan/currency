@@ -12,7 +12,12 @@ module.exports = {
         },
         hot: true,
         open: true,
-
+        proxy: {
+            '/data.json': {
+                target: 'http://currency.joshuan.ru.website.yandexcloud.net',
+                changeOrigin: true,
+            },
+        }
     },
     output: {
         filename: 'bundle.js',
@@ -60,10 +65,14 @@ module.exports = {
             //     // npm i style-loader css-loader sass sass-loader -D
             // },
             // /** Картинки */
-            // {
-            //     test: /\.(png|svg|jpg|jpeg|gif)$/i,
-            //     type: 'asset/resource',
-            // },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+                generator: {
+                    publicPath: '/assets/',
+                    outputPath: 'assets',
+                },
+            },
             // /** Шрифты */
             // {
             //     test: /\.(woff|woff2|eot|ttf|otf)$/i,
