@@ -6,8 +6,8 @@ import './Flag.css';
 
 import { currencyMap } from '../../lib/country';
 
-export function Flag({ currencyCode }) {
+export function Flag({ currencyCode, className }) {
     return (
-        <span className={`fi fi-${currencyMap[currencyCode]}`} />
+        <span className={`fi fi-${currencyMap[currencyCode]} ${className}`} />
     );
 }

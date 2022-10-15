@@ -26,7 +26,6 @@ export function Table({ currencies, ratios, values, onChange }) {
             <thead>
                 <tr>
                     <th />
-                    <th />
                     {ratios.map((ratio) => (
                         <th key={`ratio-${ratio}`}>
                             {ratio}
@@ -35,17 +34,20 @@ export function Table({ currencies, ratios, values, onChange }) {
                 </tr>
             </thead>
             <tbody>
-                {currencies.map((currency) => (
+                {currencies.map((currency, indexCurrency) => (
                     <tr key={currency}>
-                        <th><Flag currencyCode={currency} /></th>
-                        <th>{currency}:</th>
-                        {ratios.map((ratio) => (
+                        <th className="Table__Currency">
+                            <Flag className="Table__Currency_Flag" currencyCode={currency} />
+                            {currency}:
+                        </th>
+                        {ratios.map((ratio, indexRatio) => (
                             <td key={`${currency}-${ratio}`}>
                                 <MoneyInput
                                     currency={currency}
                                     ratio={ratio}
                                     value={values[currency][ratio]}
                                     onChange={handleChange}
+                                    tabIndex={(indexRatio + 1) * currencies.length + indexCurrency}
                                 />
                             </td>
                         ))}

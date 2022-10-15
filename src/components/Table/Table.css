@@ -1,6 +1,17 @@
 .Table td, .Table th {
     padding: 3px 0;
 }
+
 .Table {
     width: 100%;
+}
+
+.Table__Currency {
+    width: 60px;
+    padding-right: 5px !important;
+    white-space: nowrap;
+}
+
+.Table__Currency_Flag {
+    padding-right: 5px;
 }

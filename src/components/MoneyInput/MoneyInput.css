@@ -1,16 +1,23 @@
 .MoneyInput {
+    position: relative;
     white-space: nowrap;
 }
 
 .MoneyInput_Input {
     border: 1px solid #e3e3e3;
-    padding: 4px 5px;
+    padding: 4px 20px 4px 5px;
     font-size: 1.1em;
-    margin: 0 1px 0 .3em;
     text-align: right;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .MoneyInput_Decimal {
+    position: absolute;
+    top: 0;
+    right: 0;
     font-size: 0.8em;
     color: #aaa;
+    line-height: 2.7em;
+    width: 20px;
 }
