@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import './Item.css';
 
-import { Button } from '../../Button/Button';
+import { Button, IButtonClickEvent } from '../../Button/Button';
 import { Text } from '@gravity-ui/uikit';
 
-export function ConfigItem({ title, filter, children, onClear }) {
+type IConfigItemProps = PropsWithChildren<{
+    title: string;
+    filter: React.ReactNode;
+    onClear(event: IButtonClickEvent): void;
+}>
+
+export function ConfigItem({ title, filter, children, onClear }: IConfigItemProps) {
     return (
         <div className="Config__Item">
             <Text variant="header-1" className="Config__Item_Head">{title}:</Text>

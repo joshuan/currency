@@ -1,25 +1,27 @@
 import React from 'react';
-
+import { ICurrency, IRatio, ICalculations, ICalculate } from '../../types';
 import { Flag } from '../Flag/Flag';
-import { MoneyInput } from '../MoneyInput/MoneyInput';
+import { IMoneyInputChangeEvent, MoneyInput } from '../MoneyInput/MoneyInput';
 
 import './Table.css';
 
-export function Table({ currencies, ratios, values, onChange }) {
-    // const [state, setState] = React.useState(currencies.reduce((acc, item) => {
-    //     acc[item] = rates[item];
-    //     return acc;
-    // }, {}));
+interface ITableProps {
+    currencies: ICurrency[];
+    ratios: IRatio[];
+    values: ICalculations;
+    onChange(data: ICalculate): void;
+}
 
-    const handleChange = React.useCallback((event) => {
+export function Table({ currencies, ratios, values, onChange }: ITableProps) {
+    const handleChange = React.useCallback((event: IMoneyInputChangeEvent) => {
         const { dataset, value } = event.target;
 
         onChange({
-            currency: dataset.currency,
-            ratio: parseInt(dataset.ratio, 10),
-            value: value,
+            currency: dataset.currenc as string,
+            ratio: parseInt(dataset.ratio as string, 10),
+            value: parseFloat(value),
         });
-    });
+    }, [onChange]);
 
     return (
         <table className="Table">

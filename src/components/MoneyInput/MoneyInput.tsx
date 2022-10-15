@@ -2,7 +2,17 @@ import React from 'react';
 
 import './MoneyInput.css';
 
-export function MoneyInput({ currency, ratio, value, onChange, tabIndex }) {
+export type IMoneyInputChangeEvent = React.ChangeEvent<HTMLInputElement>;
+
+interface IMoneyInputProps {
+    currency: string;
+    ratio: number;
+    value: number;
+    onChange(event: IMoneyInputChangeEvent): void;
+    tabIndex?: number;
+}
+
+export function MoneyInput({ currency, ratio, value, onChange, tabIndex }: IMoneyInputProps) {
     const [full, decimal] = value.toFixed(2).split('.');
 
     return (

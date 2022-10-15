@@ -3,7 +3,11 @@ import React from 'react';
 import './Header.css';
 import { Text } from '@gravity-ui/uikit';
 
-export function Header({ date }) {
+interface IHeaderProps {
+    date: number;
+}
+
+export function Header({ date }: IHeaderProps) {
     return (
         <div className="Header">
             {date !== null && (

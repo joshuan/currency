@@ -5,7 +5,14 @@ import './Config.css';
 import { Currency } from './Currency/Currency';
 import { Ratio } from './Ratio/Ratio';
 
-export function Config({ currencies = [], ratios = [], onChangeCurrencies, onChangeRatios }) {
+interface IConfigProps {
+    currencies: string[];
+    ratios: number[];
+    onChangeCurrencies(list: string[]): void;
+    onChangeRatios(list: number[]): void;
+}
+
+export function Config({ currencies = [], ratios = [], onChangeCurrencies, onChangeRatios }: IConfigProps) {
     return (
         <div className="Config">
             <div className="Config-Item">

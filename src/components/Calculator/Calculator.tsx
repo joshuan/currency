@@ -1,69 +1,62 @@
 import React from 'react';
+import { ICurrency, IRatio, ICalculate, ICalculations, DTO } from '../../types';
 
 import { Header } from '../Header/Header';
 import { Page } from '../Page/Page';
 import { Table } from '../Table/Table';
 import { Config } from '../Config/Config';
-
-import './Calculator.css';
+import { calculateValues } from './utils';
 import { saveToStorage } from '../../lib/storage';
 
-function calculateValues(rates, selected, update) {
-    const baseValue = (update.value / update.ratio) / rates[update.currency];
-    const result = {};
+import './Calculator.css';
 
-    for (const currency of selected.currencies) {
-        result[currency] = {};
-
-        for (const ratio of selected.ratios) {
-            result[currency][ratio] = baseValue * rates[currency] * ratio;
-        }
-    }
-
-    return result;
+interface ICalculatorProps {
+    data: DTO;
+    currencies: ICurrency[];
+    ratios: IRatio[];
 }
 
-export function Calculator(props) {
+export function Calculator(props: ICalculatorProps) {
     const [currencies, setCurrencies] = React.useState(props.currencies);
     const [ratios, setRatios] = React.useState(props.ratios);
     const [lastCurrency, setLastCurrency] = React.useState(props.currencies[0]);
     const [lastRatio, setLastRatio] = React.useState(props.ratios[0]);
     const [lastValue, setLastValue] = React.useState(1);
-    const [values, setValues] = React.useState(calculateValues(
+    const [values, setValues] = React.useState<ICalculations>(calculateValues(
         props.data.rates,
         { currencies, ratios },
         { currency: lastCurrency, ratio: lastRatio, value: 1 },
     ));
 
-    function updateCurrencies(selected) {
+    function updateCurrencies(selected: ICurrency[]) {
         setCurrencies(selected);
         saveToStorage('currencies', selected);
     }
 
-    function updateRatios(selected) {
+    function updateRatios(selected: IRatio[]) {
         setRatios(selected);
         saveToStorage('ratios', selected);
     }
 
-    const handleChangeCurrency = React.useCallback((list) => {
+    const handleChangeCurrency = React.useCallback((list: ICurrency[]) => {
         updateCurrencies(list);
         setValues(calculateValues(
             props.data.rates,
             { currencies: list, ratios },
             { currency: lastCurrency, ratio: lastRatio, value: lastValue },
         ));
-    });
+    }, [props.data.rates, ratios, lastCurrency, lastRatio, lastValue]);
 
-    const handleChangeRatio = React.useCallback((list) => {
+    const handleChangeRatio = React.useCallback((list: IRatio[]) => {
         updateRatios(list);
         setValues(calculateValues(
             props.data.rates,
             { currencies, ratios: list },
             { currency: lastCurrency, ratio: lastRatio, value: lastValue },
         ));
-    });
+    }, [props.data.rates, ratios, lastCurrency, lastRatio, lastValue]);
 
-    const handleChangeValue = React.useCallback(({ currency, ratio, value }) => {
+    const handleChangeValue = React.useCallback(({ currency, ratio, value }: ICalculate) => {
         setLastCurrency(currency);
         setLastRatio(ratio);
         setLastValue(value);
@@ -73,7 +66,7 @@ export function Calculator(props) {
             { currencies, ratios },
             { currency, ratio, value },
         ));
-    });
+    }, [props.data.rates]);
 
     return (
         <div className="Calculator">

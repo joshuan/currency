@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import { DTO } from '../../types';
 
 import { Calculator } from '../Calculator/Calculator';
 import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../../config';
@@ -9,7 +10,7 @@ import { getFromStorage } from '../../lib/storage';
 import { Spin, Text } from '@gravity-ui/uikit';
 import { Center } from '../Center/Center';
 
-function getData() {
+function getData(): Promise<DTO> {
     return new Promise((resolve, reject) => {
         fetch(`/data.json?time=${Date.now()}`)
             .then((res) => res.json())
@@ -19,14 +20,14 @@ function getData() {
 }
 
 export function App() {
-    const query = useQuery('data', getData);
+    const query = useQuery<DTO>('data', getData);
 
     return (
         <div className="App">
             {
                 query.status === 'loading' && (
                     <Center>
-                        <Spin size="xl">Loading...</Spin>
+                        <Spin size="xl" />
                     </Center>
                 )
             }
@@ -43,7 +44,7 @@ export function App() {
                 query.status === 'error' && (
                     <Center>
                         <p><Text variant="display-1">Error</Text></p>
-                        <pre>{query.error && query.error.message}</pre>
+                        <pre>{query.error?.toString()}</pre>
                     </Center>
                 )
             }

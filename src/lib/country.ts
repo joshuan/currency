@@ -1,4 +1,4 @@
-const data = [
+const data: { code: string; name: string; currencyCode: string; }[] = [
     { code: 'ac', name: 'Ascension Island', currencyCode: '' },
     { code: 'ad', name: 'Andorra', currencyCode: '' },
     { code: 'ae', name: 'United Arab Emirates', currencyCode: 'AED' },
@@ -296,4 +296,4 @@ export const currencyMap = data.reduce((acc, item) => {
     acc[item.currencyCode] = item.code;
 
     return acc;
-}, {});
+}, {} as Record<string, string>);
