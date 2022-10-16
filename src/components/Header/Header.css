@@ -8,3 +8,7 @@
 .Header__Date {
     float: right;
 }
+
+.Header__H1 {
+    margin: 0;
+}

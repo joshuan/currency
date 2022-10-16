@@ -15,9 +15,9 @@ export function Header({ date }: IHeaderProps) {
                     <Text variant="code-2">{(new Date(date)).toLocaleString()}</Text>
                 </div>
             )}
-            <div>
+            <h1 className="Header__H1">
                 <Text variant="display-2">Currency calculator</Text>
-            </div>
+            </h1>
         </div>
     );
 }
