@@ -4,7 +4,7 @@
 }
 
 .MoneyInput_Input {
-    border: 1px solid #e3e3e3;
+    border: 1px solid var(--yc-color-line-generic);
     padding: 4px 20px 4px 5px;
     font-size: 1.1em;
     text-align: right;
@@ -33,7 +33,7 @@
     top: 0;
     right: 0;
     font-size: 0.8em;
-    color: #aaa;
+    color: var(--yc-color-text-secondary);
     line-height: 2.7em;
     width: 20px;
 }
