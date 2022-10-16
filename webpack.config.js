@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+require('dotenv').config();
+
 module.exports = function (_, { mode }) {
     const isProduction = mode === 'production';
 
@@ -75,7 +77,17 @@ module.exports = function (_, { mode }) {
         },
         plugins: [
             new HtmlWebpackPlugin({
+                hash: true,
                 template: 'index.html',
+                templateParameters: {
+                    ROLLBACK_TOKEN: process.env.ROLLBACK_TOKEN,
+                    NODE_ENV: isProduction ? 'production' : 'development',
+                },
+                minify: {
+                    minifyCSS: true,
+                    minifyJS: true,
+                    removeComments: true,
+                },
             }),
             new MiniCssExtractPlugin({
                 filename: 'style.css',
