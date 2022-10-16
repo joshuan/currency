@@ -13,6 +13,10 @@ interface ITableProps {
 }
 
 export function Table({ currencies, ratios, values, onChange }: ITableProps) {
+    if (currencies.length !== Object.keys(values).length) {
+        throw new Error('Not consistence values', { cause: { currencies, values } });
+    }
+
     return (
         <table className="Table">
             <thead>
@@ -37,7 +41,7 @@ export function Table({ currencies, ratios, values, onChange }: ITableProps) {
                                 <MoneyInput
                                     currency={currency}
                                     ratio={ratio}
-                                    value={values[currency][ratio]}
+                                    value={values[currency] ? values[currency][ratio] : 0}
                                     onChange={(value: number) => onChange({ currency, ratio, value })}
                                     tabIndex={(indexRatio + 1) * currencies.length + indexCurrency}
                                 />

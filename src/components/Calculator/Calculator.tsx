@@ -39,29 +39,25 @@ export function Calculator(props: ICalculatorProps) {
         saveToStorage('ratios', selected);
     }
 
-    const handleChangeCurrency = React.useCallback((list: ICurrency[]) => {
+    const handleChangeCurrency = (list: ICurrency[]) => {
         updateCurrencies(list);
         setValues(calculateValues(
             props.data.rates,
             { currencies: list, ratios },
             { currency: lastCurrency, ratio: lastRatio, value: lastValue },
         ));
-    }, [props.data.rates, ratios, lastCurrency, lastRatio, lastValue]);
+    };
 
-    const handleChangeRatio = React.useCallback((list: IRatio[]) => {
+    const handleChangeRatio = (list: IRatio[]) => {
         updateRatios(list);
         setValues(calculateValues(
             props.data.rates,
             { currencies, ratios: list },
             { currency: lastCurrency, ratio: lastRatio, value: lastValue },
         ));
-    }, [props.data.rates, ratios, lastCurrency, lastRatio, lastValue]);
+    };
 
-    const handleChangeValue = React.useCallback(({ currency, ratio, value }: ICalculate) => {
-        if (Number.isNaN(value)) {
-            value = 0;
-        }
-
+    const handleChangeValue = ({ currency, ratio, value }: ICalculate) => {
         setLastCurrency(currency);
         setLastRatio(ratio);
         setLastValue(value);
@@ -71,7 +67,7 @@ export function Calculator(props: ICalculatorProps) {
             { currencies, ratios },
             { currency, ratio, value },
         ));
-    }, [props.data.rates]);
+    };
 
     return (
         <div className="Calculator">
