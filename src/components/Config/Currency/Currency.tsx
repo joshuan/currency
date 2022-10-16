@@ -71,7 +71,7 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
                         filterByCodeAndName(searchValue)
                 )
                 .map(({ code, name, currencyCode }) => (
-                    <label key={code} className="Config__Currency_Item">
+                    <div key={code} className="Config__Currency_Item">
                         <Checkbox
                             className="Config__Currency_Input"
                             checked={selected.includes(currencyCode)}
@@ -79,7 +79,7 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
                         >
                             <Flag currencyCode={currencyCode} /> {name}
                         </Checkbox>
-                    </label>
+                    </div>
                 ))}
         </ConfigItem>
     );
