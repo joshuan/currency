@@ -51,6 +51,7 @@ export function MoneyInput({ currency, ratio, value, onChange, tabIndex }: IMone
                 tabIndex={tabIndex}
                 ref={inputCard}
                 onChange={handleChange}
+                aria-label={`Currency ${currency} with ${ratio} ratio`}
             />
             <span className="MoneyInput_Decimal">.{decimal}</span>
         </div>
