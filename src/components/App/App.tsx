@@ -1,14 +1,14 @@
 import React from 'react';
-import { useQuery } from 'react-query';
-import { DTO } from '../../types';
 
+import { useQuery } from '../../lib/query';
+import { DTO } from '../../types';
 import { Calculator } from '../Calculator/Calculator';
 import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../../config';
-
-import './App.css';
 import { getFromStorage } from '../../lib/storage';
 import { Spin, Text } from '@gravity-ui/uikit';
 import { Center } from '../Center/Center';
+
+import './App.css';
 
 function getData(): Promise<DTO> {
     return new Promise((resolve, reject) => {
@@ -19,8 +19,12 @@ function getData(): Promise<DTO> {
     });
 }
 
+function getErrorMessage(error: unknown): string {
+    return error instanceof Error ? error.toString() : 'Unknown error';
+}
+
 export function App() {
-    const query = useQuery<DTO>('data', getData);
+    const query = useQuery<DTO>(['data'], getData);
 
     return (
         <div className="App">
@@ -44,7 +48,7 @@ export function App() {
                 query.status === 'error' && (
                     <Center>
                         <p><Text variant="display-1">Error</Text></p>
-                        <pre>{query.error?.toString()}</pre>
+                        <pre>{getErrorMessage(query.error)}</pre>
                     </Center>
                 )
             }
