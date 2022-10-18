@@ -10,6 +10,7 @@
 .Table__Currency {
     width: 60px;
     padding-right: 5px !important;
+    padding-left: 0 !important;
     white-space: nowrap;
 }
 

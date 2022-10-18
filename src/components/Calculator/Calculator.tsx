@@ -3,7 +3,7 @@ import { ICurrency, IRatio, ICalculate, ICalculations, DTO } from '../../types';
 
 import { Header } from '../Header/Header';
 import { Hr } from '../Hr/Hr';
-import { Page } from '../Page/Page';
+import { Container } from '../Container/Container';
 import { Table } from '../Table/Table';
 import { Config } from '../Config/Config';
 import { calculateValues } from './utils';
@@ -72,21 +72,23 @@ export function Calculator(props: ICalculatorProps) {
     return (
         <div className="Calculator">
             <Header date={props.data.timestamp * 1000}/>
-            <Page>
+            <Container>
                 <Table
                     currencies={currencies}
                     ratios={ratios}
                     values={values}
                     onChange={handleChangeValue}
                 />
-                <Hr />
+            </Container>
+            <Hr />
+            <Container>
                 <Config
                     currencies={currencies}
                     ratios={ratios}
                     onChangeCurrencies={handleChangeCurrency}
                     onChangeRatios={handleChangeRatio}
                 />
-            </Page>
+            </Container>
         </div>
     );
 }
