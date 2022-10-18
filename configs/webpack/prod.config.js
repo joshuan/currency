@@ -69,6 +69,7 @@ module.exports = function () {
                 templateParameters: {
                     ROLLBACK_TOKEN: process.env.ROLLBACK_TOKEN,
                     NODE_ENV: 'production',
+                    APP_CONTENT: require('../../dist/ssr/ssr').render(),
                 },
                 minify: {
                     minifyCSS: true,

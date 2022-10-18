@@ -78,6 +78,7 @@ module.exports = function () {
                 templateParameters: {
                     ROLLBACK_TOKEN: process.env.ROLLBACK_TOKEN,
                     NODE_ENV: 'development',
+                    APP_CONTENT: 'Loading...',
                 },
                 minify: {
                     minifyCSS: true,
