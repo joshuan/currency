@@ -14,7 +14,7 @@ module.exports = function () {
         devtool: 'hidden-source-map',
         output: {
             filename: 'bundle.js',
-            path: path.resolve(ROOT, 'dist'),
+            path: path.resolve(ROOT, 'dist/prod'),
             clean: true,
         },
         resolve: {

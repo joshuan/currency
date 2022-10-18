@@ -12,9 +12,6 @@ module.exports = function () {
         mode: 'development',
         devtool: 'eval',
         devServer: {
-            static: {
-                directory: path.join(ROOT, 'dist'),
-            },
             hot: true,
             open: true,
             proxy: {

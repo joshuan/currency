@@ -9,7 +9,7 @@ fi
 AWS_PROFILE="${AWS_PROFILE}" aws s3 \
   --endpoint-url=https://storage.yandexcloud.net \
   sync \
-  ./dist/ \
+  ./dist/prod/ \
   s3://currency.joshuan.ru/ \
   --exclude '*LICENSE*' \
   --exclude '*.map' \
