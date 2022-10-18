@@ -8,7 +8,6 @@
     "deploy": "./scripts/deploy.sh",
     "open": "open https://currency.joshuan.ru/",
     "release": "npm run build && npm run deploy",
-    "prerelease": "npm run build && ./scripts/deploy-test.sh",
     "update": "yc serverless function invoke update-currency",
     "analyzer": "./scripts/analyzer.sh"
   },
