@@ -1,5 +1,7 @@
+const isAvailable = typeof localStorage !== 'undefined';
+
 export function saveToStorage(key: string, value: object): void {
-    if (localStorage) {
+    if (isAvailable) {
         localStorage.setItem(key, JSON.stringify(value));
     }
 }
@@ -7,7 +9,7 @@ export function saveToStorage(key: string, value: object): void {
 export function getFromStorage<T extends object>(key: string, defaultValue: T): T {
     let value;
 
-    if (localStorage) {
+    if (isAvailable) {
         value = localStorage.getItem(key);
     }
 

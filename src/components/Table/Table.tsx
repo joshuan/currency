@@ -1,3 +1,4 @@
+import { Skeleton } from '@gravity-ui/uikit';
 import React from 'react';
 import { ICurrency, IRatio, ICalculations, ICalculate } from '../../types';
 import { Flag } from '../Flag/Flag';
@@ -6,13 +7,14 @@ import { MoneyInput } from '../MoneyInput/MoneyInput';
 import './Table.css';
 
 interface ITableProps {
+    loading: boolean;
     currencies: ICurrency[];
     ratios: IRatio[];
     values: ICalculations;
     onChange(data: ICalculate): void;
 }
 
-export function Table({ currencies, ratios, values, onChange }: ITableProps) {
+export function Table({ loading, currencies, ratios, values, onChange }: ITableProps) {
     if (currencies.length !== Object.keys(values).length) {
         throw new Error('Not consistence values', { cause: { currencies, values } });
     }
@@ -38,13 +40,17 @@ export function Table({ currencies, ratios, values, onChange }: ITableProps) {
                         </th>
                         {ratios.map((ratio, indexRatio) => (
                             <td key={`${currency}-${ratio}`}>
-                                <MoneyInput
-                                    currency={currency}
-                                    ratio={ratio}
-                                    value={values[currency] ? values[currency][ratio] : 0}
-                                    onChange={(value: number) => onChange({ currency, ratio, value })}
-                                    tabIndex={(indexRatio + 1) * currencies.length + indexCurrency}
-                                />
+                                {loading ? (
+                                    <Skeleton className="Table__Skeleton" />
+                                ) : (
+                                    <MoneyInput
+                                        currency={currency}
+                                        ratio={ratio}
+                                        value={values[currency] ? values[currency][ratio] : 0}
+                                        onChange={(value: number) => onChange({ currency, ratio, value })}
+                                        tabIndex={(indexRatio + 1) * currencies.length + indexCurrency}
+                                    />
+                                )}
                             </td>
                         ))}
                     </tr>

@@ -21,28 +21,22 @@ export function App() {
         <div className="App">
             <Header date={query.status === 'success' ? (query.data.timestamp * 1000) : null}/>
             {
-                query.status === 'loading' && (
-                    <Center>
-                        <Spin size="xl" />
-                    </Center>
-                )
-            }
-            {
-                query.status === 'success' && (
+                (query.isLoading || query.isSuccess) ? (
                     <Calculator
-                        data={query.data}
+                        loading={query.isLoading}
+                        rates={query.isSuccess ? query.data.rates : {}}
                         currencies={getFromStorage('currencies', DEFAULT_CURRENCIES)}
                         ratios={getFromStorage('ratios', DEFAULT_RATIOS)}
                     />
-                )
+                ) : null
             }
             {
-                query.status === 'error' && (
+                query.isError ? (
                     <Center>
                         <p><Text variant="display-1">Error</Text></p>
                         <pre>{getErrorMessage(query.error)}</pre>
                     </Center>
-                )
+                ) : null
             }
         </div>
     );

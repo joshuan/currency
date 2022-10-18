@@ -17,3 +17,7 @@
 .Table__Currency_Flag {
     padding-right: 5px;
 }
+
+.Table__Skeleton {
+    height: calc(1em + 8px);
+}
