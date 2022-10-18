@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "homepage": "https://currency.joshuan.ru",
   "scripts": {
-    "dev": "webpack serve --config configs/webpack/webpack.config.js",
+    "dev": "webpack serve --config configs/webpack/dev.config.js",
     "build": "./scripts/build.sh",
     "deploy": "./scripts/deploy.sh",
     "open": "open https://currency.joshuan.ru/",

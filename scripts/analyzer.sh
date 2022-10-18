@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-webpack --config configs/webpack/webpack.config.js --mode production --profile --json > stat.json
+set -e
 
-npx webpack-bundle-analyzer stat.json
+webpack --config configs/webpack/prod.config.js --profile --json > stat.json
+
+npx --no-install webpack-bundle-analyzer stat.json

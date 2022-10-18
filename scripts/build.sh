@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-set +e
+set -e
 
-npx --no-install webpack --mode production --config configs/webpack/webpack.config.js
+npx --no-install webpack --config configs/webpack/prod.config.js

@@ -1,19 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 require('dotenv').config();
 
 const ROOT = path.resolve(__dirname, '../../');
 
-module.exports = function (_, { mode }) {
-    const isProduction = mode === 'production';
-
+module.exports = function () {
     return {
         context: path.resolve(ROOT, 'src'),
         entry: './index.tsx',
-        mode: isProduction ? 'production' : 'development',
-        devtool: isProduction ? 'hidden-source-map' : 'eval',
+        mode: 'development',
+        devtool: 'eval',
         devServer: {
             static: {
                 directory: path.join(ROOT, 'dist'),
@@ -58,7 +55,7 @@ module.exports = function (_, { mode }) {
                 {
                     test: /\.css$/i,
                     use: [
-                        isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                        'style-loader',
                         {
                             loader: 'css-loader',
                             options: {
@@ -83,16 +80,13 @@ module.exports = function (_, { mode }) {
                 template: 'index.html',
                 templateParameters: {
                     ROLLBACK_TOKEN: process.env.ROLLBACK_TOKEN,
-                    NODE_ENV: isProduction ? 'production' : 'development',
+                    NODE_ENV: 'development',
                 },
                 minify: {
                     minifyCSS: true,
                     minifyJS: true,
                     removeComments: true,
                 },
-            }),
-            new MiniCssExtractPlugin({
-                filename: 'style.css',
             }),
         ],
     };
