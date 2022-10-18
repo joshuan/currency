@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { useQuery } from '../../lib/query';
-import { DTO } from '../../types';
+import { useGetData } from '../../queries';
 import { Calculator } from '../Calculator/Calculator';
 import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../../config';
 import { getFromStorage } from '../../lib/storage';
@@ -10,21 +9,12 @@ import { Center } from '../Center/Center';
 
 import './App.css';
 
-function getData(): Promise<DTO> {
-    return new Promise((resolve, reject) => {
-        fetch(`/data.json?time=${Date.now()}`)
-            .then((res) => res.json())
-            .then((data) => resolve(data))
-            .catch((error) => reject(error));
-    });
-}
-
 function getErrorMessage(error: unknown): string {
     return error instanceof Error ? error.toString() : 'Unknown error';
 }
 
 export function App() {
-    const query = useQuery<DTO>(['data'], getData);
+    const query = useGetData();
 
     return (
         <div className="App">
