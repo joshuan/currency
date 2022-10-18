@@ -13,7 +13,7 @@ module.exports = function () {
         mode: 'production',
         devtool: 'hidden-source-map',
         output: {
-            filename: 'bundle.js',
+            filename: 'assets/app.js',
             path: path.resolve(ROOT, 'dist/prod'),
             clean: true,
         },
@@ -87,7 +87,7 @@ module.exports = function () {
                 },
             }),
             new MiniCssExtractPlugin({
-                filename: 'style.css',
+                filename: 'assets/style.css',
             }),
         ],
     };
