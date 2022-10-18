@@ -1,7 +1,6 @@
 import React from 'react';
 import { ICurrency, IRatio, ICalculate, ICalculations, DTO } from '../../types';
 
-import { Header } from '../Header/Header';
 import { Hr } from '../Hr/Hr';
 import { Container } from '../Container/Container';
 import { Table } from '../Table/Table';
@@ -71,7 +70,6 @@ export function Calculator(props: ICalculatorProps) {
 
     return (
         <div className="Calculator">
-            <Header date={props.data.timestamp * 1000}/>
             <Container>
                 <Table
                     currencies={currencies}

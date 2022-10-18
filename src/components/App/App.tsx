@@ -8,6 +8,7 @@ import { Spin, Text } from '@gravity-ui/uikit';
 import { Center } from '../Center/Center';
 
 import './App.css';
+import { Header } from '../Header/Header';
 
 function getErrorMessage(error: unknown): string {
     return error instanceof Error ? error.toString() : 'Unknown error';
@@ -18,6 +19,7 @@ export function App() {
 
     return (
         <div className="App">
+            <Header date={query.status === 'success' ? (query.data.timestamp * 1000) : null}/>
             {
                 query.status === 'loading' && (
                     <Center>

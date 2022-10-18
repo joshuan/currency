@@ -4,7 +4,7 @@ import './Header.css';
 import { Text } from '@gravity-ui/uikit';
 
 interface IHeaderProps {
-    date: number;
+    date: number | null;
 }
 
 export function Header({ date }: IHeaderProps) {
@@ -12,7 +12,9 @@ export function Header({ date }: IHeaderProps) {
         <div className="Header">
             {date !== null && (
                 <div className="Header__Date">
-                    <Text variant="code-2">{(new Date(date)).toLocaleString()}</Text>
+                    <Text variant="code-2">
+                        {(new Date(date)).toLocaleString()}
+                    </Text>
                 </div>
             )}
             <h1 className="Header__H1">
