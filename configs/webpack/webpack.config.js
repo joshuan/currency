@@ -4,17 +4,19 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 require('dotenv').config();
 
+const ROOT = path.resolve(__dirname, '../../');
+
 module.exports = function (_, { mode }) {
     const isProduction = mode === 'production';
 
     return {
-        context: path.resolve(__dirname, 'src'),
+        context: path.resolve(ROOT, 'src'),
         entry: './index.tsx',
         mode: isProduction ? 'production' : 'development',
         devtool: isProduction ? 'hidden-source-map' : 'eval',
         devServer: {
             static: {
-                directory: path.join(__dirname, 'dist'),
+                directory: path.join(ROOT, 'dist'),
             },
             hot: true,
             open: true,
@@ -27,7 +29,7 @@ module.exports = function (_, { mode }) {
         },
         output: {
             filename: 'bundle.js',
-            path: path.resolve(__dirname, 'dist'),
+            path: path.resolve(ROOT, 'dist'),
             clean: true,
         },
         resolve: {
