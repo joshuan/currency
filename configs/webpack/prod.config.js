@@ -60,6 +60,15 @@ module.exports = function () {
                         outputPath: 'assets',
                     },
                 },
+                {
+                    test: /flag-icons\/flags\/4x3\/(\w+)\.svg$/i,
+                    type: 'asset/resource',
+                    generator: {
+                        filename: '[name][ext]',
+                        publicPath: '/assets/flags/',
+                        outputPath: 'assets/flags',
+                    },
+                },
             ],
         },
         plugins: [
