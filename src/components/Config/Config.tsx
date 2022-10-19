@@ -6,23 +6,23 @@ import { Currency } from './Currency/Currency';
 import { Ratio } from './Ratio/Ratio';
 
 interface IConfigProps {
-    currencies: string[];
-    ratios: number[];
+	currencies: string[];
+	ratios: number[];
 
-    onChangeCurrencies(list: string[]): void;
+	onChangeCurrencies(list: string[]): void;
 
-    onChangeRatios(list: number[]): void;
+	onChangeRatios(list: number[]): void;
 }
 
 export function Config({ currencies = [], ratios = [], onChangeCurrencies, onChangeRatios }: IConfigProps) {
-    return (
-        <div className="Config">
-            <div className="Config-Item">
-                <Currency selected={currencies} onChange={onChangeCurrencies}/>
-            </div>
-            <div className="Config-Item">
-                <Ratio selected={ratios} onChange={onChangeRatios}/>
-            </div>
-        </div>
-    );
+	return (
+		<div className="Config">
+			<div className="Config-Item">
+				<Currency selected={currencies} onChange={onChangeCurrencies}/>
+			</div>
+			<div className="Config-Item">
+				<Ratio selected={ratios} onChange={onChangeRatios}/>
+			</div>
+		</div>
+	);
 }

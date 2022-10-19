@@ -4,14 +4,14 @@ import { dehydrate, Hydrate, QueryClient, QueryClientProvider } from '@tanstack/
 import { App } from './components/App/App';
 
 export function render() {
-    const queryClient = new QueryClient();
-    const dehydratedState = dehydrate(queryClient);
+	const queryClient = new QueryClient();
+	const dehydratedState = dehydrate(queryClient);
 
-    return renderToString(
-        <QueryClientProvider client={queryClient}>
-            <Hydrate state={dehydratedState}>
-                <App/>
-            </Hydrate>
-        </QueryClientProvider>,
-    );
+	return renderToString(
+		<QueryClientProvider client={queryClient}>
+			<Hydrate state={dehydratedState}>
+				<App/>
+			</Hydrate>
+		</QueryClientProvider>,
+	);
 }

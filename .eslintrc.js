@@ -18,7 +18,7 @@ module.exports = {
         '@typescript-eslint',
     ],
     'rules': {
-        'indent': ['error', 4],
+        'indent': ['error', 'tab'],
         'linebreak-style': ['error', 'unix'],
         'quotes': ['error', 'single'],
     },

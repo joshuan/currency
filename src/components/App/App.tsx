@@ -11,33 +11,33 @@ import './App.css';
 import { Header } from '../Header/Header';
 
 function getErrorMessage(error: unknown): string {
-    return error instanceof Error ? error.toString() : 'Unknown error';
+	return error instanceof Error ? error.toString() : 'Unknown error';
 }
 
 export function App() {
-    const query = useGetData();
+	const query = useGetData();
 
-    return (
-        <div className="App">
-            <Header date={query.status === 'success' ? (query.data.timestamp * 1000) : null}/>
-            {
-                (query.isLoading || query.isSuccess) ? (
-                    <Calculator
-                        loading={query.isLoading}
-                        rates={query.isSuccess ? query.data.rates : {}}
-                        currencies={getFromStorage('currencies', DEFAULT_CURRENCIES)}
-                        ratios={getFromStorage('ratios', DEFAULT_RATIOS)}
-                    />
-                ) : null
-            }
-            {
-                query.isError ? (
-                    <Center>
-                        <p><Text variant="display-1">Error</Text></p>
-                        <pre>{getErrorMessage(query.error)}</pre>
-                    </Center>
-                ) : null
-            }
-        </div>
-    );
+	return (
+		<div className="App">
+			<Header date={query.status === 'success' ? (query.data.timestamp * 1000) : null}/>
+			{
+				(query.isLoading || query.isSuccess) ? (
+					<Calculator
+						loading={query.isLoading}
+						rates={query.isSuccess ? query.data.rates : {}}
+						currencies={getFromStorage('currencies', DEFAULT_CURRENCIES)}
+						ratios={getFromStorage('ratios', DEFAULT_RATIOS)}
+					/>
+				) : null
+			}
+			{
+				query.isError ? (
+					<Center>
+						<p><Text variant="display-1">Error</Text></p>
+						<pre>{getErrorMessage(query.error)}</pre>
+					</Center>
+				) : null
+			}
+		</div>
+	);
 }

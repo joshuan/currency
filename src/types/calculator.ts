@@ -7,12 +7,12 @@ export type IRatio = number;
 export type ICalculations = Record<ICurrency, Record<IRatio, number>>;
 
 export interface ICalculate {
-    currency: string;
-    ratio: number;
-    value: number;
+	currency: string;
+	ratio: number;
+	value: number;
 }
 
 export interface ISelected {
-    currencies: ICurrency[];
-    ratios: IRatio[];
+	currencies: ICurrency[];
+	ratios: IRatio[];
 }

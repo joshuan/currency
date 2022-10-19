@@ -6,8 +6,7 @@ insert_final_newline = true
 
 [*.{js,jsx,ts,tsx}]
 charset = utf-8
-indent_style = space
-indent_size = 4
+indent_style = tab
 
 [{package.json,package-lock.json}]
 indent_style = space

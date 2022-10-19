@@ -8,18 +8,18 @@ import './style.css';
 import { QueryClientProvider, queryClient } from './lib/query';
 
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    const body = document.querySelector('.yc-root');
+	const body = document.querySelector('.yc-root');
 
-    body?.classList.add('yc-root_theme_dark');
-    body?.classList.remove('yc-root_theme_light');
+	body?.classList.add('yc-root_theme_dark');
+	body?.classList.remove('yc-root_theme_light');
 }
 
 configure({
-    lang: 'en',
+	lang: 'en',
 });
 
 ReactDOM.hydrate((
-    <QueryClientProvider client={queryClient}>
-        <App/>
-    </QueryClientProvider>
+	<QueryClientProvider client={queryClient}>
+		<App/>
+	</QueryClientProvider>
 ), document.getElementById('root'));
