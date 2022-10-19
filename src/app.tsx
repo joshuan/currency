@@ -18,7 +18,7 @@ configure({
     lang: 'en',
 })
 
-ReactDOM.render((
+ReactDOM.hydrate((
     <QueryClientProvider client={queryClient}>
         <App />
     </QueryClientProvider>

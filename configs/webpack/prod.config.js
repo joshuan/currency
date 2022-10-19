@@ -9,7 +9,7 @@ const ROOT = path.resolve(__dirname, '../../');
 module.exports = function () {
     return {
         context: path.resolve(ROOT, 'src'),
-        entry: './index.tsx',
+        entry: './app.tsx',
         mode: 'production',
         devtool: 'hidden-source-map',
         output: {
