@@ -18,12 +18,12 @@ interface ICalculatorProps {
 }
 
 export function Calculator(props: ICalculatorProps) {
-    const [currencies, setCurrencies] = React.useState(props.currencies);
-    const [ratios, setRatios] = React.useState(props.ratios);
-    const [lastCurrency, setLastCurrency] = React.useState(props.currencies[0]);
-    const [lastRatio, setLastRatio] = React.useState(props.ratios[0]);
-    const [lastValue, setLastValue] = React.useState(1);
-    const [values, setValues] = React.useState<ICalculations>(calculateValues(
+    const [ currencies, setCurrencies ] = React.useState(props.currencies);
+    const [ ratios, setRatios ] = React.useState(props.ratios);
+    const [ lastCurrency, setLastCurrency ] = React.useState(props.currencies[0]);
+    const [ lastRatio, setLastRatio ] = React.useState(props.ratios[0]);
+    const [ lastValue, setLastValue ] = React.useState(1);
+    const [ values, setValues ] = React.useState<ICalculations>(calculateValues(
         props.rates,
         { currencies, ratios },
         { currency: lastCurrency, ratio: lastRatio, value: 1 },
@@ -33,7 +33,7 @@ export function Calculator(props: ICalculatorProps) {
         props.rates,
         { currencies, ratios },
         { currency: lastCurrency, ratio: lastRatio, value: 1 },
-    )), [props.rates])
+    )), [ props.rates ]);
 
     function updateCurrencies(selected: ICurrency[]) {
         setCurrencies(selected);
@@ -86,7 +86,7 @@ export function Calculator(props: ICalculatorProps) {
                     onChange={handleChangeValue}
                 />
             </Container>
-            <Hr />
+            <Hr/>
             <Container>
                 <Config
                     currencies={currencies}

@@ -5,13 +5,13 @@ import { App } from './components/App/App';
 
 export function render() {
     const queryClient = new QueryClient();
-    const dehydratedState = dehydrate(queryClient)
+    const dehydratedState = dehydrate(queryClient);
 
     return renderToString(
         <QueryClientProvider client={queryClient}>
             <Hydrate state={dehydratedState}>
-                <App />
+                <App/>
             </Hydrate>
-        </QueryClientProvider>
+        </QueryClientProvider>,
     );
 }

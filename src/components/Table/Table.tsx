@@ -11,6 +11,7 @@ interface ITableProps {
     currencies: ICurrency[];
     ratios: IRatio[];
     values: ICalculations;
+
     onChange(data: ICalculate): void;
 }
 
@@ -23,7 +24,7 @@ export function Table({ loading, currencies, ratios, values, onChange }: ITableP
         <table className="Table">
             <thead>
                 <tr>
-                    <th />
+                    <th/>
                     {ratios.map((ratio) => (
                         <th key={`ratio-${ratio}`}>
                             {ratio}
@@ -35,13 +36,13 @@ export function Table({ loading, currencies, ratios, values, onChange }: ITableP
                 {currencies.map((currency, indexCurrency) => (
                     <tr key={currency}>
                         <th className="Table__Currency">
-                            <Flag className="Table__Currency_Flag" currencyCode={currency} />
+                            <Flag className="Table__Currency_Flag" currencyCode={currency}/>
                             {currency}:
                         </th>
                         {ratios.map((ratio, indexRatio) => (
                             <td key={`${currency}-${ratio}`}>
                                 {loading ? (
-                                    <Skeleton className="Table__Skeleton" />
+                                    <Skeleton className="Table__Skeleton"/>
                                 ) : (
                                     <MoneyInput
                                         currency={currency}

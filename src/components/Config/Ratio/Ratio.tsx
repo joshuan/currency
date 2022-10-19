@@ -14,24 +14,25 @@ function sort(list: number[]) {
 
 interface IRatioProps {
     selected: number[];
+
     onChange(list: number[]): void;
 }
 
 export function Ratio({ selected = [], onChange }: IRatioProps) {
     const handleUnchecked = React.useCallback((ratio: number) => {
         onChange(selected.filter((item) => item !== ratio));
-    }, [onChange, selected]);
+    }, [ onChange, selected ]);
 
     const handleClear = React.useCallback((event: IButtonClickEvent) => {
         event.preventDefault();
         onChange(DEFAULT_RATIOS);
-    }, [onChange]);
+    }, [ onChange ]);
 
-    const [searchValue, setSearchValue] = React.useState('');
+    const [ searchValue, setSearchValue ] = React.useState('');
 
     const handleSearch = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target.value);
-    }, [setSearchValue]);
+    }, [ setSearchValue ]);
 
     const handleSearchApply = React.useCallback((event: IButtonClickEvent) => {
         event.preventDefault();
@@ -47,7 +48,7 @@ export function Ratio({ selected = [], onChange }: IRatioProps) {
             parseInt(searchValue, 10),
         ]));
         setSearchValue('');
-    }, [setSearchValue, searchValue, selected, onChange]);
+    }, [ setSearchValue, searchValue, selected, onChange ]);
 
     return (
         <ConfigItem

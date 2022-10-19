@@ -6,7 +6,9 @@ interface IMoneyInputProps {
     currency: string;
     ratio: number;
     value: number;
+
     onChange(value: number): void;
+
     tabIndex?: number;
 }
 
@@ -17,8 +19,8 @@ function format(value: number | string): string {
     const groups = [];
 
     while (i >= 0) {
-        groups.push(`${cardValue[i-2] || ''}${cardValue[i-1] || ''}${cardValue[i] || ''}`);
-        i = i-3;
+        groups.push(`${cardValue[i - 2] || ''}${cardValue[i - 1] || ''}${cardValue[i] || ''}`);
+        i = i - 3;
     }
 
     groups.reverse();
@@ -27,7 +29,7 @@ function format(value: number | string): string {
 }
 
 export function MoneyInput({ currency, ratio, value, onChange, tabIndex }: IMoneyInputProps) {
-    const [full, decimal] = value.toFixed(2).split('.');
+    const [ full, decimal ] = value.toFixed(2).split('.');
     const inputCard = React.useRef<HTMLInputElement>(null);
 
     const handleChange = () => {

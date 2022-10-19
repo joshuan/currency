@@ -7,4 +7,4 @@ export const Checkbox = (props: ICheckboxProps) => {
     return (
         <GravityCheckbox size="m" {...props} />
     );
-}
+};

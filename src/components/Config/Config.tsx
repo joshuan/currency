@@ -8,7 +8,9 @@ import { Ratio } from './Ratio/Ratio';
 interface IConfigProps {
     currencies: string[];
     ratios: number[];
+
     onChangeCurrencies(list: string[]): void;
+
     onChangeRatios(list: number[]): void;
 }
 
@@ -16,10 +18,10 @@ export function Config({ currencies = [], ratios = [], onChangeCurrencies, onCha
     return (
         <div className="Config">
             <div className="Config-Item">
-                <Currency selected={currencies} onChange={onChangeCurrencies} />
+                <Currency selected={currencies} onChange={onChangeCurrencies}/>
             </div>
             <div className="Config-Item">
-                <Ratio selected={ratios} onChange={onChangeRatios} />
+                <Ratio selected={ratios} onChange={onChangeRatios}/>
             </div>
         </div>
     );

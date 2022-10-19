@@ -9,4 +9,4 @@ export const Button = (props: IButtonProps) => {
     return (
         <GravityButton view="action" size="m" {...props} />
     );
-}
+};

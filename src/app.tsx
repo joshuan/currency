@@ -16,10 +16,10 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 
 configure({
     lang: 'en',
-})
+});
 
 ReactDOM.hydrate((
     <QueryClientProvider client={queryClient}>
-        <App />
+        <App/>
     </QueryClientProvider>
 ), document.getElementById('root'));

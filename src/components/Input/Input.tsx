@@ -9,4 +9,4 @@ export const Input = (props: IInputProps) => {
     return (
         <TextInput view="normal" size="m" {...props} />
     );
-}
+};

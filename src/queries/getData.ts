@@ -8,5 +8,5 @@ async function getData(): Promise<DTO> {
 }
 
 export function useGetData() {
-    return useQuery<DTO>(['data'], getData);
+    return useQuery<DTO>([ 'data' ], getData);
 }

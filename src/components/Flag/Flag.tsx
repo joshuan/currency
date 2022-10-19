@@ -11,6 +11,6 @@ interface IFlagProps {
 
 export function Flag({ currencyCode, className }: IFlagProps) {
     return (
-        <span className={`Flag Flag-${currencyMap[currencyCode]} ${className || ''}`} />
+        <span className={`Flag Flag-${currencyMap[currencyCode]} ${className || ''}`}/>
     );
 }

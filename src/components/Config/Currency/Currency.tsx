@@ -26,6 +26,7 @@ function filterByCodeAndName(searchValue: string) {
 
 interface ICurrencyProps {
     selected: string[];
+
     onChange(list: string[]): void;
 }
 
@@ -39,18 +40,18 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
         } else {
             onChange(selected.filter((item) => item !== name));
         }
-    }, [onChange, selected]);
+    }, [ onChange, selected ]);
 
     const handleClear = React.useCallback((event: IButtonClickEvent) => {
         onChange(DEFAULT_CURRENCIES);
         event.preventDefault();
-    }, [onChange]);
+    }, [ onChange ]);
 
-    const [searchValue, setSearchValue] = React.useState('');
+    const [ searchValue, setSearchValue ] = React.useState('');
 
     const handleSearch = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target.value);
-    }, [setSearchValue]);
+    }, [ setSearchValue ]);
 
     return (
         <ConfigItem
@@ -68,7 +69,7 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
                 .filter(
                     searchValue === '' ?
                         filterByCode(selected) :
-                        filterByCodeAndName(searchValue)
+                        filterByCodeAndName(searchValue),
                 )
                 .map(({ code, name, currencyCode }) => (
                     <div key={code} className="Config__Currency_Item">
@@ -77,7 +78,7 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
                             checked={selected.includes(currencyCode)}
                             onUpdate={(checked: boolean) => handleChange(currencyCode, checked)}
                         >
-                            <Flag currencyCode={currencyCode} /> {name}
+                            <Flag currencyCode={currencyCode}/> {name}
                         </Checkbox>
                     </div>
                 ))}
