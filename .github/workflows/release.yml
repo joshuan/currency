@@ -21,6 +21,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Linting
+        run: npm run lint
+
       - name: Install AWS cli
         uses: unfor19/install-aws-cli-action@master
 

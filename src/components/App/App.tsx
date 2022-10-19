@@ -4,7 +4,7 @@ import { useGetData } from '../../queries';
 import { Calculator } from '../Calculator/Calculator';
 import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../../config';
 import { getFromStorage } from '../../lib/storage';
-import { Spin, Text } from '@gravity-ui/uikit';
+import { Text } from '@gravity-ui/uikit';
 import { Center } from '../Center/Center';
 
 import './App.css';
