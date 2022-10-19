@@ -1,9 +1,9 @@
 .Config__Ratio_Input {
-    width: 10em;
-    margin-right: 0.6em;
+	width: 10em;
+	margin-right: 0.6em;
 }
 
 .Config__Ratio_Checkbox {
-    display: block;
-    margin: 0.2em 0;
+	display: block;
+	margin: 0.2em 0;
 }

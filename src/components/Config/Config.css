@@ -1,18 +1,18 @@
 .Config {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    column-gap: 1em;
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+	column-gap: 1em;
 }
 
 @media (max-width: 640px) {
-    .Config {
-        flex-direction: column;
-        align-items: center;
-    }
+	.Config {
+		flex-direction: column;
+		align-items: center;
+	}
 }
 
 .Config-Item {
-    flex: 0 0 50%;
-    max-width: 260px;
+	flex: 0 0 50%;
+	max-width: 260px;
 }

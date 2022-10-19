@@ -1,10 +1,10 @@
 .Config__Item_Filter {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1em;
+	display: flex;
+	align-items: center;
+	margin-bottom: 1em;
 }
 
 .Config__Item_Head {
-    margin: 0.6em 0;
-    display: block;
+	margin: 0.6em 0;
+	display: block;
 }
