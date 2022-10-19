@@ -6,8 +6,14 @@ if [ -f ./.env ]; then
     source ./.env
 fi
 
-AWS_PROFILE="${AWS_PROFILE}" aws s3 \
+if [[ -n "$AWS_PROFILE" ]];
+then
+    export AWS_PROFILE="${AWS_PROFILE}"
+fi
+
+aws s3 \
   --endpoint-url=https://storage.yandexcloud.net \
+  --region=us-east-1 \
   sync \
   ./dist/prod/ \
   s3://currency.joshuan.ru/ \
