@@ -1,14 +1,13 @@
 import React, { PropsWithChildren } from 'react';
+import { Text } from '@gravity-ui/uikit';
+import { Button, IButtonClickEvent } from '../../Button/Button';
 
 import './Item.css';
-
-import { Button, IButtonClickEvent } from '../../Button/Button';
-import { Text } from '@gravity-ui/uikit';
 
 type IConfigItemProps = PropsWithChildren<{
 	title: string;
 	filter: React.ReactNode;
-	onClear(event: IButtonClickEvent): void;
+	onClear(_event: IButtonClickEvent): void;
 }>
 
 export function ConfigItem({ title, filter, children, onClear }: IConfigItemProps) {

@@ -5,8 +5,6 @@ type IButtonProps = Partial<Pick<ButtonProps, 'size' | 'view'>> & Omit<ButtonPro
 
 export type IButtonClickEvent = React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>;
 
-export const Button = (props: IButtonProps) => {
-	return (
-		<GravityButton view="action" size="m" {...props} />
-	);
-};
+export const Button = (props: IButtonProps) => (
+	<GravityButton view="action" size="m" {...props} />
+);

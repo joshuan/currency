@@ -1,3 +1,5 @@
+/* eslint no-magic-numbers: 'off' */
+
 export const DEFAULT_CURRENCIES = [
 	'USD',
 	'EUR',

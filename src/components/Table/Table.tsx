@@ -12,7 +12,13 @@ interface ITableProps {
 	ratios: IRatio[];
 	values: ICalculations;
 
-	onChange(data: ICalculate): void;
+	onChange(_data: ICalculate): void;
+}
+
+function calcTabIndex(ratio: number, currency: number, currencies: Array<unknown>) {
+	const ratioK = (ratio + 1) * currencies.length;
+
+	return ratioK + currency;
 }
 
 export function Table({ loading, currencies, ratios, values, onChange }: ITableProps) {
@@ -49,7 +55,7 @@ export function Table({ loading, currencies, ratios, values, onChange }: ITableP
 										ratio={ratio}
 										value={values[currency] ? values[currency][ratio] : 0}
 										onChange={(value: number) => onChange({ currency, ratio, value })}
-										tabIndex={(indexRatio + 1) * currencies.length + indexCurrency}
+										tabIndex={calcTabIndex(indexRatio, indexCurrency, currencies)}
 									/>
 								)}
 							</td>

@@ -13,7 +13,7 @@ export function Header({ date }: IHeaderProps) {
 			{date !== null && (
 				<div className="Header__Date">
 					<Text variant="code-2">
-						{(new Date(date)).toLocaleString()}
+						{new Date(date).toLocaleString()}
 					</Text>
 				</div>
 			)}

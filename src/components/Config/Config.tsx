@@ -9,9 +9,9 @@ interface IConfigProps {
 	currencies: string[];
 	ratios: number[];
 
-	onChangeCurrencies(list: string[]): void;
+	onChangeCurrencies(_list: string[]): void;
 
-	onChangeRatios(list: number[]): void;
+	onChangeRatios(_list: number[]): void;
 }
 
 export function Config({ currencies = [], ratios = [], onChangeCurrencies, onChangeRatios }: IConfigProps) {

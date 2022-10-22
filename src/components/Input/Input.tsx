@@ -5,8 +5,6 @@ type IInputProps = Partial<Pick<TextInputProps, 'view' | 'size'>> & Omit<TextInp
 
 export type IInputChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
-export const Input = (props: IInputProps) => {
-	return (
-		<TextInput view="normal" size="m" {...props} />
-	);
-};
+export const Input = (props: IInputProps) => (
+	<TextInput view="normal" size="m" {...props} />
+);

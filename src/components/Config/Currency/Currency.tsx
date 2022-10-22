@@ -10,24 +10,32 @@ import { Input } from '../../Input/Input';
 import { Checkbox } from '../../Checkbox/Checkbox';
 import { ConfigItem } from '../Item/Item';
 
+interface IFilterByCode {
+	currencyCode: string;
+}
+
 function filterByCode(selected: string[]) {
 	const lowerSelected = selected.map((item) => item.toLowerCase());
 
-	return ({ currencyCode }: { currencyCode: string; }) => lowerSelected.includes(currencyCode.toLowerCase());
+	return ({ currencyCode }: IFilterByCode) => lowerSelected.includes(currencyCode.toLowerCase());
+}
+
+interface IFilterByCodeAndName {
+	name: string;
+	currencyCode: string;
 }
 
 function filterByCodeAndName(searchValue: string) {
 	const lowerSearchValue = searchValue.toLowerCase();
 
-	return ({ name, currencyCode }: { name: string; currencyCode: string; }) =>
-		name.toLowerCase().includes(lowerSearchValue) ||
+	return ({ name, currencyCode }: IFilterByCodeAndName) => name.toLowerCase().includes(lowerSearchValue) ||
 		currencyCode.toLowerCase().includes(lowerSearchValue);
 }
 
 interface ICurrencyProps {
 	selected: string[];
 
-	onChange(list: string[]): void;
+	onChange(_list: string[]): void;
 }
 
 export function Currency({ selected = [], onChange }: ICurrencyProps) {
@@ -40,18 +48,18 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
 		} else {
 			onChange(selected.filter((item) => item !== name));
 		}
-	}, [ onChange, selected ]);
+	}, [onChange, selected]);
 
 	const handleClear = React.useCallback((event: IButtonClickEvent) => {
 		onChange(DEFAULT_CURRENCIES);
 		event.preventDefault();
-	}, [ onChange ]);
+	}, [onChange]);
 
-	const [ searchValue, setSearchValue ] = React.useState('');
+	const [searchValue, setSearchValue] = React.useState('');
 
 	const handleSearch = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(event.target.value);
-	}, [ setSearchValue ]);
+	}, [setSearchValue]);
 
 	return (
 		<ConfigItem
@@ -66,11 +74,7 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
 			onClear={handleClear}
 		>
 			{countries
-				.filter(
-					searchValue === '' ?
-						filterByCode(selected) :
-						filterByCodeAndName(searchValue),
-				)
+				.filter(searchValue === '' ? filterByCode(selected) : filterByCodeAndName(searchValue))
 				.map(({ code, name, currencyCode }) => (
 					<div key={code} className="Config__Currency_Item">
 						<Checkbox
