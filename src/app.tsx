@@ -6,6 +6,8 @@ import React from 'react';
 import '@gravity-ui/uikit/styles/styles.css';
 import './style.css';
 import { QueryClientProvider, queryClient } from './lib/query';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 	const body = document.querySelector('.yc-root');
@@ -19,7 +21,9 @@ configure({
 });
 
 ReactDOM.hydrate((
-	<QueryClientProvider client={queryClient}>
-		<App/>
-	</QueryClientProvider>
+	<Provider store={store}>
+		<QueryClientProvider client={queryClient}>
+			<App/>
+		</QueryClientProvider>
+	</Provider>
 ), document.getElementById('root'));

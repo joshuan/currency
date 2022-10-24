@@ -23,6 +23,7 @@ function calcTabIndex(ratio: number, currency: number, currencies: Array<unknown
 
 export function Table({ loading, currencies, ratios, values, onChange }: ITableProps) {
 	if (currencies.length !== Object.keys(values).length) {
+		console.error('Error:', { currencies, values });
 		throw new Error('Not consistence values', { cause: { currencies, values } });
 	}
 

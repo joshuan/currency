@@ -1,10 +1,7 @@
 import React from 'react';
-
+import { Text } from '@gravity-ui/uikit';
 import { useGetData } from '../../queries';
 import { Calculator } from '../Calculator/Calculator';
-import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../../config';
-import { getFromStorage } from '../../lib/storage';
-import { Text } from '@gravity-ui/uikit';
 import { Center } from '../Center/Center';
 import { Header } from '../Header/Header';
 
@@ -27,8 +24,6 @@ export function App() {
 					<Calculator
 						loading={query.isLoading}
 						rates={query.isSuccess ? query.data.rates : {}}
-						currencies={getFromStorage('currencies', DEFAULT_CURRENCIES)}
-						ratios={getFromStorage('ratios', DEFAULT_RATIOS)}
 					/>
 				) : null
 			}

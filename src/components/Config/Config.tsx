@@ -1,27 +1,31 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useConfig, configActions } from '../../store';
 
 import './Config.css';
 
 import { Currency } from './Currency/Currency';
 import { Ratio } from './Ratio/Ratio';
 
-interface IConfigProps {
-	currencies: string[];
-	ratios: number[];
+export function Config() {
+	const { ratios, currencies } = useSelector(useConfig);
+	const dispatch = useDispatch();
 
-	onChangeCurrencies(_list: string[]): void;
+	const handleChangeCurrencies = React.useCallback((list: string[]) => {
+		dispatch(configActions.setCurrencies(list));
+	}, [dispatch]);
 
-	onChangeRatios(_list: number[]): void;
-}
+	const handleChangeRatios = React.useCallback((list: number[]) => {
+		dispatch(configActions.setRatios(list));
+	}, [dispatch]);
 
-export function Config({ currencies = [], ratios = [], onChangeCurrencies, onChangeRatios }: IConfigProps) {
 	return (
 		<div className="Config">
 			<div className="Config-Item">
-				<Currency selected={currencies} onChange={onChangeCurrencies}/>
+				<Currency selected={currencies} onChange={handleChangeCurrencies}/>
 			</div>
 			<div className="Config-Item">
-				<Ratio selected={ratios} onChange={onChangeRatios}/>
+				<Ratio selected={ratios} onChange={handleChangeRatios}/>
 			</div>
 		</div>
 	);
