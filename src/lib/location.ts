@@ -10,7 +10,7 @@ function getLocation() {
 	return new window.URL(window.location.href);
 }
 
-export function getLocationParam<T extends any>(name: string, predicate: (val: string) => T, defaultValue: T): T {
+export function getLocationParam<T = unknown>(name: string, predicate: (_val: string) => T, defaultValue: T): T {
 	const url = getLocation();
 
 	if (url.searchParams.has(name)) {

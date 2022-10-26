@@ -12,12 +12,11 @@ export function HeaderLink() {
 	const toaster = useToaster();
 
 	const handleLink = () => {
-		const url = `${window.location.protocol}//${window.location.host}/?` +
-			makeParams({
-				currencies: currencies.join(','),
-				ratios: ratios.join(','),
-				select: `${select.currency}:${select.ratio}:${select.value}`,
-			});
+		const url = `${window.location.protocol}//${window.location.host}/?${makeParams({
+			currencies: currencies.join(','),
+			ratios: ratios.join(','),
+			select: `${select.currency}:${select.ratio}:${select.value}`,
+		})}`;
 
 		navigator.clipboard.writeText(url)
 			.then(() => {
