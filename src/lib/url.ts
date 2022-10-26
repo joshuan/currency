@@ -1,8 +1,8 @@
-const URLParams = window?.URLSearchParams;
+const URLSearchParams = window?.URLSearchParams;
 
 export function makeParams(data: Record<string, string>) {
-	if (!URLParams) {
-		throw new Error('Undefined URL search params');
+	if (!URLSearchParams) {
+		throw new Error('Error environment');
 	}
 
 	return new window.URLSearchParams(data).toString();

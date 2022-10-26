@@ -1,20 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { saveToStorage } from '../lib';
+import { getLocationParam, parseCurrencies, parseRatios, saveToStorage } from '../lib';
+import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../config';
 
 interface ConfigState {
 	ratios: number[];
 	currencies: string[];
 }
 
-const initialState: ConfigState = {
-	ratios: [],
-	currencies: [],
+export const initialConfigState: ConfigState = {
+	ratios: getLocationParam('ratios', parseRatios, DEFAULT_RATIOS),
+	currencies: getLocationParam('currencies', parseCurrencies, DEFAULT_CURRENCIES),
 };
 
 export const configSlice = createSlice({
 	name: 'config',
-	initialState,
+	initialState: initialConfigState,
 	reducers: {
 		addRatio: (state, action: PayloadAction<number>) => {
 			state.ratios.push(action.payload);

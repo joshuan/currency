@@ -1,18 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getLocationParam, parseCalculator } from '../lib';
 
 import { ICalculate } from '../types';
+import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../config';
 
 type CalculatorState = ICalculate;
 
-const initialState: CalculatorState = {
+export const initialCalculatorState: CalculatorState = getLocationParam('select', parseCalculator, {
 	value: 0,
-	ratio: 0,
-	currency: 'USD',
-};
+	ratio: DEFAULT_RATIOS[0],
+	currency: DEFAULT_CURRENCIES[0],
+});
 
 export const calculatorSlice = createSlice({
 	name: 'calculator',
-	initialState,
+	initialState: initialCalculatorState,
 	reducers: {
 		setValue: (state, action: PayloadAction<ICalculate>) => action.payload,
 	},
