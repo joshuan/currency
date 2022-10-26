@@ -1,3 +1,4 @@
+import { useToaster } from '@gravity-ui/uikit';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useCalculator, useConfig } from '../../../store';
@@ -7,6 +8,7 @@ import { Button } from '../../Button/Button';
 export function HeaderLink() {
 	const { currencies, ratios } = useSelector(useConfig);
 	const select = useSelector(useCalculator);
+	const toaster = useToaster();
 
 	const handleLink = () => {
 		const url = `${window.location.protocol}//${window.location.host}/` +
@@ -14,10 +16,15 @@ export function HeaderLink() {
 			`&ratios=${ratios.join(',')}` +
 			`&select=${select.currency}:${select.ratio}:${select.value}`;
 
-		navigator.clipboard.writeText(url).then(() => {
-			// eslint-disable-next-line no-console
-			console.log('Copied');
-		});
+		navigator.clipboard.writeText(url)
+			.then(() => {
+				toaster.add({
+					name: 'copied',
+					title: 'Copied',
+					content: 'Copying completed successfully.',
+					type: 'success',
+				});
+			});
 	};
 
 	return (
