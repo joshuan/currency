@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getLocationParam, parseCurrencies, parseRatios, saveToStorage } from '../lib';
+import { getFromStorage, getLocationParam, parseCurrencies, parseRatios, saveToStorage } from '../lib';
 import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../config';
 
 interface ConfigState {
@@ -9,8 +9,8 @@ interface ConfigState {
 }
 
 export const initialConfigState: ConfigState = {
-	ratios: getLocationParam('ratios', parseRatios, DEFAULT_RATIOS),
-	currencies: getLocationParam('currencies', parseCurrencies, DEFAULT_CURRENCIES),
+	ratios: getLocationParam('ratios', parseRatios, getFromStorage('ratios', DEFAULT_RATIOS)),
+	currencies: getLocationParam('currencies', parseCurrencies, getFromStorage('currencies', DEFAULT_CURRENCIES)),
 };
 
 export const configSlice = createSlice({
