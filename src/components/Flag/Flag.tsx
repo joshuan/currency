@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './Flag.css';
+import { currencyMap } from '../../lib';
 
-import { currencyMap } from '../../lib/country';
+import './Flag.css';
 
 interface IFlagProps {
 	currencyCode: string;

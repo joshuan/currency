@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { saveToStorage } from '../lib/storage';
+
+import { saveToStorage } from '../lib';
 
 interface ConfigState {
 	ratios: number[];

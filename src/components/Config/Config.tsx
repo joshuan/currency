@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useConfig, configActions } from '../../store';
-
-import './Config.css';
 
 import { Currency } from './Currency/Currency';
 import { Ratio } from './Ratio/Ratio';
+import { useConfig, configActions } from '../../store';
+
+import './Config.css';
 
 export function Config() {
 	const { ratios, currencies } = useSelector(useConfig);

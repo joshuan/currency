@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ICalculate, IRates } from '../../types';
 
 import { Hr } from '../Hr/Hr';
 import { Container } from '../Container/Container';
 import { Table } from '../Table/Table';
 import { Config } from '../Config/Config';
 import { calculateValues } from './utils';
+import { ICalculate, IRates } from '../../types';
 import { calculatorActions, useCalculator, useConfig } from '../../store';
 
 import './Calculator.css';

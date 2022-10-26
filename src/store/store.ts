@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import { calculatorReducer } from './calculator';
 import { configReducer } from './config';
 import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../config';

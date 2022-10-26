@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { dehydrate, Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import { App } from './components/App/App';
 
 export function render() {

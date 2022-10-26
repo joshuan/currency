@@ -1,5 +1,6 @@
-import { Skeleton } from '@gravity-ui/uikit';
 import React from 'react';
+import { Skeleton } from '@gravity-ui/uikit';
+
 import { ICurrency, IRatio, ICalculations, ICalculate } from '../../types';
 import { Flag } from '../Flag/Flag';
 import { MoneyInput } from '../MoneyInput/MoneyInput';

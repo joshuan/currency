@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { ICalculate } from '../types';
 
 type CalculatorState = ICalculate;

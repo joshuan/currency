@@ -1,9 +1,10 @@
-import { useToaster } from '@gravity-ui/uikit';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useCalculator, useConfig } from '../../../store';
+import { useToaster } from '@gravity-ui/uikit';
 
 import { Button } from '../../Button/Button';
+import { makeParams } from '../../../lib';
+import { useCalculator, useConfig } from '../../../store';
 
 export function HeaderLink() {
 	const { currencies, ratios } = useSelector(useConfig);
@@ -11,10 +12,12 @@ export function HeaderLink() {
 	const toaster = useToaster();
 
 	const handleLink = () => {
-		const url = `${window.location.protocol}//${window.location.host}/` +
-			`?currencies=${currencies.join(',')}` +
-			`&ratios=${ratios.join(',')}` +
-			`&select=${select.currency}:${select.ratio}:${select.value}`;
+		const url = `${window.location.protocol}//${window.location.host}/?` +
+			makeParams({
+				currencies: currencies.join(','),
+				ratios: ratios.join(','),
+				select: `${select.currency}:${select.ratio}:${select.value}`,
+			});
 
 		navigator.clipboard.writeText(url)
 			.then(() => {

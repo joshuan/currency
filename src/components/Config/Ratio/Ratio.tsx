@@ -1,12 +1,12 @@
 import React from 'react';
 
-import './Ratio.css';
-
-import { DEFAULT_RATIOS } from '../../../config';
 import { Button, IButtonClickEvent } from '../../Button/Button';
 import { Input } from '../../Input/Input';
 import { Checkbox } from '../../Checkbox/Checkbox';
 import { ConfigItem } from '../Item/Item';
+import { DEFAULT_RATIOS } from '../../../config';
+
+import './Ratio.css';
 
 function sort(list: number[]) {
 	return list.sort((a, b) => a - b);

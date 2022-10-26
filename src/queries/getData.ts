@@ -1,4 +1,4 @@
-import { useQuery } from '../lib/query';
+import { useQuery } from '../lib';
 import { DTO } from '../types';
 
 async function getData(): Promise<DTO> {

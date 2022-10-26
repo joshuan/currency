@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text } from '@gravity-ui/uikit';
 
-import './Header.css';
 import { HeaderLink } from './Link/Link';
+
+import './Header.css';
 
 interface IHeaderProps {
 	date: number | null;

@@ -1,14 +1,14 @@
 import React from 'react';
 
-import './Currency.css';
-
-import { countries } from '../../../lib/country';
 import { IButtonClickEvent } from '../../Button/Button';
 import { Flag } from '../../Flag/Flag';
-import { DEFAULT_CURRENCIES } from '../../../config';
 import { Input } from '../../Input/Input';
 import { Checkbox } from '../../Checkbox/Checkbox';
 import { ConfigItem } from '../Item/Item';
+import { DEFAULT_CURRENCIES } from '../../../config';
+import { countries } from '../../../lib';
+
+import './Currency.css';
 
 interface IFilterByCode {
 	currencyCode: string;

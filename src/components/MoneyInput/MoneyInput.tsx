@@ -1,7 +1,8 @@
 import React from 'react';
 
-import './MoneyInput.css';
 import { formatValue, toFixed } from './utils';
+
+import './MoneyInput.css';
 
 interface IMoneyInputProps {
 	currency: string;

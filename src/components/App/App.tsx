@@ -1,9 +1,10 @@
 import React from 'react';
 import { Text } from '@gravity-ui/uikit';
-import { useGetData } from '../../queries';
+
 import { Calculator } from '../Calculator/Calculator';
 import { Center } from '../Center/Center';
 import { Header } from '../Header/Header';
+import { useGetData } from '../../queries';
 
 import './App.css';
 
