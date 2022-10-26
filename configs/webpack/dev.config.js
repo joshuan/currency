@@ -1,4 +1,5 @@
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 require('dotenv').config();
@@ -86,6 +87,9 @@ module.exports = function () {
                     removeComments: true,
                 },
             }),
+			new DefinePlugin({
+				'process.env.SSR': JSON.stringify(false),
+			}),
         ],
     };
 };

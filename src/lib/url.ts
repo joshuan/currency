@@ -1,7 +1,5 @@
-const URLSearchParams = window?.URLSearchParams;
-
 export function makeParams(data: Record<string, string>) {
-	if (!URLSearchParams) {
+	if (!window.URLSearchParams) {
 		throw new Error('Error environment');
 	}
 

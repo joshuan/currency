@@ -1,4 +1,5 @@
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -89,6 +90,9 @@ module.exports = function () {
             new MiniCssExtractPlugin({
                 filename: 'assets/style.css',
             }),
+			new DefinePlugin({
+				'process.env.SSR': JSON.stringify(false),
+			}),
         ],
     };
 };

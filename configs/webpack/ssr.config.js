@@ -1,4 +1,5 @@
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
 require('dotenv').config();
@@ -52,5 +53,10 @@ module.exports = function () {
                 },
             ],
         },
+		plugins: [
+			new DefinePlugin({
+				'process.env.SSR': JSON.stringify(true),
+			}),
+		],
     };
 };

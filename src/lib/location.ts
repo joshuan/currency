@@ -1,5 +1,5 @@
 function getLocation() {
-	if (!window || !window.location) {
+	if (!window?.location) {
 		throw new Error('Unknown environment');
 	}
 
@@ -11,6 +11,10 @@ function getLocation() {
 }
 
 export function getLocationParam<T = unknown>(name: string, predicate: (_val: string) => T, defaultValue: T): T {
+	if (process.env.SSR) {
+		return defaultValue;
+	}
+
 	const url = getLocation();
 
 	if (url.searchParams.has(name)) {
