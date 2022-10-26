@@ -15,7 +15,8 @@ export function HeaderLink() {
 			`&select=${select.currency}:${select.ratio}:${select.value}`;
 
 		navigator.clipboard.writeText(url).then(() => {
-			alert('Copied');
+			// eslint-disable-next-line no-console
+			console.log('Copied');
 		});
 	};
 

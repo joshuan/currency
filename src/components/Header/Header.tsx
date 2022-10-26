@@ -9,10 +9,6 @@ interface IHeaderProps {
 }
 
 export function Header({ date }: IHeaderProps) {
-	const handleLink = () => {
-
-	};
-
 	return (
 		<div className="Header">
 			<h1 className="Header__H1">
