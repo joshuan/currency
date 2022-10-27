@@ -21,7 +21,7 @@ configure({
 	lang: 'en',
 });
 
-ReactDOM.hydrate((
+ReactDOM.render((
 	<Provider store={store}>
 		<QueryClientProvider client={queryClient}>
 			<ToasterProvider>
