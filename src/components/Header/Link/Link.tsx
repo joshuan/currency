@@ -8,14 +8,14 @@ import { useCalculator, useConfig } from '../../../store';
 
 export function HeaderLink() {
 	const { currencies, ratios } = useSelector(useConfig);
-	const select = useSelector(useCalculator);
+	const value = useSelector(useCalculator);
 	const toaster = useToaster();
 
 	const handleLink = () => {
 		const url = `${window.location.protocol}//${window.location.host}/?${makeParams({
 			currencies: currencies.join(','),
 			ratios: ratios.join(','),
-			select: `${select.currency}:${select.ratio}:${select.value}`,
+			value: `${value.currency}:${value.ratio}:${value.value}`,
 		})}`;
 
 		navigator.clipboard.writeText(url)

@@ -6,7 +6,7 @@ import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../config';
 
 type CalculatorState = ICalculate;
 
-export const initialCalculatorState: CalculatorState = getLocationParam('select', parseCalculator, {
+export const initialCalculatorState: CalculatorState = getLocationParam('value', parseCalculator, {
 	value: 0,
 	ratio: DEFAULT_RATIOS[0],
 	currency: DEFAULT_CURRENCIES[0],
