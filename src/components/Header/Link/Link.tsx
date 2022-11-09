@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useToaster } from '@gravity-ui/uikit';
 
@@ -8,15 +8,17 @@ import { useCalculator, useConfig } from '../../../store';
 
 export function HeaderLink() {
 	const { currencies, ratios } = useSelector(useConfig);
-	const value = useSelector(useCalculator);
+	const values = useSelector(useCalculator);
 	const toaster = useToaster();
 
 	const handleLink = () => {
-		const url = `${window.location.protocol}//${window.location.host}/?${makeParams({
+		const params = {
 			currencies: currencies.join(','),
 			ratios: ratios.join(','),
-			value: `${value.currency}:${value.ratio}:${value.value}`,
-		})}`;
+			value: `${values.currency}:${values.ratio}:${values.value}`,
+		};
+		const path = `/?${makeParams(params)}`;
+		const url = `${window.location.protocol}//${window.location.host}${path}`;
 
 		navigator.clipboard.writeText(url)
 			.then(() => {
@@ -26,8 +28,25 @@ export function HeaderLink() {
 					content: 'Copying completed successfully.',
 					type: 'success',
 				});
+				window.history.replaceState(params, path, path);
 			});
 	};
+
+
+	function save(event: KeyboardEvent) {
+		if (event.code === 'KeyS' && (event.metaKey || event.ctrlKey)) {
+			event.preventDefault();
+			handleLink();
+		}
+	}
+
+	useEffect(() => {
+		window.addEventListener('keydown', save);
+
+		return () => {
+			window.removeEventListener('keydown', save);
+		};
+	}, []);
 
 	return (
 		<Button className="Header__Link" view="normal" onClick={handleLink}>
