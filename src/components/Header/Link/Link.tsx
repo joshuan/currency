@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useToaster } from '@gravity-ui/uikit';
 
@@ -11,7 +11,7 @@ export function HeaderLink() {
 	const values = useSelector(useCalculator);
 	const toaster = useToaster();
 
-	const handleLink = () => {
+	const save = useCallback(() => {
 		const params = {
 			currencies: currencies.join(','),
 			ratios: ratios.join(','),
@@ -30,26 +30,25 @@ export function HeaderLink() {
 				});
 				window.history.replaceState(params, path, path);
 			});
-	};
-
-
-	function save(event: KeyboardEvent) {
-		if (event.code === 'KeyS' && (event.metaKey || event.ctrlKey)) {
-			event.preventDefault();
-			handleLink();
-		}
-	}
+	}, [currencies, ratios, values]);
 
 	useEffect(() => {
-		window.addEventListener('keydown', save);
+		function handleSave(event: KeyboardEvent) {
+			if (event.code === 'KeyS' && (event.metaKey || event.ctrlKey)) {
+				event.preventDefault();
+				save();
+			}
+		}
+
+		window.addEventListener('keydown', handleSave);
 
 		return () => {
-			window.removeEventListener('keydown', save);
+			window.removeEventListener('keydown', handleSave);
 		};
-	}, []);
+	}, [save]);
 
 	return (
-		<Button className="Header__Link" view="normal" onClick={handleLink}>
+		<Button className="Header__Link" view="normal" onClick={save}>
 			Link
 		</Button>
 	);
