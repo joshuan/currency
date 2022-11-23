@@ -29,7 +29,7 @@
     "dotenv": "16.0.3",
     "eslint": "8.25.0",
     "eslint-plugin-react": "7.31.10",
-    "flag-icons": "6.4.2",
+    "flag-icons": "6.6.6",
     "html-webpack-plugin": "5.5.0",
     "mini-css-extract-plugin": "2.6.1",
     "null-loader": "4.0.1",
