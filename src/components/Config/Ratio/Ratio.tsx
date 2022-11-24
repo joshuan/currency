@@ -19,41 +19,50 @@ interface IRatioProps {
 }
 
 export function Ratio({ selected = [], onChange }: IRatioProps) {
-	const handleUnchecked = React.useCallback((ratio: number) => {
-		onChange(selected.filter((item) => item !== ratio));
-	}, [onChange, selected]);
+	const handleUnchecked = React.useCallback(
+		(ratio: number) => {
+			onChange(selected.filter((item) => item !== ratio));
+		},
+		[onChange, selected]
+	);
 
-	const handleClear = React.useCallback((event: IButtonClickEvent) => {
-		event.preventDefault();
-		onChange(DEFAULT_RATIOS);
-	}, [onChange]);
+	const handleClear = React.useCallback(
+		(event: IButtonClickEvent) => {
+			event.preventDefault();
+			onChange(DEFAULT_RATIOS);
+		},
+		[onChange]
+	);
 
 	const [searchValue, setSearchValue] = React.useState('');
 
-	const handleSearch = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchValue(event.target.value);
-	}, [setSearchValue]);
+	const handleSearch = React.useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			setSearchValue(event.target.value);
+		},
+		[setSearchValue]
+	);
 
-	const handleSearchApply = React.useCallback((event: IButtonClickEvent) => {
-		event.preventDefault();
+	const handleSearchApply = React.useCallback(
+		(event: IButtonClickEvent) => {
+			event.preventDefault();
 
-		const value = parseInt(searchValue, 10);
+			const value = parseInt(searchValue, 10);
 
-		if (selected.includes(value)) {
-			return;
-		}
+			if (selected.includes(value)) {
+				return;
+			}
 
-		onChange(sort([
-			...selected,
-			parseInt(searchValue, 10),
-		]));
-		setSearchValue('');
-	}, [setSearchValue, searchValue, selected, onChange]);
+			onChange(sort([...selected, parseInt(searchValue, 10)]));
+			setSearchValue('');
+		},
+		[setSearchValue, searchValue, selected, onChange]
+	);
 
 	return (
 		<ConfigItem
 			title="Ratio"
-			filter={(
+			filter={
 				<>
 					<Input
 						className="Config__Ratio_Input"
@@ -64,20 +73,19 @@ export function Ratio({ selected = [], onChange }: IRatioProps) {
 					/>
 					<Button onClick={handleSearchApply}>Add</Button>
 				</>
-			)}
+			}
 			onClear={handleClear}
 		>
-			{selected
-				.map((ratio) => (
-					<Checkbox
-						key={ratio}
-						className="Config__Ratio_Checkbox"
-						checked
-						onChange={() => handleUnchecked(ratio)}
-					>
-						{ratio}
-					</Checkbox>
-				))}
+			{selected.map((ratio) => (
+				<Checkbox
+					key={ratio}
+					className="Config__Ratio_Checkbox"
+					checked
+					onChange={() => handleUnchecked(ratio)}
+				>
+					{ratio}
+				</Checkbox>
+			))}
 		</ConfigItem>
 	);
 }

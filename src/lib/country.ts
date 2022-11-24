@@ -1,4 +1,4 @@
-const data: { code: string; name: string; currencyCode: string; }[] = [
+const data: { code: string; name: string; currencyCode: string }[] = [
 	{ code: 'ae', name: 'United Arab Emirates', currencyCode: 'AED' },
 	{ code: 'al', name: 'Albania', currencyCode: 'ALL' },
 	{ code: 'am', name: 'Armenia', currencyCode: 'AMD' },
@@ -127,7 +127,11 @@ const data: { code: string; name: string; currencyCode: string; }[] = [
 	{ code: 'sd', name: 'Sudan', currencyCode: 'SDG' },
 	{ code: 'se', name: 'Sweden', currencyCode: 'SEK' },
 	{ code: 'sg', name: 'Singapore', currencyCode: 'SGD' },
-	{ code: 'sh', name: 'Saint Helena, Ascension and Tristan da Cunha', currencyCode: 'SHP' },
+	{
+		code: 'sh',
+		name: 'Saint Helena, Ascension and Tristan da Cunha',
+		currencyCode: 'SHP',
+	},
 	{ code: 'sj', name: 'Svalbard and Jan Mayen', currencyCode: 'NOK' },
 	{ code: 'sl', name: 'Sierra Leone', currencyCode: 'SLL' },
 	{ code: 'so', name: 'Somalia', currencyCode: 'SOS' },

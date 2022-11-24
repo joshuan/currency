@@ -6,11 +6,15 @@ import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../config';
 
 type CalculatorState = ICalculate;
 
-export const initialCalculatorState: CalculatorState = getLocationParam('value', parseCalculator, {
-	value: 0,
-	ratio: DEFAULT_RATIOS[0],
-	currency: DEFAULT_CURRENCIES[0],
-});
+export const initialCalculatorState: CalculatorState = getLocationParam(
+	'value',
+	parseCalculator,
+	{
+		value: 0,
+		ratio: DEFAULT_RATIOS[0],
+		currency: DEFAULT_CURRENCIES[0],
+	}
+);
 
 export const calculatorSlice = createSlice({
 	name: 'calculator',
@@ -23,5 +27,5 @@ export const calculatorSlice = createSlice({
 export const calculatorReducer = calculatorSlice.reducer;
 export const calculatorActions = calculatorSlice.actions;
 
-export const useCalculator = (state: { calculator: CalculatorState }) => state.calculator;
-
+export const useCalculator = (state: { calculator: CalculatorState }) =>
+	state.calculator;

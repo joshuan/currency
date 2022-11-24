@@ -1,6 +1,11 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { dehydrate, Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+	dehydrate,
+	Hydrate,
+	QueryClient,
+	QueryClientProvider,
+} from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 
 import { App } from './components/App/App';
@@ -14,9 +19,9 @@ export function render() {
 		<QueryClientProvider client={queryClient}>
 			<Hydrate state={dehydratedState}>
 				<Provider store={store}>
-					<App/>
+					<App />
 				</Provider>
 			</Hydrate>
-		</QueryClientProvider>,
+		</QueryClientProvider>
 	);
 }

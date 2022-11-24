@@ -13,7 +13,13 @@ interface IMoneyInputProps {
 	onChange(_value: number): void;
 }
 
-export function MoneyInput({ currency, ratio, value, onChange, tabIndex }: IMoneyInputProps) {
+export function MoneyInput({
+	currency,
+	ratio,
+	value,
+	onChange,
+	tabIndex,
+}: IMoneyInputProps) {
 	const [full, decimal] = toFixed(value).split('.');
 	const inputCard = React.useRef<HTMLInputElement>(null);
 

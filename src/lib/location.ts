@@ -10,7 +10,11 @@ function getLocation() {
 	return new window.URL(window.location.href);
 }
 
-export function getLocationParam<T = unknown>(name: string, predicate: (_val: string) => T, defaultValue: T): T {
+export function getLocationParam<T = unknown>(
+	name: string,
+	predicate: (_val: string) => T,
+	defaultValue: T
+): T {
 	if (process.env.SSR) {
 		return defaultValue;
 	}

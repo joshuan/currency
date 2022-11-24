@@ -17,7 +17,8 @@ interface IFilterByCode {
 function filterByCode(selected: string[]) {
 	const lowerSelected = selected.map((item) => item.toLowerCase());
 
-	return ({ currencyCode }: IFilterByCode) => lowerSelected.includes(currencyCode.toLowerCase());
+	return ({ currencyCode }: IFilterByCode) =>
+		lowerSelected.includes(currencyCode.toLowerCase());
 }
 
 interface IFilterByCodeAndName {
@@ -28,7 +29,8 @@ interface IFilterByCodeAndName {
 function filterByCodeAndName(searchValue: string) {
 	const lowerSearchValue = searchValue.toLowerCase();
 
-	return ({ name, currencyCode }: IFilterByCodeAndName) => name.toLowerCase().includes(lowerSearchValue) ||
+	return ({ name, currencyCode }: IFilterByCodeAndName) =>
+		name.toLowerCase().includes(lowerSearchValue) ||
 		currencyCode.toLowerCase().includes(lowerSearchValue);
 }
 
@@ -39,50 +41,62 @@ interface ICurrencyProps {
 }
 
 export function Currency({ selected = [], onChange }: ICurrencyProps) {
-	const handleChange = React.useCallback((name: string, checked: boolean) => {
-		if (checked) {
-			onChange([
-				...selected,
-				name,
-			]);
-		} else {
-			onChange(selected.filter((item) => item !== name));
-		}
-	}, [onChange, selected]);
+	const handleChange = React.useCallback(
+		(name: string, checked: boolean) => {
+			if (checked) {
+				onChange([...selected, name]);
+			} else {
+				onChange(selected.filter((item) => item !== name));
+			}
+		},
+		[onChange, selected]
+	);
 
-	const handleClear = React.useCallback((event: IButtonClickEvent) => {
-		onChange(DEFAULT_CURRENCIES);
-		event.preventDefault();
-	}, [onChange]);
+	const handleClear = React.useCallback(
+		(event: IButtonClickEvent) => {
+			onChange(DEFAULT_CURRENCIES);
+			event.preventDefault();
+		},
+		[onChange]
+	);
 
 	const [searchValue, setSearchValue] = React.useState('');
 
-	const handleSearch = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchValue(event.target.value);
-	}, [setSearchValue]);
+	const handleSearch = React.useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			setSearchValue(event.target.value);
+		},
+		[setSearchValue]
+	);
 
 	return (
 		<ConfigItem
 			title="Currencies"
-			filter={(
+			filter={
 				<Input
 					value={searchValue}
 					onChange={handleSearch}
 					placeholder="Search currency or country"
 				/>
-			)}
+			}
 			onClear={handleClear}
 		>
 			{countries
-				.filter(searchValue === '' ? filterByCode(selected) : filterByCodeAndName(searchValue))
+				.filter(
+					searchValue === ''
+						? filterByCode(selected)
+						: filterByCodeAndName(searchValue)
+				)
 				.map(({ code, name, currencyCode }) => (
 					<div key={code} className="Config__Currency_Item">
 						<Checkbox
 							className="Config__Currency_Input"
 							checked={selected.includes(currencyCode)}
-							onUpdate={(checked: boolean) => handleChange(currencyCode, checked)}
+							onUpdate={(checked: boolean) =>
+								handleChange(currencyCode, checked)
+							}
 						>
-							<Flag currencyCode={currencyCode}/> {name}
+							<Flag currencyCode={currencyCode} /> {name}
 						</Checkbox>
 					</div>
 				))}

@@ -28,7 +28,7 @@ export function Calculator(props: ICalculatorProps) {
 	const values = calculateValues(
 		props.rates,
 		{ currencies, ratios },
-		{ currency, ratio, value },
+		{ currency, ratio, value }
 	);
 
 	return (
@@ -42,7 +42,7 @@ export function Calculator(props: ICalculatorProps) {
 					onChange={handleChangeValue}
 				/>
 			</Container>
-			<Hr/>
+			<Hr />
 			<Container>
 				<Config />
 			</Container>

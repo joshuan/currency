@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getFromStorage, getLocationParam, parseCurrencies, parseRatios, saveToStorage } from '../lib';
+import {
+	getFromStorage,
+	getLocationParam,
+	parseCurrencies,
+	parseRatios,
+	saveToStorage,
+} from '../lib';
 import { DEFAULT_CURRENCIES, DEFAULT_RATIOS } from '../config';
 
 interface ConfigState {
@@ -9,8 +15,16 @@ interface ConfigState {
 }
 
 export const initialConfigState: ConfigState = {
-	ratios: getLocationParam('ratios', parseRatios, getFromStorage('ratios', DEFAULT_RATIOS)),
-	currencies: getLocationParam('currencies', parseCurrencies, getFromStorage('currencies', DEFAULT_CURRENCIES)),
+	ratios: getLocationParam(
+		'ratios',
+		parseRatios,
+		getFromStorage('ratios', DEFAULT_RATIOS)
+	),
+	currencies: getLocationParam(
+		'currencies',
+		parseCurrencies,
+		getFromStorage('currencies', DEFAULT_CURRENCIES)
+	),
 };
 
 export const configSlice = createSlice({
@@ -34,7 +48,9 @@ export const configSlice = createSlice({
 			saveToStorage('currencies', state.currencies);
 		},
 		removeCurrency: (state, action: PayloadAction<string>) => {
-			state.currencies = state.currencies.filter((currency) => currency !== action.payload);
+			state.currencies = state.currencies.filter(
+				(currency) => currency !== action.payload
+			);
 			saveToStorage('currencies', state.currencies);
 		},
 		setCurrencies: (state, action: PayloadAction<string[]>) => {
@@ -48,4 +64,3 @@ export const configReducer = configSlice.reducer;
 export const configActions = configSlice.actions;
 
 export const useConfig = (state: { config: ConfigState }) => state.config;
-

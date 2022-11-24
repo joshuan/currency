@@ -20,16 +20,15 @@ export function HeaderLink() {
 		const path = `/?${makeParams(params)}`;
 		const url = `${window.location.protocol}//${window.location.host}${path}`;
 
-		navigator.clipboard.writeText(url)
-			.then(() => {
-				toaster.add({
-					name: 'copied',
-					title: 'Copied',
-					content: 'Copying completed successfully.',
-					type: 'success',
-				});
-				window.history.replaceState(params, path, path);
+		navigator.clipboard.writeText(url).then(() => {
+			toaster.add({
+				name: 'copied',
+				title: 'Copied',
+				content: 'Copying completed successfully.',
+				type: 'success',
 			});
+			window.history.replaceState(params, path, path);
+		});
 	}, [currencies, ratios, values]);
 
 	useEffect(() => {

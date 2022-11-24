@@ -11,21 +11,27 @@ export function Config() {
 	const { ratios, currencies } = useSelector(useConfig);
 	const dispatch = useDispatch();
 
-	const handleChangeCurrencies = React.useCallback((list: string[]) => {
-		dispatch(configActions.setCurrencies(list));
-	}, [dispatch]);
+	const handleChangeCurrencies = React.useCallback(
+		(list: string[]) => {
+			dispatch(configActions.setCurrencies(list));
+		},
+		[dispatch]
+	);
 
-	const handleChangeRatios = React.useCallback((list: number[]) => {
-		dispatch(configActions.setRatios(list));
-	}, [dispatch]);
+	const handleChangeRatios = React.useCallback(
+		(list: number[]) => {
+			dispatch(configActions.setRatios(list));
+		},
+		[dispatch]
+	);
 
 	return (
 		<div className="Config">
 			<div className="Config-Item">
-				<Currency selected={currencies} onChange={handleChangeCurrencies}/>
+				<Currency selected={currencies} onChange={handleChangeCurrencies} />
 			</div>
 			<div className="Config-Item">
-				<Ratio selected={ratios} onChange={handleChangeRatios}/>
+				<Ratio selected={ratios} onChange={handleChangeRatios} />
 			</div>
 		</div>
 	);

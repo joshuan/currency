@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { configure, ToasterComponent, ToasterProvider } from '@gravity-ui/uikit';
+import {
+	configure,
+	ToasterComponent,
+	ToasterProvider,
+} from '@gravity-ui/uikit';
 
 import { App } from './components/App/App';
 import { QueryClientProvider, queryClient } from './lib';
@@ -21,13 +25,14 @@ configure({
 	lang: 'en',
 });
 
-ReactDOM.render((
+ReactDOM.render(
 	<Provider store={store}>
 		<QueryClientProvider client={queryClient}>
 			<ToasterProvider>
-				<App/>
+				<App />
 				<ToasterComponent />
 			</ToasterProvider>
 		</QueryClientProvider>
-	</Provider>
-), document.getElementById('root'));
+	</Provider>,
+	document.getElementById('root')
+);
