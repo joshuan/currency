@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('homepage has title', async ({ page }) => {
+test('homepage has title and load data.json', async ({ browserName, page }) => {
 	await page.route('**/data.json*', route => {
 		return route.fulfill({
 			status: 200,
@@ -11,20 +11,9 @@ test('homepage has title', async ({ page }) => {
 
   await page.goto('/');
 
-  // Expect a title "to contain" a substring.
   await expect(await page.title()).toEqual("Money exchanges");
-	// await page.waitForTimeout(1000);
-	await expect(page.locator('.yc-text_variant_code-2')).toHaveText("11/27/2022, 11:15:03 AM");
 
-  // // create a locator
-  // const getStarted = page.getByRole('link', { name: 'Get started' });
+	await expect(page.locator('.Header__Date')).toHaveText("11/27/2022, 11:15:03 AM");
 
-  // // Expect an attribute "to be strictly equal" to the value.
-  // await expect(getStarted).toHaveAttribute('href', '/docs/intro');
-
-  // // Click the get started link.
-  // await getStarted.click();
-
-  // // Expects the URL to contain intro.
-  // await expect(page).toHaveURL(/.*intro/);
+	await page.screenshot({ path: `tests/screenshot-${browserName}.png`, fullPage: true });
 });
