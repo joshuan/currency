@@ -5,3 +5,4 @@ stat.json
 /test-results/
 /playwright-report/
 /playwright/.cache/
+tests/screenshot-*.png

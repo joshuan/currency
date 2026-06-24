@@ -20,10 +20,10 @@ const isDark = typeof window !== 'undefined' && window.matchMedia('(prefers-colo
 const theme = isDark ? 'dark' : 'light';
 
 if (isDark) {
-	const body = document.querySelector('.yc-root');
+	const body = document.querySelector('.g-root');
 
-	body?.classList.add('yc-root_theme_dark');
-	body?.classList.remove('yc-root_theme_light');
+	body?.classList.add('g-root_theme_dark');
+	body?.classList.remove('g-root_theme_light');
 }
 
 configure({
