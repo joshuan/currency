@@ -8,7 +8,7 @@ export function saveToStorage(key: string, value: object): void {
 
 export function getFromStorage<T extends object>(
 	key: string,
-	defaultValue: T
+	defaultValue: T,
 ): T {
 	let value = null;
 

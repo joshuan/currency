@@ -13,7 +13,7 @@ function getLocation() {
 export function getLocationParam<T = unknown>(
 	name: string,
 	predicate: (_val: string) => T,
-	defaultValue: T
+	defaultValue: T,
 ): T {
 	if (process.env.SSR) {
 		return defaultValue;

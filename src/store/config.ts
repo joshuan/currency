@@ -18,12 +18,12 @@ export const initialConfigState: ConfigState = {
 	ratios: getLocationParam(
 		'ratios',
 		parseRatios,
-		getFromStorage('ratios', DEFAULT_RATIOS)
+		getFromStorage('ratios', DEFAULT_RATIOS),
 	),
 	currencies: getLocationParam(
 		'currencies',
 		parseCurrencies,
-		getFromStorage('currencies', DEFAULT_CURRENCIES)
+		getFromStorage('currencies', DEFAULT_CURRENCIES),
 	),
 };
 
@@ -49,7 +49,7 @@ export const configSlice = createSlice({
 		},
 		removeCurrency: (state, action: PayloadAction<string>) => {
 			state.currencies = state.currencies.filter(
-				(currency) => currency !== action.payload
+				(currency) => currency !== action.payload,
 			);
 			saveToStorage('currencies', state.currencies);
 		},

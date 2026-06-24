@@ -3,7 +3,7 @@ import { IRates, ISelected, ICalculate, ICalculations } from '../../types';
 export function calculateValues(
 	rates: IRates,
 	selected: ISelected,
-	update: ICalculate
+	update: ICalculate,
 ): ICalculations {
 	const baseValue = update.value / update.ratio / rates[update.currency];
 	const result: ICalculations = {};

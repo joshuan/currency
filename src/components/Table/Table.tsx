@@ -20,7 +20,7 @@ interface ITableProps {
 function calcTabIndex(
 	ratio: number,
 	currency: number,
-	currencies: Array<unknown>
+	currencies: Array<unknown>,
 ) {
 	const ratioK = (ratio + 1) * currencies.length;
 
@@ -81,7 +81,7 @@ export function Table({
 										tabIndex={calcTabIndex(
 											indexRatio,
 											indexCurrency,
-											currencies
+											currencies,
 										)}
 									/>
 								)}

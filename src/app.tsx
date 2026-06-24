@@ -16,7 +16,9 @@ import { store } from './store';
 import '@gravity-ui/uikit/styles/styles.css';
 import './style.css';
 
-const isDark = typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+const isDark =
+	typeof window !== 'undefined' &&
+	window.matchMedia('(prefers-color-scheme: dark)').matches;
 const theme = isDark ? 'dark' : 'light';
 
 if (isDark) {
@@ -45,6 +47,6 @@ if (container) {
 					</ToasterProvider>
 				</ThemeProvider>
 			</QueryClientProvider>
-		</Provider>
+		</Provider>,
 	);
 }

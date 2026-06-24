@@ -15,14 +15,14 @@ export function Config() {
 		(list: string[]) => {
 			dispatch(configActions.setCurrencies(list));
 		},
-		[dispatch]
+		[dispatch],
 	);
 
 	const handleChangeRatios = React.useCallback(
 		(list: number[]) => {
 			dispatch(configActions.setRatios(list));
 		},
-		[dispatch]
+		[dispatch],
 	);
 
 	return (

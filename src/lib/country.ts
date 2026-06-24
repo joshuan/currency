@@ -166,8 +166,11 @@ const data: { code: string; name: string; currencyCode: string }[] = [
 
 export const countries = data;
 
-export const currencyMap = data.reduce((acc, item) => {
-	acc[item.currencyCode] = item.code;
+export const currencyMap = data.reduce(
+	(acc, item) => {
+		acc[item.currencyCode] = item.code;
 
-	return acc;
-}, {} as Record<string, string>);
+		return acc;
+	},
+	{} as Record<string, string>,
+);

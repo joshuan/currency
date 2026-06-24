@@ -25,6 +25,6 @@ export function render() {
 					</Provider>
 				</ThemeProvider>
 			</HydrationBoundary>
-		</QueryClientProvider>
+		</QueryClientProvider>,
 	);
 }

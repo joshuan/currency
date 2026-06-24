@@ -13,7 +13,7 @@ export const initialCalculatorState: CalculatorState = getLocationParam(
 		value: 0,
 		ratio: DEFAULT_RATIOS[0],
 		currency: DEFAULT_CURRENCIES[0],
-	}
+	},
 );
 
 export const calculatorSlice = createSlice({

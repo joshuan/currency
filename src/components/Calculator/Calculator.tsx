@@ -7,7 +7,12 @@ import { Table } from '../Table/Table';
 import { Config } from '../Config/Config';
 import { calculateValues } from './utils';
 import { ICalculate, ICurrency, IRates } from '../../types';
-import { calculatorActions, configActions, useCalculator, useConfig } from '../../store';
+import {
+	calculatorActions,
+	configActions,
+	useCalculator,
+	useConfig,
+} from '../../store';
 
 import './Calculator.css';
 
@@ -28,7 +33,7 @@ export function Calculator(props: ICalculatorProps) {
 	const values = calculateValues(
 		props.rates,
 		{ currencies, ratios },
-		{ currency, ratio, value }
+		{ currency, ratio, value },
 	);
 
 	const handleRemoveCurrency = (currencyToRemove: ICurrency) => {
@@ -41,7 +46,7 @@ export function Calculator(props: ICalculatorProps) {
 						currency: remaining[0],
 						ratio,
 						value: values[remaining[0]] ? values[remaining[0]][ratio] : value,
-					})
+					}),
 				);
 			}
 		}

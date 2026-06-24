@@ -18,7 +18,9 @@ export function Header({ date }: IHeaderProps) {
 			{date !== null && (
 				<div className="Header__Right">
 					<HeaderLink />
-					<Text className="Header__Date" variant="code-2">{new Date(date).toLocaleString()}</Text>
+					<Text className="Header__Date" variant="code-2">
+						{new Date(date).toLocaleString()}
+					</Text>
 				</div>
 			)}
 		</div>
