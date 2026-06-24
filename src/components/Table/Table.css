@@ -12,13 +12,13 @@
 	position: relative;
 	width: 60px;
 	padding-right: 5px !important;
-	padding-left: 0 !important;
+	padding-left: 20px !important;
 	white-space: nowrap;
 }
 
 .Table__Currency_Remove {
 	position: absolute;
-	left: -20px;
+	left: 0px;
 	top: 50%;
 	transform: translateY(-50%);
 	visibility: hidden;
