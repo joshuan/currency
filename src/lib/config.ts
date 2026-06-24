@@ -1,5 +1,5 @@
 function parseItem(item: string): number {
-	return parseInt(item, 10);
+	return parseFloat(item);
 }
 
 export function parseRatios(param: string) {

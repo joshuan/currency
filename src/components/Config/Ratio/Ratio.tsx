@@ -42,18 +42,17 @@ export function Ratio({ selected = [], onChange }: IRatioProps) {
 		},
 		[setSearchValue],
 	);
-
 	const handleSearchApply = React.useCallback(
 		(event: IButtonClickEvent) => {
 			event.preventDefault();
 
-			const value = parseInt(searchValue, 10);
+			const value = parseFloat(searchValue);
 
-			if (selected.includes(value)) {
+			if (isNaN(value) || selected.includes(value)) {
 				return;
 			}
 
-			onChange(sort([...selected, parseInt(searchValue, 10)]));
+			onChange(sort([...selected, value]));
 			setSearchValue('');
 		},
 		[setSearchValue, searchValue, selected, onChange],

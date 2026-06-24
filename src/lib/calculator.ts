@@ -3,7 +3,7 @@ export function parseCalculator(param: string) {
 
 	return {
 		value: parseInt(value, 10),
-		ratio: parseInt(ratio, 10),
+		ratio: parseFloat(ratio),
 		currency,
 	};
 }
