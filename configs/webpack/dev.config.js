@@ -15,12 +15,13 @@ module.exports = function () {
         devServer: {
             hot: true,
             open: true,
-            proxy: {
-                '/data.json': {
+            proxy: [
+                {
+                    context: ['/data.json'],
                     target: 'http://currency.joshuan.ru.website.yandexcloud.net',
                     changeOrigin: true,
                 },
-            }
+            ]
         },
         output: {
             filename: 'bundle.js',
@@ -87,9 +88,9 @@ module.exports = function () {
                     removeComments: true,
                 },
             }),
-			new DefinePlugin({
-				'process.env.SSR': JSON.stringify(false),
-			}),
+            new DefinePlugin({
+                'process.env.SSR': JSON.stringify(false),
+            }),
         ],
     };
 };
