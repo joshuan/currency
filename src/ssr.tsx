@@ -2,11 +2,12 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import {
 	dehydrate,
-	Hydrate,
+	HydrationBoundary,
 	QueryClient,
 	QueryClientProvider,
 } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from '@gravity-ui/uikit';
 
 import { App } from './components/App/App';
 import { store } from './store';
@@ -17,11 +18,13 @@ export function render() {
 
 	return renderToString(
 		<QueryClientProvider client={queryClient}>
-			<Hydrate state={dehydratedState}>
-				<Provider store={store}>
-					<App />
-				</Provider>
-			</Hydrate>
+			<HydrationBoundary state={dehydratedState}>
+				<ThemeProvider theme="light">
+					<Provider store={store}>
+						<App />
+					</Provider>
+				</ThemeProvider>
+			</HydrationBoundary>
 		</QueryClientProvider>
 	);
 }

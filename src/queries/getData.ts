@@ -8,5 +8,8 @@ async function getData(): Promise<DTO> {
 }
 
 export function useGetData() {
-	return useQuery<DTO>(['data'], getData);
+	return useQuery<DTO>({
+		queryKey: ['data'],
+		queryFn: getData,
+	});
 }

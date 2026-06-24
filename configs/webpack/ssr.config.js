@@ -22,7 +22,11 @@ module.exports = function () {
             },
         },
         externals: [
-            nodeExternals()
+            nodeExternals({
+                allowlist: [
+                    /^@gravity-ui\/uikit/
+                ]
+            })
         ],
         resolve: {
             extensions: ['', '.js', '.jsx', '.ts', '.tsx'],

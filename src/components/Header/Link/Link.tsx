@@ -25,7 +25,7 @@ export function HeaderLink() {
 				name: 'copied',
 				title: 'Copied',
 				content: 'Copying completed successfully.',
-				type: 'success',
+				theme: 'success',
 			});
 			window.history.replaceState(params, path, path);
 		});
