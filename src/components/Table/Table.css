@@ -9,10 +9,32 @@
 }
 
 .Table__Currency {
+	position: relative;
 	width: 60px;
 	padding-right: 5px !important;
 	padding-left: 0 !important;
 	white-space: nowrap;
+}
+
+.Table__Currency_Remove {
+	position: absolute;
+	left: -20px;
+	top: 50%;
+	transform: translateY(-50%);
+	visibility: hidden;
+	color: #939393;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0 4px;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 1;
+	transition: color 0.15s ease;
+}
+
+.Table tr:hover .Table__Currency_Remove {
+	visibility: visible;
 }
 
 .Table__Currency_Flag {

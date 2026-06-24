@@ -14,6 +14,7 @@ interface ITableProps {
 	values: ICalculations;
 
 	onChange(_data: ICalculate): void;
+	onRemoveCurrency(_currency: ICurrency): void;
 }
 
 function calcTabIndex(
@@ -32,6 +33,7 @@ export function Table({
 	ratios,
 	values,
 	onChange,
+	onRemoveCurrency,
 }: ITableProps) {
 	if (currencies.length !== Object.keys(values).length) {
 		throw new Error('Not consistence values', {
@@ -53,6 +55,14 @@ export function Table({
 				{currencies.map((currency, indexCurrency) => (
 					<tr key={currency}>
 						<th className="Table__Currency">
+							<button
+								className="Table__Currency_Remove"
+								onClick={() => onRemoveCurrency(currency)}
+								title={`Remove ${currency}`}
+								aria-label={`Remove ${currency}`}
+							>
+								&times;
+							</button>
 							<Flag className="Table__Currency_Flag" currencyCode={currency} />
 							{currency}:
 						</th>

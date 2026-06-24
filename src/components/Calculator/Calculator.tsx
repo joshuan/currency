@@ -6,8 +6,8 @@ import { Container } from '../Container/Container';
 import { Table } from '../Table/Table';
 import { Config } from '../Config/Config';
 import { calculateValues } from './utils';
-import { ICalculate, IRates } from '../../types';
-import { calculatorActions, useCalculator, useConfig } from '../../store';
+import { ICalculate, ICurrency, IRates } from '../../types';
+import { calculatorActions, configActions, useCalculator, useConfig } from '../../store';
 
 import './Calculator.css';
 
@@ -31,6 +31,22 @@ export function Calculator(props: ICalculatorProps) {
 		{ currency, ratio, value }
 	);
 
+	const handleRemoveCurrency = (currencyToRemove: ICurrency) => {
+		dispatch(configActions.removeCurrency(currencyToRemove));
+		if (currency === currencyToRemove) {
+			const remaining = currencies.filter((c) => c !== currencyToRemove);
+			if (remaining.length > 0) {
+				dispatch(
+					calculatorActions.setValue({
+						currency: remaining[0],
+						ratio,
+						value: values[remaining[0]] ? values[remaining[0]][ratio] : value,
+					})
+				);
+			}
+		}
+	};
+
 	return (
 		<div className="Calculator">
 			<Container>
@@ -40,6 +56,7 @@ export function Calculator(props: ICalculatorProps) {
 					ratios={ratios}
 					values={values}
 					onChange={handleChangeValue}
+					onRemoveCurrency={handleRemoveCurrency}
 				/>
 			</Container>
 			<Hr />
