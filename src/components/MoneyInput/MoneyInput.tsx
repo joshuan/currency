@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { formatValue, toFixed } from './utils';
 
@@ -21,14 +21,37 @@ export function MoneyInput({
 	tabIndex,
 }: IMoneyInputProps) {
 	const [full, decimal] = toFixed(value).split('.');
-	const inputCard = React.useRef<HTMLInputElement>(null);
+	const [isFocused, setIsFocused] = useState(false);
+	const [localValue, setLocalValue] = useState('');
+	const inputCard = useRef<HTMLInputElement>(null);
 
-	const handleChange = () => {
-		if (!inputCard.current) {
-			return;
+	useEffect(() => {
+		if (!isFocused) {
+			setLocalValue(value === 0 ? '' : value.toString());
 		}
+	}, [value, isFocused]);
 
-		onChange(parseInt(inputCard.current.value.replace(/\D/gu, ''), 10));
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const rawValue = e.target.value;
+		const filteredValue = rawValue.replace(/[^0-9.,]/g, '');
+		setLocalValue(filteredValue);
+
+		const cleanValue = filteredValue.replace(',', '.');
+		const parsed = parseFloat(cleanValue);
+		if (!isNaN(parsed)) {
+			onChange(parsed);
+		} else if (filteredValue === '') {
+			onChange(0);
+		}
+	};
+
+	const handleFocus = () => {
+		setIsFocused(true);
+		setLocalValue(value === 0 ? '' : value.toString());
+	};
+
+	const handleBlur = () => {
+		setIsFocused(false);
 	};
 
 	return (
@@ -39,14 +62,16 @@ export function MoneyInput({
 				data-currency={currency}
 				data-ratio={ratio}
 				type="text"
-				value={formatValue(full)}
+				value={isFocused ? localValue : formatValue(full)}
 				step={1}
 				tabIndex={tabIndex}
 				ref={inputCard}
 				onChange={handleChange}
+				onFocus={handleFocus}
+				onBlur={handleBlur}
 				aria-label={`Currency ${currency} with ${ratio} ratio`}
 			/>
-			<span className="MoneyInput_Decimal">.{decimal}</span>
+			{!isFocused && <span className="MoneyInput_Decimal">.{decimal}</span>}
 		</div>
 	);
 }
