@@ -3,7 +3,9 @@
 set -e
 
 if [ -f ./.env ]; then
+    set -a
     source ./.env
+    set +a
 fi
 
 DATE="$(date '+%Y-%m-%d')"

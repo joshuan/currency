@@ -10,6 +10,7 @@
     "open": "open https://currency.joshuan.ru/",
     "release": "npm run build && npm run deploy",
     "update": "yc serverless function invoke update-currency",
+    "deploy-function": "./scripts/deploy-function.sh",
     "analyzer": "./scripts/analyzer.sh",
     "lint": "prettier --check src",
     "lint:fix": "prettier --write src",

@@ -3,7 +3,9 @@
 set -e
 
 if [ -f ./.env ]; then
+    set -a
     source ./.env
+    set +a
 fi
 
 AWS_PROFILE="${AWS_PROFILE}" aws s3 \
