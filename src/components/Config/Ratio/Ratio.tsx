@@ -19,6 +19,8 @@ interface IRatioProps {
 }
 
 export function Ratio({ selected = [], onChange }: IRatioProps) {
+	const inputRef = React.useRef<HTMLInputElement>(null);
+
 	const handleUnchecked = React.useCallback(
 		(ratio: number) => {
 			onChange(selected.filter((item) => item !== ratio));
@@ -43,17 +45,25 @@ export function Ratio({ selected = [], onChange }: IRatioProps) {
 		[setSearchValue],
 	);
 	const handleSearchApply = React.useCallback(
-		(event: IButtonClickEvent) => {
+		(event: React.SyntheticEvent) => {
 			event.preventDefault();
 
-			const value = parseFloat(searchValue);
+			const cleanValue = searchValue.replace(',', '.');
+			
+			// Validate format: only allow positive integers or decimals (e.g. 12, 0.64)
+			if (!/^[0-9]+(\.[0-9]+)?$/.test(cleanValue)) {
+				return;
+			}
 
-			if (isNaN(value) || selected.includes(value)) {
+			const value = parseFloat(cleanValue);
+
+			if (isNaN(value) || value <= 0 || selected.includes(value)) {
 				return;
 			}
 
 			onChange(sort([...selected, value]));
 			setSearchValue('');
+			inputRef.current?.focus();
 		},
 		[setSearchValue, searchValue, selected, onChange],
 	);
@@ -62,16 +72,17 @@ export function Ratio({ selected = [], onChange }: IRatioProps) {
 		<ConfigItem
 			title="Ratio"
 			filter={
-				<>
+				<form className="Config__Ratio_Form" onSubmit={handleSearchApply}>
 					<Input
+						controlRef={inputRef}
 						className="Config__Ratio_Input"
 						type="search"
 						value={searchValue}
 						onChange={handleSearch}
 						placeholder="Ration value"
 					/>
-					<Button onClick={handleSearchApply}>Add</Button>
-				</>
+					<Button type="submit">Add</Button>
+				</form>
 			}
 			onClear={handleClear}
 		>

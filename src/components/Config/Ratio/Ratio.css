@@ -3,6 +3,11 @@
 	margin-right: 0.6em;
 }
 
+.Config__Ratio_Form {
+	display: flex;
+	align-items: center;
+}
+
 .Config__Ratio_Checkbox {
 	display: block;
 	margin: 0.2em 0;
