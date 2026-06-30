@@ -12,6 +12,8 @@ interface ITableProps {
 	currencies: ICurrency[];
 	ratios: IRatio[];
 	values: ICalculations;
+	activeCurrency: ICurrency;
+	activeRatio: IRatio;
 
 	onChange(_data: ICalculate): void;
 	onRemoveCurrency(_currency: ICurrency): void;
@@ -32,6 +34,8 @@ export function Table({
 	currencies,
 	ratios,
 	values,
+	activeCurrency,
+	activeRatio,
 	onChange,
 	onRemoveCurrency,
 }: ITableProps) {
@@ -75,6 +79,9 @@ export function Table({
 										currency={currency}
 										ratio={ratio}
 										value={values[currency] ? values[currency][ratio] : 0}
+										isActive={
+											currency === activeCurrency && ratio === activeRatio
+										}
 										onChange={(value: number) =>
 											onChange({ currency, ratio, value })
 										}

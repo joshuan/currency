@@ -1,0 +1,172 @@
+.CalculatorRow {
+	display: flex;
+	align-items: center;
+	padding: 12px 16px;
+	background-color: var(--g-color-base-generic-accent);
+	border: 1px solid var(--g-color-line-generic);
+	border-radius: 8px;
+	gap: 16px;
+	margin: 16px 0;
+	flex-wrap: wrap;
+	transition: all 0.2s ease-in-out;
+}
+
+.CalculatorRow__Title {
+	font-weight: bold;
+	color: var(--g-color-text-primary);
+	font-size: 0.95em;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.CalculatorRow__Expression {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+	flex-grow: 1;
+}
+
+.CalculatorRow__Operator {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: var(--g-color-text-hint);
+	padding: 0 4px;
+}
+
+.CalculatorRow__Item {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	background-color: var(--g-color-base-background);
+	border: 1px solid var(--g-color-line-generic);
+	border-radius: 20px;
+	font-size: 0.9em;
+	color: var(--g-color-text-primary);
+	cursor: pointer;
+	position: relative;
+	transition: all 0.15s ease;
+	user-select: none;
+}
+
+.CalculatorRow__Item:hover {
+	border-color: var(--g-color-line-generic-hover);
+	transform: translateY(-1px);
+}
+
+.CalculatorRow__Item_active {
+	border-color: var(--g-color-line-info);
+	box-shadow:
+		0 0 0 2px var(--g-color-base-info-light),
+		0 2px 4px rgba(0, 0, 0, 0.05);
+	background-color: var(--g-color-base-info-light);
+}
+
+.CalculatorRow__Item_temp {
+	border-style: dashed;
+}
+
+.CalculatorRow__Item_temp.CalculatorRow__Item_active {
+	border-style: solid;
+}
+
+.CalculatorRow__Item_sum {
+	border-color: var(--g-color-line-success);
+}
+
+.CalculatorRow__Item_sum.CalculatorRow__Item_active {
+	border-color: var(--g-color-line-success);
+	box-shadow:
+		0 0 0 2px var(--g-color-base-success-light),
+		0 2px 4px rgba(0, 0, 0, 0.05);
+	background-color: var(--g-color-base-success-light);
+}
+
+.CalculatorRow__Flag {
+	width: 1.1em;
+	height: auto;
+}
+
+.CalculatorRow__Value {
+	font-weight: 600;
+}
+
+.CalculatorRow__Details {
+	color: var(--g-color-text-hint);
+	font-size: 0.8em;
+}
+
+.CalculatorRow__Badge {
+	font-size: 0.7em;
+	background-color: var(--g-color-base-info);
+	color: #fff;
+	padding: 1px 6px;
+	border-radius: 10px;
+	text-transform: uppercase;
+}
+
+.CalculatorRow__Item_Remove {
+	background: transparent;
+	border: none;
+	color: var(--g-color-text-hint);
+	cursor: pointer;
+	font-size: 1.1em;
+	font-weight: bold;
+	padding: 0 0 0 4px;
+	margin-left: 2px;
+	line-height: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.1s ease;
+}
+
+.CalculatorRow__Item_Remove:hover {
+	color: var(--g-color-text-danger);
+}
+
+.CalculatorRow__AddBtn {
+	min-width: 32px;
+	height: 32px;
+	padding: 0;
+	border-radius: 50% !important;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.CalculatorRow__SelectorContainer {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	background-color: var(--g-color-base-generic-accent);
+	border: 1px solid var(--g-color-line-generic);
+	border-radius: 4px;
+	padding: 2px 6px;
+	margin-left: 4px;
+}
+
+.CalculatorRow__SelectorFlag {
+	width: 1em;
+	height: auto;
+}
+
+.CalculatorRow__Select {
+	background: transparent;
+	border: none;
+	color: var(--g-color-text-primary);
+	font-size: 0.85em;
+	font-weight: 500;
+	cursor: pointer;
+	padding: 0;
+	outline: none;
+}
+
+.CalculatorRow__Select option {
+	background-color: var(--g-color-base-background);
+	color: var(--g-color-text-primary);
+}
+
+.CalculatorRow__ClearBtn {
+	margin-left: auto;
+}

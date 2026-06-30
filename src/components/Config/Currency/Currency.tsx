@@ -43,7 +43,9 @@ interface ICurrencyProps {
 export function Currency({ selected = [], onChange }: ICurrencyProps) {
 	const inputRef = React.useRef<HTMLInputElement>(null);
 	const containerRef = React.useRef<HTMLDivElement>(null);
-	const pendingFocusRef = React.useRef<{ type: 'checkbox'; index: number } | { type: 'input' } | null>(null);
+	const pendingFocusRef = React.useRef<
+		{ type: 'checkbox'; index: number } | { type: 'input' } | null
+	>(null);
 
 	const [searchValue, setSearchValue] = React.useState('');
 
@@ -55,9 +57,10 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
 			if (action.type === 'input') {
 				inputRef.current?.focus();
 			} else if (action.type === 'checkbox') {
-				const checkboxes = containerRef.current?.querySelectorAll<HTMLInputElement>(
-					'input[type="checkbox"]',
-				);
+				const checkboxes =
+					containerRef.current?.querySelectorAll<HTMLInputElement>(
+						'input[type="checkbox"]',
+					);
 				if (checkboxes && checkboxes.length > action.index) {
 					checkboxes[action.index].focus();
 				} else {
@@ -71,7 +74,9 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
 		(name: string, checked: boolean) => {
 			if (!checked && searchValue === '') {
 				const checkboxes = Array.from(
-					containerRef.current?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]') || [],
+					containerRef.current?.querySelectorAll<HTMLInputElement>(
+						'input[type="checkbox"]',
+					) || [],
 				);
 				const activeElement = document.activeElement as HTMLInputElement;
 				if (activeElement && checkboxes.includes(activeElement)) {
@@ -136,10 +141,14 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
 					setSearchValue('');
 					inputRef.current?.focus();
 				}
-			} else if (event.key === 'ArrowDown' || (event.key === 'Tab' && !event.shiftKey)) {
-				const checkboxes = containerRef.current?.querySelectorAll<HTMLInputElement>(
-					'input[type="checkbox"]',
-				);
+			} else if (
+				event.key === 'ArrowDown' ||
+				(event.key === 'Tab' && !event.shiftKey)
+			) {
+				const checkboxes =
+					containerRef.current?.querySelectorAll<HTMLInputElement>(
+						'input[type="checkbox"]',
+					);
 				if (checkboxes && checkboxes.length > 0) {
 					event.preventDefault();
 					checkboxes[0].focus();
@@ -157,14 +166,19 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
 			}
 
 			const checkboxes = Array.from(
-				containerRef.current?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]') || [],
+				containerRef.current?.querySelectorAll<HTMLInputElement>(
+					'input[type="checkbox"]',
+				) || [],
 			);
 			const currentIndex = checkboxes.indexOf(activeElement);
 			if (currentIndex === -1) {
 				return;
 			}
 
-			if (event.key === 'ArrowDown' || (event.key === 'Tab' && !event.shiftKey)) {
+			if (
+				event.key === 'ArrowDown' ||
+				(event.key === 'Tab' && !event.shiftKey)
+			) {
 				if (currentIndex < checkboxes.length - 1) {
 					event.preventDefault();
 					checkboxes[currentIndex + 1].focus();
@@ -172,7 +186,10 @@ export function Currency({ selected = [], onChange }: ICurrencyProps) {
 					event.preventDefault();
 					checkboxes[0].focus();
 				}
-			} else if (event.key === 'ArrowUp' || (event.key === 'Tab' && event.shiftKey)) {
+			} else if (
+				event.key === 'ArrowUp' ||
+				(event.key === 'Tab' && event.shiftKey)
+			) {
 				if (currentIndex > 0) {
 					event.preventDefault();
 					checkboxes[currentIndex - 1].focus();

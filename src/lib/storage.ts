@@ -1,4 +1,8 @@
-const isAvailable = typeof localStorage !== 'undefined';
+const isAvailable =
+	typeof window !== 'undefined' &&
+	typeof window.localStorage !== 'undefined' &&
+	typeof localStorage !== 'undefined' &&
+	typeof localStorage.getItem === 'function';
 
 export function saveToStorage(key: string, value: object): void {
 	if (isAvailable) {

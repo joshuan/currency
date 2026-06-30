@@ -5,6 +5,7 @@ import { Hr } from '../Hr/Hr';
 import { Container } from '../Container/Container';
 import { Table } from '../Table/Table';
 import { Config } from '../Config/Config';
+import { CalculatorRow } from './CalculatorRow';
 import { calculateValues } from './utils';
 import { ICalculate, ICurrency, IRates } from '../../types';
 import {
@@ -60,9 +61,14 @@ export function Calculator(props: ICalculatorProps) {
 					currencies={currencies}
 					ratios={ratios}
 					values={values}
+					activeCurrency={currency}
+					activeRatio={ratio}
 					onChange={handleChangeValue}
 					onRemoveCurrency={handleRemoveCurrency}
 				/>
+			</Container>
+			<Container>
+				<CalculatorRow rates={props.rates} />
 			</Container>
 			<Hr />
 			<Container>

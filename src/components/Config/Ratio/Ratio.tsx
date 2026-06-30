@@ -49,7 +49,7 @@ export function Ratio({ selected = [], onChange }: IRatioProps) {
 			event.preventDefault();
 
 			const cleanValue = searchValue.replace(',', '.');
-			
+
 			// Validate format: only allow positive integers or decimals (e.g. 12, 0.64)
 			if (!/^[0-9]+(\.[0-9]+)?$/.test(cleanValue)) {
 				return;

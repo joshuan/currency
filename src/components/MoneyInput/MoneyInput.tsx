@@ -9,6 +9,7 @@ interface IMoneyInputProps {
 	ratio: number;
 	value: number;
 	tabIndex?: number;
+	isActive?: boolean;
 
 	onChange(_value: number): void;
 }
@@ -19,6 +20,7 @@ export function MoneyInput({
 	value,
 	onChange,
 	tabIndex,
+	isActive,
 }: IMoneyInputProps) {
 	const [full, decimal] = toFixed(value).split('.');
 	const [isFocused, setIsFocused] = useState(false);
@@ -57,7 +59,7 @@ export function MoneyInput({
 	return (
 		<div className="MoneyInput">
 			<input
-				className="MoneyInput_Input"
+				className={`MoneyInput_Input ${isActive ? 'MoneyInput_Input_Active' : ''}`}
 				name={`${currency}-${ratio}`}
 				data-currency={currency}
 				data-ratio={ratio}

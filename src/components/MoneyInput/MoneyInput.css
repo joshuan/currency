@@ -30,6 +30,12 @@
 	border: 1px solid var(--g-color-line-generic-active);
 }
 
+.MoneyInput_Input_Active {
+	border-color: var(--g-color-line-info) !important;
+	background-color: var(--g-color-base-info-light) !important;
+	font-weight: 500;
+}
+
 .MoneyInput_Decimal {
 	position: absolute;
 	top: 0;

@@ -16,3 +16,15 @@ export interface ISelected {
 	currencies: ICurrency[];
 	ratios: IRatio[];
 }
+
+export interface CalculatorState {
+	currency: string;
+	ratio: number;
+	value: number;
+
+	tempSummand: ICalculate;
+	summands: ICalculate[];
+	activeSummandIndex: number | 'sum' | null;
+	sumCurrency: string;
+	sumRatio: number;
+}
