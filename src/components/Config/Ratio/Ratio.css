@@ -1,14 +1,22 @@
 .Config__Ratio_Input {
-	width: 10em;
-	margin-right: 0.6em;
+	flex-grow: 1;
+	margin-right: 8px;
 }
 
 .Config__Ratio_Form {
 	display: flex;
 	align-items: center;
+	width: 100%;
 }
 
 .Config__Ratio_Checkbox {
 	display: block;
-	margin: 0.2em 0;
+	padding: 4px 6px;
+	border-radius: 4px;
+	transition: background-color 0.1s ease;
+	cursor: pointer;
+}
+
+.Config__Ratio_Checkbox:hover {
+	background-color: var(--g-color-base-simple-hover);
 }

@@ -1,19 +1,16 @@
 .CalculatorRow {
 	display: flex;
 	align-items: center;
-	padding: 12px 0;
+	padding: 10px 0;
 	background-color: transparent;
-	border-top: 1px solid var(--g-color-line-generic);
-	border-bottom: 1px solid var(--g-color-line-generic);
-	gap: 12px;
-	margin: 16px 0;
+	gap: 10px;
 	flex-wrap: wrap;
 }
 
 .CalculatorRow__Title {
-	font-weight: bold;
+	font-weight: 700;
 	color: var(--g-color-text-primary);
-	font-size: 0.95em;
+	font-size: 0.85em;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 }
@@ -21,22 +18,25 @@
 .CalculatorRow__Settings {
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: 6px;
 }
 
 .CalculatorRow__Expression {
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: 6px;
 	flex-wrap: wrap;
 	flex-grow: 1;
 }
 
 .CalculatorRow__Operator {
 	font-size: 1.2em;
-	font-weight: bold;
+	font-weight: 600;
 	color: var(--g-color-text-hint);
-	padding: 0 4px;
+	padding: 0 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .CalculatorRow__Item {
@@ -44,23 +44,28 @@
 	align-items: center;
 	gap: 6px;
 	padding: 4px 8px;
-	background-color: var(--g-color-base-background);
+	background-color: var(--g-color-base-generic);
 	border: 1px solid var(--g-color-line-generic);
-	border-radius: 2px;
-	font-size: 0.95em;
+	border-radius: 6px;
+	font-size: 0.9em;
 	color: var(--g-color-text-primary);
 	cursor: pointer;
 	position: relative;
 	user-select: none;
+	transition: all 0.15s ease;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .CalculatorRow__Item:hover {
 	border-color: var(--g-color-line-generic-hover);
+	transform: translateY(-1px);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .CalculatorRow__Item_active {
-	border-color: var(--g-color-line-info);
-	background-color: var(--g-color-base-info-light);
+	border-color: var(--brand-accent) !important;
+	background-color: var(--brand-accent-light) !important;
+	box-shadow: 0 0 0 2px var(--brand-accent-light-border) !important;
 }
 
 .CalculatorRow__Item_temp {
@@ -73,25 +78,34 @@
 
 .CalculatorRow__Item_sum {
 	border-color: var(--g-color-line-generic);
+	background-color: var(--g-color-base-generic);
+	font-weight: 700;
+}
+
+.CalculatorRow__Item_sum:hover {
+	border-color: var(--brand-accent);
 }
 
 .CalculatorRow__Item_sum.CalculatorRow__Item_active {
-	border-color: var(--g-color-line-info);
-	background-color: var(--g-color-base-info-light);
+	border-color: var(--brand-accent) !important;
+	background-color: var(--brand-accent-light) !important;
 }
 
 .CalculatorRow__Flag {
 	width: 1.1em;
 	height: auto;
+	border-radius: 1px;
 }
 
 .CalculatorRow__Value {
 	font-weight: 600;
+	letter-spacing: -0.1px;
 }
 
 .CalculatorRow__Details {
 	color: var(--g-color-text-hint);
 	font-size: 0.8em;
+	font-weight: 500;
 }
 
 .CalculatorRow__Item_Remove {
@@ -101,12 +115,13 @@
 	cursor: pointer;
 	font-size: 1.1em;
 	font-weight: bold;
-	padding: 0 0 0 4px;
+	padding: 0 0 0 2px;
 	margin-left: 2px;
 	line-height: 1;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	transition: color 0.15s ease;
 }
 
 .CalculatorRow__Item_Remove:hover {
@@ -114,46 +129,75 @@
 }
 
 .CalculatorRow__AddBtn {
-	min-width: 28px;
-	height: 28px;
-	padding: 0;
-	border-radius: 2px !important;
-	font-size: 1.1em;
-	font-weight: bold;
+	min-width: 28px !important;
+	height: 28px !important;
+	padding: 0 !important;
+	border-radius: 6px !important;
+	font-size: 1.1em !important;
+	font-weight: bold !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	transition: all 0.15s ease !important;
+}
+
+.CalculatorRow__AddBtn:not(:disabled) {
+	background-color: var(--brand-accent) !important;
+	border-color: var(--brand-accent) !important;
+	color: #fff !important;
+}
+
+.CalculatorRow__AddBtn:not(:disabled):hover {
+	background-color: var(--brand-accent-hover) !important;
+	border-color: var(--brand-accent-hover) !important;
+	transform: scale(1.03);
 }
 
 .CalculatorRow__SelectorContainer {
 	display: inline-flex;
 	align-items: center;
 	gap: 4px;
-	background-color: var(--g-color-base-background);
+	background-color: var(--g-color-base-generic);
 	border: 1px solid var(--g-color-line-generic);
-	border-radius: 2px;
-	padding: 4px 6px;
+	border-radius: 6px;
+	padding: 4px 8px;
+	transition: all 0.15s ease;
+}
+
+.CalculatorRow__SelectorContainer:hover {
+	border-color: var(--g-color-line-generic-hover);
+}
+
+.CalculatorRow__SelectorContainer:focus-within {
+	border-color: var(--brand-accent);
+	box-shadow: 0 0 0 2px var(--brand-accent-light-border);
 }
 
 .CalculatorRow__SelectorFlag {
 	width: 1em;
 	height: auto;
+	border-radius: 1px;
 }
 
 .CalculatorRow__Select {
 	background: transparent;
 	border: none;
 	color: var(--g-color-text-primary);
-	font-size: 0.95em;
-	font-weight: 500;
+	font-size: 0.9em;
+	font-weight: 600;
 	cursor: pointer;
 	padding: 0;
 	outline: none;
 }
 
 .CalculatorRow__Select option {
-	background-color: var(--g-color-base-background);
+	background-color: var(--g-color-base-generic);
 	color: var(--g-color-text-primary);
 }
 
 .CalculatorRow__ClearBtn {
 	margin-left: auto;
-	border-radius: 2px !important;
+	border-radius: 6px !important;
+	font-weight: 600 !important;
+	height: 28px !important;
 }

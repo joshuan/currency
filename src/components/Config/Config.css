@@ -1,18 +1,23 @@
 .Config {
 	display: flex;
+	gap: 16px;
+	flex-wrap: wrap;
 	width: 100%;
-	justify-content: space-around;
-	column-gap: 1em;
-}
-
-@media (max-width: 640px) {
-	.Config {
-		flex-direction: column;
-		align-items: center;
-	}
+	margin-top: 12px;
 }
 
 .Config-Item {
-	flex: 0 0 50%;
-	max-width: 260px;
+	flex: 1 1 400px;
+	min-width: 0;
+	background: var(--card-bg);
+	border: 1px solid var(--g-color-line-generic);
+	border-radius: 8px;
+	padding: 16px;
+	box-shadow: var(--card-shadow);
+	box-sizing: border-box;
+	transition: border-color 0.15s ease;
+}
+
+.Config-Item:hover {
+	border-color: var(--g-color-line-generic-hover);
 }

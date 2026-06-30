@@ -1,23 +1,102 @@
 .Header {
-	background: var(--g-color-base-generic);
-	padding: 10px 20px;
+	background: var(--g-color-base-background);
 	border-bottom: 1px solid var(--g-color-line-generic);
-	line-height: 24px;
+	width: 100%;
+	position: relative;
+	z-index: 100;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.Header__Container {
+	margin: 0 auto;
+	max-width: 1100px;
+	padding: 16px 20px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	box-sizing: border-box;
 }
 
-.Header__Link {
-	margin-right: 0.5em;
+.Header__Brand {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.Header__LogoIcon {
+	display: block;
+	flex-shrink: 0;
+	filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.25));
+}
+
+.Header__TitleGroup {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.Header__TitleBrand {
+	font-size: 1.45em;
+	font-weight: 800;
+	letter-spacing: -0.5px;
+	color: var(--g-color-text-primary);
+	line-height: 1.1;
+}
+
+.Header__TitleSub {
+	font-size: 0.75em;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: #d97706;
+	line-height: 1;
+	margin-top: 2px;
 }
 
 .Header__Right {
-	line-height: var(--g-text-display-2-line-height);
 	display: flex;
 	align-items: center;
+	gap: 16px;
 }
 
-.Header__H1 {
-	margin: 0;
+.Header__Link {
+	margin-right: 0 !important;
+}
+
+.Header__Status {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: var(--g-color-base-generic);
+	border: 1px solid var(--g-color-line-generic);
+	padding: 6px 12px;
+	border-radius: 6px;
+}
+
+.Header__StatusDot {
+	width: 8px;
+	height: 8px;
+	background-color: #10b981;
+	border-radius: 50%;
+	display: inline-block;
+	box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+	animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+	0% {
+		box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.4);
+	}
+	70% {
+		box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0px rgba(16, 185, 129, 0);
+	}
+}
+
+.Header__Date {
+	color: var(--g-color-text-secondary);
+	font-weight: 500;
+	font-size: 0.85em;
 }

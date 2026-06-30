@@ -1,6 +1,15 @@
 .Config__Currency_Item {
 	display: block;
+	padding: 4px 6px;
+	border-radius: 4px;
+	transition: background-color 0.1s ease;
+}
+
+.Config__Currency_Item:hover {
+	background-color: var(--g-color-base-simple-hover);
 }
 
 .Config__Currency_Input {
+	width: 100%;
+	cursor: pointer;
 }

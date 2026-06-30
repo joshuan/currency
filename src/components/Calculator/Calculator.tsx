@@ -70,7 +70,6 @@ export function Calculator(props: ICalculatorProps) {
 			<Container>
 				<CalculatorRow rates={props.rates} />
 			</Container>
-			<Hr />
 			<Container>
 				<Config />
 			</Container>

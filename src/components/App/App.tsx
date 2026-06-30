@@ -26,20 +26,22 @@ export function App() {
 						: null
 				}
 			/>
-			{query.isLoading || query.isSuccess ? (
-				<Calculator
-					loading={query.isLoading}
-					rates={query.isSuccess ? query.data.rates : {}}
-				/>
-			) : null}
-			{query.isError ? (
-				<Center>
-					<p>
-						<Text variant="display-1">Error</Text>
-					</p>
-					<pre>{getErrorMessage(query.error)}</pre>
-				</Center>
-			) : null}
+			<div className="App__Content">
+				{query.isLoading || query.isSuccess ? (
+					<Calculator
+						loading={query.isLoading}
+						rates={query.isSuccess ? query.data.rates : {}}
+					/>
+				) : null}
+				{query.isError ? (
+					<Center>
+						<p>
+							<Text variant="display-1">Error</Text>
+						</p>
+						<pre>{getErrorMessage(query.error)}</pre>
+					</Center>
+				) : null}
+			</div>
 		</div>
 	);
 }

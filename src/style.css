@@ -1,3 +1,27 @@
 body {
 	margin: 0;
+	background-color: var(--g-color-base-background);
+	font-family: var(--g-font-family-sans);
+}
+
+:root {
+	--brand-accent: #d97706;
+	--brand-accent-hover: #b45309;
+	--brand-accent-light: rgba(217, 119, 6, 0.06);
+	--brand-accent-light-border: rgba(217, 119, 6, 0.2);
+	--card-bg: #ffffff;
+	--card-shadow:
+		0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+	--table-row-border: rgba(0, 0, 0, 0.04);
+}
+
+.g-root_theme_dark {
+	--brand-accent: #fbbf24;
+	--brand-accent-hover: #f59e0b;
+	--brand-accent-light: rgba(251, 191, 36, 0.1);
+	--brand-accent-light-border: rgba(251, 191, 36, 0.3);
+	--card-bg: #1e293b;
+	--card-shadow:
+		0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+	--table-row-border: rgba(255, 255, 255, 0.05);
 }

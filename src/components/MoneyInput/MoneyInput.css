@@ -4,44 +4,50 @@
 }
 
 .MoneyInput_Input {
-	border: 1px solid var(--g-color-line-generic);
-	padding: 4px 20px 4px 5px;
-	font-size: 1.1em;
+	border: 1px solid transparent;
+	padding: 4px 22px 4px 6px;
+	font-size: 1.05em;
 	text-align: right;
 	width: 100%;
 	box-sizing: border-box;
 	color: var(--g-color-text-primary);
 	background-color: transparent;
+	border-radius: 4px;
+	transition:
+		border-color 0.1s ease,
+		background-color 0.1s ease,
+		box-shadow 0.1s ease;
 }
 
 .MoneyInput_Input::placeholder {
 	color: var(--g-color-text-hint);
 }
 
-.MoneyInput_Input {
-	border: 1px solid var(--g-color-line-generic);
-}
-
 .MoneyInput_Input:hover {
-	border: 1px solid var(--g-color-line-generic-hover);
+	border-color: var(--g-color-line-generic);
+	background-color: var(--g-color-base-simple-hover);
 }
 
 .MoneyInput_Input:focus {
-	border: 1px solid var(--g-color-line-generic-active);
+	border-color: var(--brand-accent);
+	background-color: var(--g-color-base-background);
+	box-shadow: 0 0 0 2px var(--brand-accent-light-border);
+	outline: none;
 }
 
 .MoneyInput_Input_Active {
-	border-color: var(--g-color-line-info) !important;
-	background-color: var(--g-color-base-info-light) !important;
-	font-weight: 500;
+	border-color: var(--brand-accent) !important;
+	background-color: var(--brand-accent-light) !important;
+	font-weight: 600;
 }
 
 .MoneyInput_Decimal {
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 6px;
 	font-size: 0.8em;
 	color: var(--g-color-text-secondary);
-	line-height: 2.7em;
-	width: 20px;
+	width: auto;
+	pointer-events: none;
 }
