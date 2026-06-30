@@ -13,10 +13,6 @@
 	color: var(--g-color-text-primary);
 	background-color: transparent;
 	border-radius: 4px;
-	transition:
-		border-color 0.1s ease,
-		background-color 0.1s ease,
-		box-shadow 0.1s ease;
 }
 
 .MoneyInput_Input::placeholder {
@@ -39,6 +35,10 @@
 	border-color: var(--brand-accent) !important;
 	background-color: var(--brand-accent-light) !important;
 	font-weight: 600;
+}
+
+.MoneyInput_Input_Focused {
+	padding-right: 6px !important;
 }
 
 .MoneyInput_Decimal {

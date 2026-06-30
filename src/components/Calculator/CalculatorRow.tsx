@@ -100,43 +100,6 @@ export function CalculatorRow({ rates }: ICalculatorRowProps) {
 		<div className="CalculatorRow">
 			<div className="CalculatorRow__Title">Calculator:</div>
 
-			{/* Global Calculator/Sum target Settings */}
-			<div className="CalculatorRow__Settings">
-				<div className="CalculatorRow__SelectorContainer">
-					<Flag
-						className="CalculatorRow__SelectorFlag"
-						currencyCode={sumCurrency}
-					/>
-					<select
-						className="CalculatorRow__Select"
-						value={sumCurrency}
-						onChange={handleSumCurrencyChange}
-						title="Change target currency"
-					>
-						{currencies.map((c) => (
-							<option key={c} value={c}>
-								{c}
-							</option>
-						))}
-					</select>
-				</div>
-
-				<div className="CalculatorRow__SelectorContainer">
-					<select
-						className="CalculatorRow__Select"
-						value={ratio}
-						onChange={handleSumRatioChange}
-						title="Change target ratio"
-					>
-						{ratios.map((r) => (
-							<option key={r} value={r}>
-								{r}
-							</option>
-						))}
-					</select>
-				</div>
-			</div>
-
 			<div className="CalculatorRow__Expression">
 				{summands.map((summand, index) => {
 					const isActive = activeSummandIndex === index;
@@ -225,6 +188,43 @@ export function CalculatorRow({ rates }: ICalculatorRowProps) {
 					title="Click to view the sum in the table"
 				>
 					<span className="CalculatorRow__Value">{formatMoney(sumValue)}</span>
+				</div>
+
+				{/* Global Calculator/Sum target Settings */}
+				<div className="CalculatorRow__Settings">
+					<div className="CalculatorRow__SelectorContainer">
+						<Flag
+							className="CalculatorRow__SelectorFlag"
+							currencyCode={sumCurrency}
+						/>
+						<select
+							className="CalculatorRow__Select"
+							value={sumCurrency}
+							onChange={handleSumCurrencyChange}
+							title="Change target currency"
+						>
+							{currencies.map((c) => (
+								<option key={c} value={c}>
+									{c}
+								</option>
+							))}
+						</select>
+					</div>
+
+					<div className="CalculatorRow__SelectorContainer">
+						<select
+							className="CalculatorRow__Select"
+							value={ratio}
+							onChange={handleSumRatioChange}
+							title="Change target ratio"
+						>
+							{ratios.map((r) => (
+								<option key={r} value={r}>
+									{r}
+								</option>
+							))}
+						</select>
+					</div>
 				</div>
 			</div>
 

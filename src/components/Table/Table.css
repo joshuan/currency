@@ -27,11 +27,6 @@
 	padding-left: 28px;
 }
 
-.Table tbody tr td,
-.Table tbody tr th {
-	transition: background-color 0.08s ease;
-}
-
 .Table tbody tr:hover td,
 .Table tbody tr:hover th {
 	background-color: var(--g-color-base-simple-hover);
@@ -61,7 +56,6 @@
 	font-size: 18px;
 	font-weight: bold;
 	line-height: 1;
-	transition: color 0.15s ease;
 	border-radius: 4px;
 }
 

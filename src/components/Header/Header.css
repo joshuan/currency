@@ -80,19 +80,6 @@
 	border-radius: 50%;
 	display: inline-block;
 	box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
-	animation: pulse-green 2s infinite;
-}
-
-@keyframes pulse-green {
-	0% {
-		box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.4);
-	}
-	70% {
-		box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
-	}
-	100% {
-		box-shadow: 0 0 0 0px rgba(16, 185, 129, 0);
-	}
 }
 
 .Header__Date {

@@ -29,7 +29,7 @@ export function MoneyInput({
 
 	useEffect(() => {
 		if (!isFocused) {
-			setLocalValue(value === 0 ? '' : value.toString());
+			setLocalValue(value === 0 ? '' : toFixed(value));
 		}
 	}, [value, isFocused]);
 
@@ -49,7 +49,7 @@ export function MoneyInput({
 
 	const handleFocus = () => {
 		setIsFocused(true);
-		setLocalValue(value === 0 ? '' : value.toString());
+		setLocalValue(value === 0 ? '' : toFixed(value));
 	};
 
 	const handleBlur = () => {
@@ -59,7 +59,7 @@ export function MoneyInput({
 	return (
 		<div className="MoneyInput">
 			<input
-				className={`MoneyInput_Input ${isActive ? 'MoneyInput_Input_Active' : ''}`}
+				className={`MoneyInput_Input ${isActive ? 'MoneyInput_Input_Active' : ''} ${isFocused ? 'MoneyInput_Input_Focused' : ''}`}
 				name={`${currency}-${ratio}`}
 				data-currency={currency}
 				data-ratio={ratio}

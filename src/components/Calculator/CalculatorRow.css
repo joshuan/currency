@@ -52,7 +52,6 @@
 	cursor: pointer;
 	position: relative;
 	user-select: none;
-	transition: all 0.15s ease;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
@@ -121,7 +120,6 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	transition: color 0.15s ease;
 }
 
 .CalculatorRow__Item_Remove:hover {
@@ -138,7 +136,6 @@
 	display: inline-flex !important;
 	align-items: center !important;
 	justify-content: center !important;
-	transition: all 0.15s ease !important;
 }
 
 .CalculatorRow__AddBtn:not(:disabled) {
@@ -161,7 +158,6 @@
 	border: 1px solid var(--g-color-line-generic);
 	border-radius: 6px;
 	padding: 4px 8px;
-	transition: all 0.15s ease;
 }
 
 .CalculatorRow__SelectorContainer:hover {

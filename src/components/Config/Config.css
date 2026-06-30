@@ -15,7 +15,6 @@
 	padding: 16px;
 	box-shadow: var(--card-shadow);
 	box-sizing: border-box;
-	transition: border-color 0.15s ease;
 }
 
 .Config-Item:hover {

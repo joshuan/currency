@@ -2,7 +2,6 @@
 	display: block;
 	padding: 4px 6px;
 	border-radius: 4px;
-	transition: background-color 0.1s ease;
 }
 
 .Config__Currency_Item:hover {
