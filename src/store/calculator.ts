@@ -115,7 +115,8 @@ export const calculatorSlice = createSlice({
 					baseValue += state.value / state.ratio / rate;
 				}
 			}
-			const sumValue = baseValue * (rates[state.sumCurrency] || 1) * state.sumRatio;
+			const sumValue =
+				baseValue * (rates[state.sumCurrency] || 1) * state.sumRatio;
 
 			state.activeSummandIndex = 'sum';
 			state.currency = state.sumCurrency;
