@@ -24,28 +24,35 @@ export function CalculatorRow({ rates }: ICalculatorRowProps) {
 		currency,
 		ratio,
 		value,
+		tempSummand,
 		summands,
 		activeSummandIndex,
 		sumCurrency,
-		sumRatio,
 	} = useSelector(useCalculator);
 
 	// Calculate the sum in base values (USD)
 	let baseValueSum = 0;
-	for (const summand of summands) {
+	summands.forEach((summand, index) => {
 		const rate = rates[summand.currency];
 		if (rate) {
-			baseValueSum += summand.value / summand.ratio / rate;
+			if (activeSummandIndex === index) {
+				baseValueSum += value / ratio / rate;
+			} else {
+				baseValueSum += summand.value / summand.ratio / rate;
+			}
 		}
-	}
-	if (activeSummandIndex === null && value > 0) {
-		const rate = rates[currency];
-		if (rate) {
-			baseValueSum += value / ratio / rate;
+	});
+
+	const tempRate = rates[tempSummand.currency];
+	if (tempRate) {
+		if (activeSummandIndex === null) {
+			baseValueSum += value / ratio / tempRate;
+		} else {
+			baseValueSum += tempSummand.value / tempSummand.ratio / tempRate;
 		}
 	}
 
-	const sumValue = baseValueSum * (rates[sumCurrency] || 1) * sumRatio;
+	const sumValue = baseValueSum * (rates[sumCurrency] || 1) * ratio;
 
 	const handleAdd = () => {
 		dispatch(calculatorActions.addSummand());
@@ -93,6 +100,43 @@ export function CalculatorRow({ rates }: ICalculatorRowProps) {
 		<div className="CalculatorRow">
 			<div className="CalculatorRow__Title">Calculator:</div>
 
+			{/* Global Calculator/Sum target Settings */}
+			<div className="CalculatorRow__Settings">
+				<div className="CalculatorRow__SelectorContainer">
+					<Flag
+						className="CalculatorRow__SelectorFlag"
+						currencyCode={sumCurrency}
+					/>
+					<select
+						className="CalculatorRow__Select"
+						value={sumCurrency}
+						onChange={handleSumCurrencyChange}
+						title="Change target currency"
+					>
+						{currencies.map((c) => (
+							<option key={c} value={c}>
+								{c}
+							</option>
+						))}
+					</select>
+				</div>
+
+				<div className="CalculatorRow__SelectorContainer">
+					<select
+						className="CalculatorRow__Select"
+						value={ratio}
+						onChange={handleSumRatioChange}
+						title="Change target ratio"
+					>
+						{ratios.map((r) => (
+							<option key={r} value={r}>
+								{r}
+							</option>
+						))}
+					</select>
+				</div>
+			</div>
+
 			<div className="CalculatorRow__Expression">
 				{summands.map((summand, index) => {
 					const isActive = activeSummandIndex === index;
@@ -114,7 +158,7 @@ export function CalculatorRow({ rates }: ICalculatorRowProps) {
 									{formatMoney(summand.value)}
 								</span>
 								<span className="CalculatorRow__Details">
-									{summand.currency}-{summand.ratio}
+									{summand.currency}
 								</span>
 								<button
 									className="CalculatorRow__Item_Remove"
@@ -129,46 +173,28 @@ export function CalculatorRow({ rates }: ICalculatorRowProps) {
 					);
 				})}
 
-				{/* Active/Temporary Summand */}
-				{activeSummandIndex === null && (
-					<>
-						{summands.length > 0 && (
-							<span className="CalculatorRow__Operator">+</span>
-						)}
-						<div
-							className="CalculatorRow__Item CalculatorRow__Item_active CalculatorRow__Item_temp"
-							onClick={handleSelectActive}
-							role="button"
-							tabIndex={0}
-							title="Currently editing in the table"
-						>
-							<Flag className="CalculatorRow__Flag" currencyCode={currency} />
-							<span className="CalculatorRow__Value">{formatMoney(value)}</span>
-							<span className="CalculatorRow__Details">
-								{currency}-{ratio}
-							</span>
-							<span className="CalculatorRow__Badge">editing</span>
-						</div>
-					</>
+				{/* Active/Temporary Summand (always visible, never collapsed) */}
+				{summands.length > 0 && (
+					<span className="CalculatorRow__Operator">+</span>
 				)}
-
-				{/* If we are NOT editing the active summand, we can still click to go back to editing a new summand */}
-				{activeSummandIndex !== null && (
-					<>
-						{summands.length > 0 && (
-							<span className="CalculatorRow__Operator">+</span>
-						)}
-						<div
-							className="CalculatorRow__Item CalculatorRow__Item_temp"
-							onClick={handleSelectActive}
-							role="button"
-							tabIndex={0}
-							title="Click to resume editing a new summand"
-						>
-							<span className="CalculatorRow__Value">...</span>
-						</div>
-					</>
-				)}
+				<div
+					className={`CalculatorRow__Item CalculatorRow__Item_temp ${
+						activeSummandIndex === null ? 'CalculatorRow__Item_active' : ''
+					}`}
+					onClick={handleSelectActive}
+					role="button"
+					tabIndex={0}
+					title="Click to edit new summand"
+				>
+					<Flag
+						className="CalculatorRow__Flag"
+						currencyCode={tempSummand.currency}
+					/>
+					<span className="CalculatorRow__Value">
+						{formatMoney(tempSummand.value)}
+					</span>
+					<span className="CalculatorRow__Details">{tempSummand.currency}</span>
+				</div>
 
 				{/* Plus button to fix the active summand */}
 				<Button
@@ -199,42 +225,6 @@ export function CalculatorRow({ rates }: ICalculatorRowProps) {
 					title="Click to view the sum in the table"
 				>
 					<span className="CalculatorRow__Value">{formatMoney(sumValue)}</span>
-				</div>
-
-				{/* Currency Selector with Flag */}
-				<div className="CalculatorRow__SelectorContainer">
-					<Flag
-						className="CalculatorRow__SelectorFlag"
-						currencyCode={sumCurrency}
-					/>
-					<select
-						className="CalculatorRow__Select"
-						value={sumCurrency}
-						onChange={handleSumCurrencyChange}
-						title="Change sum currency"
-					>
-						{currencies.map((c) => (
-							<option key={c} value={c}>
-								{c}
-							</option>
-						))}
-					</select>
-				</div>
-
-				{/* Ratio Selector */}
-				<div className="CalculatorRow__SelectorContainer">
-					<select
-						className="CalculatorRow__Select"
-						value={sumRatio}
-						onChange={handleSumRatioChange}
-						title="Change sum ratio"
-					>
-						{ratios.map((r) => (
-							<option key={r} value={r}>
-								{r}
-							</option>
-						))}
-					</select>
 				</div>
 			</div>
 

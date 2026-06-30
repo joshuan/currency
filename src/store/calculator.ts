@@ -21,31 +21,100 @@ export const initialCalculatorState: CalculatorState = {
 	sumRatio: initialValue.ratio,
 };
 
+function scaleValues(state: CalculatorState, newRatio: number) {
+	const oldRatio = state.ratio;
+	if (oldRatio === newRatio) return;
+
+	state.ratio = newRatio;
+	for (const summand of state.summands) {
+		summand.value = summand.value * (newRatio / summand.ratio);
+		summand.ratio = newRatio;
+	}
+	state.tempSummand.value =
+		state.tempSummand.value * (newRatio / state.tempSummand.ratio);
+	state.tempSummand.ratio = newRatio;
+	state.value = state.value * (newRatio / oldRatio);
+	state.sumRatio = newRatio;
+}
+
+export function calculateBaseSum(state: CalculatorState, rates: IRates) {
+	let baseValueSum = 0;
+	state.summands.forEach((summand, index) => {
+		const rate = rates[summand.currency];
+		if (rate) {
+			if (state.activeSummandIndex === index) {
+				baseValueSum += state.value / state.ratio / rate;
+			} else {
+				baseValueSum += summand.value / summand.ratio / rate;
+			}
+		}
+	});
+
+	const tempRate = rates[state.tempSummand.currency];
+	if (tempRate) {
+		if (state.activeSummandIndex === null) {
+			baseValueSum += state.value / state.ratio / tempRate;
+		} else {
+			baseValueSum +=
+				state.tempSummand.value / state.tempSummand.ratio / tempRate;
+		}
+	}
+	return baseValueSum;
+}
+
 export const calculatorSlice = createSlice({
 	name: 'calculator',
 	initialState: initialCalculatorState,
 	reducers: {
 		setValue: (state, action: PayloadAction<ICalculate>) => {
 			const data = action.payload;
-			if (state.activeSummandIndex === 'sum') {
-				// Typing while sum is selected resets calculation to a new temporary summand
-				state.summands = [];
-				state.activeSummandIndex = null;
-				state.tempSummand = { ...data };
-				state.currency = data.currency;
-				state.ratio = data.ratio;
-				state.value = data.value;
-			} else if (state.activeSummandIndex === null) {
-				state.tempSummand = { ...data };
-				state.currency = data.currency;
-				state.ratio = data.ratio;
-				state.value = data.value;
+
+			if (state.summands.length === 0) {
+				scaleValues(state, data.ratio);
+
+				if (state.activeSummandIndex === 'sum') {
+					state.summands = [];
+					state.activeSummandIndex = null;
+					state.tempSummand = { ...data };
+					state.currency = data.currency;
+					state.value = data.value;
+				} else {
+					state.tempSummand = { ...data };
+					state.currency = data.currency;
+					state.value = data.value;
+				}
 			} else {
-				const idx = state.activeSummandIndex;
-				state.summands[idx] = { ...data };
-				state.currency = data.currency;
-				state.ratio = data.ratio;
-				state.value = data.value;
+				const globalRatio = state.ratio;
+				const scaledValue = data.value * (globalRatio / data.ratio);
+
+				if (state.activeSummandIndex === 'sum') {
+					state.summands = [];
+					state.activeSummandIndex = null;
+					state.tempSummand = {
+						currency: data.currency,
+						ratio: globalRatio,
+						value: scaledValue,
+					};
+					state.currency = data.currency;
+					state.value = scaledValue;
+				} else if (state.activeSummandIndex === null) {
+					state.tempSummand = {
+						currency: data.currency,
+						ratio: globalRatio,
+						value: scaledValue,
+					};
+					state.currency = data.currency;
+					state.value = scaledValue;
+				} else {
+					const idx = state.activeSummandIndex;
+					state.summands[idx] = {
+						currency: data.currency,
+						ratio: globalRatio,
+						value: scaledValue,
+					};
+					state.currency = data.currency;
+					state.value = scaledValue;
+				}
 			}
 		},
 		addSummand: (state) => {
@@ -57,7 +126,6 @@ export const calculatorSlice = createSlice({
 			state.summands.push(current);
 			if (state.summands.length === 1) {
 				state.sumCurrency = state.currency;
-				state.sumRatio = state.ratio;
 			}
 			state.tempSummand = {
 				currency: state.currency,
@@ -65,7 +133,6 @@ export const calculatorSlice = createSlice({
 				value: 0,
 			};
 			state.currency = state.tempSummand.currency;
-			state.ratio = state.tempSummand.ratio;
 			state.value = 0;
 			state.activeSummandIndex = null;
 		},
@@ -75,7 +142,6 @@ export const calculatorSlice = createSlice({
 			if (state.activeSummandIndex === idx) {
 				state.activeSummandIndex = null;
 				state.currency = state.tempSummand.currency;
-				state.ratio = state.tempSummand.ratio;
 				state.value = state.tempSummand.value;
 			} else if (
 				state.activeSummandIndex !== null &&
@@ -90,37 +156,22 @@ export const calculatorSlice = createSlice({
 			if (idx >= 0 && idx < state.summands.length) {
 				state.activeSummandIndex = idx;
 				state.currency = state.summands[idx].currency;
-				state.ratio = state.summands[idx].ratio;
 				state.value = state.summands[idx].value;
 			}
 		},
 		selectActiveSummand: (state) => {
 			state.activeSummandIndex = null;
 			state.currency = state.tempSummand.currency;
-			state.ratio = state.tempSummand.ratio;
 			state.value = state.tempSummand.value;
 		},
 		selectSum: (state, action: PayloadAction<{ rates: IRates }>) => {
 			const { rates } = action.payload;
-			let baseValue = 0;
-			for (const summand of state.summands) {
-				const rate = rates[summand.currency];
-				if (rate) {
-					baseValue += summand.value / summand.ratio / rate;
-				}
-			}
-			if (state.activeSummandIndex === null) {
-				const rate = rates[state.currency];
-				if (rate) {
-					baseValue += state.value / state.ratio / rate;
-				}
-			}
+			const baseValue = calculateBaseSum(state, rates);
 			const sumValue =
-				baseValue * (rates[state.sumCurrency] || 1) * state.sumRatio;
+				baseValue * (rates[state.sumCurrency] || 1) * state.ratio;
 
 			state.activeSummandIndex = 'sum';
 			state.currency = state.sumCurrency;
-			state.ratio = state.sumRatio;
 			state.value = sumValue;
 		},
 		setSumCurrency: (
@@ -130,14 +181,8 @@ export const calculatorSlice = createSlice({
 			const { currency, rates } = action.payload;
 			state.sumCurrency = currency;
 			if (state.activeSummandIndex === 'sum') {
-				let baseValue = 0;
-				for (const summand of state.summands) {
-					const rate = rates[summand.currency];
-					if (rate) {
-						baseValue += summand.value / summand.ratio / rate;
-					}
-				}
-				const sumValue = baseValue * (rates[currency] || 1) * state.sumRatio;
+				const baseValue = calculateBaseSum(state, rates);
+				const sumValue = baseValue * (rates[currency] || 1) * state.ratio;
 				state.value = sumValue;
 				state.currency = currency;
 			}
@@ -147,18 +192,12 @@ export const calculatorSlice = createSlice({
 			action: PayloadAction<{ ratio: number; rates: IRates }>,
 		) => {
 			const { ratio, rates } = action.payload;
-			state.sumRatio = ratio;
+			scaleValues(state, ratio);
 			if (state.activeSummandIndex === 'sum') {
-				let baseValue = 0;
-				for (const summand of state.summands) {
-					const rate = rates[summand.currency];
-					if (rate) {
-						baseValue += summand.value / summand.ratio / rate;
-					}
-				}
-				const sumValue = baseValue * (rates[state.sumCurrency] || 1) * ratio;
+				const baseValue = calculateBaseSum(state, rates);
+				const sumValue =
+					baseValue * (rates[state.sumCurrency] || 1) * state.ratio;
 				state.value = sumValue;
-				state.ratio = ratio;
 			}
 		},
 		clearCalculator: (state) => {
